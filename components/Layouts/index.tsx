@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
-import Head from "next/head";
-import Header from "../Header";
-import Footer from "../Footer";
+import React, { Fragment } from 'react';
+import Head from 'next/head';
+import Header from './Header';
+import Footer from './Footer';
 
 //Components
 
@@ -9,7 +9,7 @@ interface LayoutProps {
   title?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ title = "BDS app", children }) => {
+const Layout: React.FC<LayoutProps> = ({ title = 'BDS app', children }) => {
   return (
     <Fragment>
       <Head>

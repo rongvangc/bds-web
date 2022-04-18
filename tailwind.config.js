@@ -4,7 +4,25 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1170px',
+    },
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      primary: '#12004f',
+      secondary: '#e04946',
+      tertiary: '#37a5e5',
+      red: '#c2525c',
+      green: '#3d8860',
+      lightRed: '#e3aaad',
+      lightGreen: '#a7d1bb',
+      white: '#ffffff',
+      black: '#484848',
+    },
   },
   plugins: [],
-}
+};
