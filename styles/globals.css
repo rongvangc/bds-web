@@ -18,3 +18,21 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.menu-header li {
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.menu-header li.active {
+  border-color: white;
+  transition: 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.menu-header li a {
+  font-size: 14px;
+  font-weight: 600;
+}

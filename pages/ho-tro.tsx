@@ -1,15 +1,14 @@
 import type { NextPage } from 'next';
+import React from 'react';
 import Layout from '../components/Layouts';
 import Section from '../components/Layouts/Section';
 
-const Custom404: NextPage = () => {
+const Support: NextPage = () => {
   return (
-    <Layout title="404">
-      <Section>
-        <h1>404 - Page Not Found</h1>
-      </Section>
+    <Layout title="Hỗ trợ">
+      <Section>Hỗ trợ</Section>
     </Layout>
   );
 };
 
-export default Custom404;
+export default Support;

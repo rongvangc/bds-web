@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../utils/types';
 
-export const Mobile = ({
+export const MobileIcon = ({
   width = 24,
   height = 24,
   color = '#212529',
