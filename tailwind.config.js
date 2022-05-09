@@ -5,10 +5,14 @@ module.exports = {
   ],
   theme: {
     screens: {
+      xs: '360px',
+      // => @media (min-width: 360px) { ... }
       sm: '480px',
+      // => @media (min-width: 480px) { ... }
       md: '768px',
-      lg: '976px',
-      xl: '1170px',
+      // => @media (min-width: 768px) { ... }
+      lg: '1024px',
+      // => @media (min-width: 1024px) { ... }
     },
     colors: {
       transparent: 'transparent',
@@ -24,5 +28,5 @@ module.exports = {
       black: '#484848',
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
