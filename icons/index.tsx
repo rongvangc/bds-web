@@ -14,6 +14,8 @@ import { UserIcon } from './User';
 import { UserPlusIcon } from './UserPlus';
 import { MenuIcon } from './Menu';
 import { AcreageIcon } from './Acreage';
+import { CaretDownIcon } from './CaretDown';
+import { CaretUpIcon } from './CaretUp';
 
 export * from './User';
 export * from './UserPlus';
@@ -168,6 +170,22 @@ export const IconList = (
     case 'acreage':
       return (
         <AcreageIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'caret-up':
+      return (
+        <CaretUpIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'caret-down':
+      return (
+        <CaretDownIcon
           width={sizeIcon}
           height={sizeIcon}
           color={checkVariantColor}
