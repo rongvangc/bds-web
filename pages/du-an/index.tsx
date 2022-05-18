@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import ProductCard from '../../components/Elements/ProductCard';
+import ProductItem from '../../components/Elements/ProductItem';
 import Layout from '../../components/Layouts';
 import Section from '../../components/Layouts/Section';
 
@@ -9,10 +9,10 @@ const Product: NextPage = () => {
       <Section>
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
+            <ProductItem />
           </div>
         </div>
       </Section>

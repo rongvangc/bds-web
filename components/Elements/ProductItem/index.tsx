@@ -1,34 +1,48 @@
 import React from 'react';
 import Image from 'next/image';
-import { LocationIcon, HomeIcon } from '../../../icons';
-import Badge from '../../../components/Badge';
+import { LocationIcon, HomeIcon, MenuIcon } from '../../../icons';
+import Badge from '../../../components/Elements/Badge';
 
 const imageUrl =
   'https://file4.batdongsan.com.vn/crop/240x180/2022/05/11/20220511152802-1ac9.jpg';
+const image1 =
+  'https://file4.batdongsan.com.vn/2022/05/11/20220511134202-e179.jpg';
+const image2 =
+  'https://file4.batdongsan.com.vn/2022/05/11/20220511133755-f476.jpg';
 
 type ProductItemType = {};
 
 const ProductItem: React.FC<ProductItemType> = () => {
   return (
-    <div className="mb-4 flex rounded-md shadow">
-      <div className="product-preview-image">
+    <a
+      className="mb-4 flex cursor-pointer overflow-hidden rounded-md shadow"
+      href="./du-an"
+    >
+      <div className="relative !flex h-[248px] w-[240px] flex-col">
+        <span className="product-image-gradient border-bottom-left-radius-[4px] absolute left-0 bottom-0 z-[1] h-[40px] w-full" />
+        <span className="absolute bottom-4 right-6 z-10 flex font-semibold text-white">
+          <MenuIcon color="white" />6
+        </span>
         <Image
           src={imageUrl || '/default-product-image.png'}
           width={240}
           height={180}
+          className="object-cover"
           alt=""
         />
-        <div className="flex justify-between">
+        <div className="mt-0.5 flex justify-between	">
           <Image
-            src={imageUrl || '/default-product-image.png'}
+            src={image1 || '/default-product-image.png'}
             width={119}
             height={66}
+            className="object-cover"
             alt=""
           />
           <Image
-            src={imageUrl || '/default-product-image.png'}
+            src={image2 || '/default-product-image.png'}
             width={119}
             height={66}
+            className="object-cover"
             alt=""
           />
         </div>
@@ -61,7 +75,7 @@ const ProductItem: React.FC<ProductItemType> = () => {
           tượng của Đà Nẵng.
         </p>
       </div>
-    </div>
+    </a>
   );
 };
 
