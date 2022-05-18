@@ -47,7 +47,7 @@ const ProductItem: React.FC<ProductItemType> = () => {
           />
         </div>
       </div>
-      <div className="product-item-content border-tertiary p-2">
+      <div className="product-item-content ml-2 border-tertiary p-2">
         <div className="mb-2">
           <Badge text="Đã bán" />
         </div>
