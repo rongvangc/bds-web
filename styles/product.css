@@ -13,13 +13,14 @@
   -webkit-line-clamp: 2;
 }
 
-.product-preview-image {
-  display: block;
-  width: 240px;
-  height: 248px;
-  overflow: hidden;
-}
-
 .product-item-content {
   width: calc(100% - 240px);
+}
+
+.product-image-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(44, 44, 44, 0) 0%,
+    rgba(44, 44, 44, 0.8) 100%
+  );
 }

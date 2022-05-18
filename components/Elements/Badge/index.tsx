@@ -1,5 +1,4 @@
 import React from 'react';
-import classname from 'classnames';
 
 type BadgeProps = {
   text?: string;
@@ -11,7 +10,7 @@ const Badge: React.FC<BadgeProps> = ({
   className = 'text-sm text-inherit bg-tertiary',
 }) => {
   return (
-    <span className={classname('auto mb-0 rounded-md px-2 py-1', className)}>
+    <span className={`auto mb-0 rounded-md px-2 py-1 ${className}`}>
       {text}
     </span>
   );
