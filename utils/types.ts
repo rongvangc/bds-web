@@ -1,3 +1,10 @@
+import type {
+  MouseEvent,
+  TouchEvent,
+  EventHandler,
+  FocusEventHandler,
+} from 'react';
+
 export type IconProps = {
   width?: number;
   height?: number;
@@ -23,6 +30,8 @@ export type IconListProps =
   | 'warning'
   | 'menu'
   | 'acreage'
+  | 'caret-down'
+  | 'caret-up'
   | '';
 
 export enum Colors {
@@ -38,3 +47,58 @@ export enum Colors {
   white = '#ffffff',
   black = '#484848',
 }
+
+export type FilterRealEstateProps = {
+  option: OptionData[];
+  onChange?: (value: OptionData) => void;
+};
+
+export type OptionData = {
+  id: string;
+  value: string;
+  description?: string;
+  icon?: IconListProps;
+  active?: boolean;
+} & Record<string, any>;
+
+export type MenuOption = Readonly<{
+  label: string | number;
+  value: string | number;
+  data: OptionData;
+  isDisabled: boolean;
+  isSelected: boolean;
+}>;
+
+export type SelectRef = Readonly<{
+  empty: boolean;
+  menuOpen: boolean;
+  blur: () => void;
+  focus: () => void;
+  clearValue: () => void;
+  toggleMenu: (state?: boolean) => void;
+  setValue: (option?: OptionData) => void;
+}>;
+
+export type SelectProps = Readonly<{
+  options: OptionData[];
+  autoFocus?: boolean;
+  initialValue?: OptionData;
+  placeholder?: string;
+  filterIgnoreCase?: boolean;
+  filterIgnoreAccents?: boolean;
+  inputDelay?: number;
+  acceptKey?: string[];
+  valueFormat?: (data: OptionData) => string;
+  descriptionFormat?: (data: OptionData) => string;
+  onInputChange?: (value?: string) => any;
+  onInputFocus?: FocusEventHandler<HTMLInputElement>;
+  onInputBlur?: FocusEventHandler<HTMLInputElement>;
+  onSearchChange?: (value?: string) => any;
+  onOptionChange?: (data: OptionData) => any;
+}>;
+
+export type CallbackFunction = (...args: any[]) => any;
+export type MouseOrTouchEvent<T = Element> = MouseEvent<T> | TouchEvent<T>;
+export type MouseOrTouchEventHandler<T = Element> = EventHandler<
+  MouseOrTouchEvent<T>
+>;
