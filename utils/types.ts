@@ -1,5 +1,4 @@
 import type {
-  ReactNode,
   MouseEvent,
   TouchEvent,
   EventHandler,
@@ -54,7 +53,13 @@ export type FilterRealEstateProps = {
   onChange?: (value: OptionData) => void;
 };
 
-export type OptionData = any;
+export type OptionData = {
+  id: string;
+  value: string;
+  description?: string;
+  icon?: IconListProps;
+  active?: boolean;
+} & Record<string, any>;
 
 export type MenuOption = Readonly<{
   label: string | number;
@@ -76,32 +81,24 @@ export type SelectRef = Readonly<{
 
 export type SelectProps = Readonly<{
   options: OptionData[];
-  initialValue?: OptionData | OptionData[];
+  autoFocus?: boolean;
+  initialValue?: OptionData;
   placeholder?: string;
-  getOptionLabel?: OptionLabelCallback;
-  getOptionValue?: OptionValueCallback;
-  renderOptionLabel?: (data: OptionData) => ReactNode;
+  filterIgnoreCase?: boolean;
+  filterIgnoreAccents?: boolean;
+  inputDelay?: number;
+  acceptKey?: string[];
+  valueFormat?: (data: OptionData) => string;
+  descriptionFormat?: (data: OptionData) => string;
   onInputChange?: (value?: string) => any;
   onInputFocus?: FocusEventHandler<HTMLInputElement>;
   onInputBlur?: FocusEventHandler<HTMLInputElement>;
+  onSearchChange?: (value?: string) => any;
+  onOptionChange?: (data: OptionData) => any;
 }>;
 
 export type CallbackFunction = (...args: any[]) => any;
-export type OptionValueCallback = (data: OptionData) => string | number;
-export type OptionLabelCallback = OptionValueCallback;
-export type RenderLabelCallback = (data: OptionData) => ReactNode;
-export type OptionFilterCallback = (option: MenuOption) => string;
-export type OptionDisabledCallback = (data: OptionData) => boolean;
 export type MouseOrTouchEvent<T = Element> = MouseEvent<T> | TouchEvent<T>;
 export type MouseOrTouchEventHandler<T = Element> = EventHandler<
   MouseOrTouchEvent<T>
 >;
-
-export const FunctionDefaults = {
-  OPTION_LABEL: (({ label }) => label) as OptionLabelCallback,
-  OPTION_VALUE: (({ value }) => value) as OptionValueCallback,
-  OPTION_IS_DISABLED: (({ isDisabled }) =>
-    !!isDisabled) as OptionDisabledCallback,
-  OPTION_FILTER: (({ label }) =>
-    typeof label === 'string' ? label : `${label}`) as OptionFilterCallback,
-};

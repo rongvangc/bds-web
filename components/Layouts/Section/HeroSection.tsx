@@ -10,7 +10,7 @@ const HeroSection = () => {
 
   return (
     <div>
-      {/* <FilterRealEstate option={FILTER_OPTION} onChange={handleChangeTab} /> */}
+      <FilterRealEstate option={FILTER_OPTION} onChange={handleChangeTab} />
     </div>
   );
 };

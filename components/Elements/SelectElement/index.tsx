@@ -3,39 +3,45 @@ import React, {
   useRef,
   useState,
   forwardRef,
-  useMemo,
   type Ref,
   type FormEvent,
   type FocusEvent,
   useEffect,
 } from 'react';
-import { normalizeValue, suppressEvent } from '../../../utils/common';
+import { isFunction, suppressEvent } from '../../../utils/common';
 import {
-  FunctionDefaults,
   MouseOrTouchEvent,
-  OptionLabelCallback,
-  OptionValueCallback,
-  RenderLabelCallback,
+  OptionData,
   SelectProps,
   SelectRef,
 } from '../../../utils/types';
+import { useDebounce, useMountEffect } from '../../Layouts/hooks';
+import useOptions from './hooks/useOptions';
+import Value from './Value';
 
 const SelectElement = forwardRef<SelectRef, SelectProps>(
   (
     {
-      initialValue,
       options,
+      autoFocus,
+      initialValue,
+      placeholder = 'Select option...',
+      filterIgnoreCase = true,
+      filterIgnoreAccents = true,
+      inputDelay = 300,
+      acceptKey,
+      valueFormat,
+      descriptionFormat,
       onInputBlur,
       onInputFocus,
       onInputChange,
-      getOptionLabel,
-      getOptionValue,
-      renderOptionLabel,
     },
     ref: Ref<SelectRef>
   ) => {
-    const onChangeEventValue = useRef<boolean>(false);
+    // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
+
+    // DOM element refs
     const controlRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -44,41 +50,38 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     const [inputValue, setInputValue] = useState<string>('');
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [selectedOption, setSelectedOption] = useState<
+      OptionData | undefined
+    >(initialValue);
+
+    // Custom hook abstraction that debounces search input value (opt-in)
+    const debouncedInputValue = useDebounce<string>(inputValue, inputDelay);
+
+    // Custom hook abstraction that handles the creation of menuOptions
+    const { menuOptions } = useOptions(
+      options,
+      debouncedInputValue,
+      filterIgnoreCase,
+      filterIgnoreAccents,
+      selectedOption,
+      acceptKey
+    );
 
     const blurInput = (): void => inputRef.current?.blur();
     const focusInput = (): void => inputRef.current?.focus();
 
-    // Memoized callback functions referencing optional function properties on Select.tsx
-    const getOptionLabelFn = useMemo<OptionLabelCallback>(
-      () => getOptionLabel || FunctionDefaults.OPTION_LABEL,
-      [getOptionLabel]
-    );
-    const getOptionValueFn = useMemo<OptionValueCallback>(
-      () => getOptionValue || FunctionDefaults.OPTION_VALUE,
-      [getOptionValue]
-    );
-    const renderOptionLabelFn = useMemo<RenderLabelCallback>(
-      () => renderOptionLabel || getOptionLabelFn,
-      [renderOptionLabel, getOptionLabelFn]
-    );
-
-    const [selectedOption, setSelectedOption] = useState<any[]>(() =>
-      normalizeValue(initialValue, getOptionValueFn, getOptionLabelFn)
-    );
-
+    // Stop blur event on input
     const handleOnMouseDownEvent = (e: FormEvent<Element>): void => {
       suppressEvent(e);
       focusInput();
     };
 
-    const selectOption = useCallback(
-      (option: any, isSelected?: boolean): void => {
-        console.log(option);
-        setSelectedOption([option]);
-        setMenuOpen(false);
-      },
-      []
-    );
+    const selectOption = useCallback((option: OptionData): void => {
+      blurInput();
+      setSelectedOption(option);
+      setInputValue('');
+      setMenuOpen(false);
+    }, []);
 
     const openMenuAndFocusOption = useCallback((): void => {
       setMenuOpen(true);
@@ -104,7 +107,6 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     const handleOnInputBlur = useCallback(
       (e: FocusEvent<HTMLInputElement>): void => {
         onInputBlur?.(e);
-        console.log('blur');
         setIsFocused(false);
         setMenuOpen(false);
         setInputValue('');
@@ -114,7 +116,6 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
 
     const handleOnInputFocus = useCallback(
       (e: FocusEvent<HTMLInputElement>): void => {
-        console.log('focus');
         onInputFocus?.(e);
         setIsFocused(true);
       },
@@ -123,12 +124,28 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
 
     const handleOnInputChange = useCallback(
       (e: FormEvent<HTMLInputElement>): void => {
-        onChangeEventValue.current = true;
-        onInputChange?.(e.currentTarget.value);
-        setInputValue(e.currentTarget.value);
+        const value = e.currentTarget.value;
+        onInputChange?.(value);
+        setInputValue(value);
         setMenuOpen(true);
       },
       [onInputChange]
+    );
+
+    const onFormatValue = useCallback(
+      (): string =>
+        isFunction(valueFormat) && selectedOption
+          ? valueFormat(selectedOption)
+          : selectedOption?.value!,
+      [selectedOption, valueFormat]
+    );
+
+    const onFormatDescription = useCallback(
+      (option: OptionData): string =>
+        isFunction(descriptionFormat)
+          ? descriptionFormat(option)
+          : option.description!,
+      [descriptionFormat]
     );
 
     /**
@@ -139,13 +156,20 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       menuOpenRef.current = menuOpen;
     }, [menuOpen]);
 
+    /**
+     * useMountEffect:
+     * If autoFocus = true, focus the control following initial mount.
+     */
+    useMountEffect(() => {
+      autoFocus && focusInput();
+    });
+
     return (
       <div
         className="select-wrapper"
         id="id"
         aria-controls="id"
         aria-expanded={false}
-        onKeyDown={() => {}}
       >
         <div
           className="control-wrapper"
@@ -153,27 +177,35 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
           onMouseDown={handleOnControlMouseDown}
           ref={controlRef}
         >
-          <div className="value-wrapper">
-            <div className="single-value">{selectedOption?.[0]?.city}</div>
+          <div className="value-wrapper relative">
+            <div className="single-value absolute">
+              <Value
+                searchValue={inputValue}
+                placeholder={placeholder}
+                onFormatValue={onFormatValue}
+              />
+            </div>
+
             <input
               ref={inputRef}
               onBlur={handleOnInputBlur}
               onFocus={handleOnInputFocus}
               onChange={handleOnInputChange}
               value={inputValue}
+              className=""
             />
           </div>
         </div>
         {menuOpen && (
           <div className="menu" ref={menuRef}>
-            {options?.map((item) => (
+            {menuOptions?.map((item) => (
               <p
                 onMouseDown={handleOnMouseDownEvent}
                 onClick={() => selectOption(item)}
                 key={item?.id}
                 className="cursor-pointer"
               >
-                {item?.city}
+                {onFormatDescription(item)}
               </p>
             ))}
           </div>

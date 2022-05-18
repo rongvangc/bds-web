@@ -1,5 +1,4 @@
 import { FormEvent } from 'react';
-import { OptionLabelCallback, OptionValueCallback } from './types';
 
 const DIACRITICS_REG_EXP = /[\u0300-\u036f]/g;
 
@@ -45,29 +44,4 @@ export const trimAndFormatFilterStr = (
   }
 
   return !filterIgnoreAccents ? trimVal : stripDiacritics(trimVal);
-};
-
-/**
- * Parses an object or an array of objects into output of SelectedOption[].
- */
-export const normalizeValue = (
-  value: any,
-  getOptionValue: OptionValueCallback,
-  getOptionLabel: OptionLabelCallback
-): any[] => {
-  const initValues = Array.isArray(value)
-    ? value
-    : isPlainObject(value)
-    ? [value]
-    : [];
-
-  if (!isArrayWithLength(initValues)) {
-    return initValues;
-  }
-
-  return initValues.map((data: any) => ({
-    data,
-    value: getOptionValue(data),
-    label: getOptionLabel(data),
-  }));
 };

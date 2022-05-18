@@ -1,4 +1,4 @@
-import { IOption } from './types';
+import { OptionData } from './types';
 
 export const NAVIGATOR = [
   {
@@ -11,16 +11,19 @@ export const NAVIGATOR = [
   },
 ];
 
-export const FILTER_OPTION: IOption[] = [
+export const FILTER_OPTION: OptionData[] = [
   {
+    id: '1',
     value: 'dat-ban',
     description: 'Nhà đất bán',
   },
   {
+    id: '2',
     value: 'cho-thue',
     description: 'Nhà đất cho thuê',
   },
   {
+    id: '3',
     value: 'du-an',
     description: 'Dự án',
   },

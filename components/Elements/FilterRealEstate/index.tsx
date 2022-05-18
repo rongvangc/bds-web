@@ -3,16 +3,16 @@ import { FilterRealEstateProps, OptionData } from '../../../utils/types';
 import SelectElement from '../SelectElement';
 
 const options: OptionData[] = [
-  { id: 1, city: 'Boston', state: 'MA' },
-  { id: 2, city: 'Austin', state: 'TX' },
-  { id: 3, city: 'Denver', state: 'CO' },
-  { id: 4, city: 'Chicago', state: 'IL' },
-  { id: 5, city: 'Phoenix', state: 'AZ' },
-  { id: 6, city: 'Houston', state: 'TX' },
-  { id: 7, city: 'Orlando', state: 'FL' },
-  { id: 8, city: 'Portland', state: 'OR' },
-  { id: 9, city: 'Milwaukee', state: 'WI' },
-  { id: 10, city: 'Louisville', state: 'KY' },
+  { id: '1', value: 'Boston', description: 'MA' },
+  { id: '2', value: 'Austin', description: 'TX' },
+  { id: '3', value: 'Denver', description: 'CO' },
+  { id: '4', value: 'Chicago', description: 'IL' },
+  { id: '5', value: 'Phoenix', description: 'AZ' },
+  { id: '6', value: 'Houston', description: 'TX' },
+  { id: '7', value: 'Orlando', description: 'FL' },
+  { id: '8', value: 'Portland', description: 'OR' },
+  { id: '9', value: 'Milwaukee', description: 'WI' },
+  { id: '10', value: 'Louisville', description: 'KY' },
 ];
 
 const FilterRealEstate: React.FC<
@@ -26,12 +26,6 @@ const FilterRealEstate: React.FC<
       onChange && onChange(value);
     },
     [onChange]
-  );
-
-  const getOptionValue = useCallback((option: any): number => option.id, []);
-  const getOptionLabel = useCallback(
-    (option: any): string => `${option.city}, ${option.state}`,
-    []
   );
 
   return (
@@ -49,11 +43,7 @@ const FilterRealEstate: React.FC<
           </a>
         ))}
       </div>
-      <SelectElement
-        options={options}
-        getOptionLabel={getOptionLabel}
-        getOptionValue={getOptionValue}
-      />
+      <SelectElement placeholder="Tìm kiếm" options={options} />
       <input
         type="text"
         placeholder="Type here"
