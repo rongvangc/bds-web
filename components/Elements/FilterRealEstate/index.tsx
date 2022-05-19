@@ -1,19 +1,11 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
-import { FilterRealEstateProps, OptionData } from '../../../utils/types';
+import { OPTION_FILTER } from '../../../utils/constants';
+import {
+  Colors,
+  FilterRealEstateProps,
+  OptionData,
+} from '../../../utils/types';
 import SelectElement from '../SelectElement';
-
-const options: OptionData[] = [
-  { id: '1', value: 'Boston', description: 'MA' },
-  { id: '2', value: 'Austin', description: 'TX' },
-  { id: '3', value: 'Denver', description: 'CO' },
-  { id: '4', value: 'Chicago', description: 'IL' },
-  { id: '5', value: 'Phoenix', description: 'AZ' },
-  { id: '6', value: 'Houston', description: 'TX' },
-  { id: '7', value: 'Orlando', description: 'FL' },
-  { id: '8', value: 'Portland', description: 'OR' },
-  { id: '9', value: 'Milwaukee', description: 'WI' },
-  { id: '10', value: 'Louisville', description: 'KY' },
-];
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
@@ -30,25 +22,75 @@ const FilterRealEstate: React.FC<
 
   return (
     <div className={`${className}`}>
-      <div className="tabs">
+      <div className="text-center">
         {option?.map((tab) => (
           <a
             onClick={() => handleSwichTab(tab)}
             key={tab.value}
-            className={`tab tab-lifted font-bold ${
-              tab.value === currentTab?.value ? ' tab-active' : 'text-white'
+            className={`mr-2 inline-block cursor-pointer rounded-t-md border-[1.5px] py-2 px-4 pb-1 font-bold shadow-md ${
+              tab.value === currentTab?.value
+                ? ' border-primary bg-primary text-white'
+                : 'border-primary bg-white text-primary'
             }`}
           >
-            {tab.description}
+            <span>{tab.description}</span>
           </a>
         ))}
       </div>
-      <SelectElement placeholder="Tìm kiếm" options={options} />
-      <input
-        type="text"
-        placeholder="Type here"
-        className="input input-bordered w-full max-w-xs rounded-t-none"
-      />
+      <div className="rounded-lg bg-primary p-4 ">
+        <div className="flex items-center align-middle">
+          <SelectElement
+            className="w-[250px]"
+            inputClass="rounded-tr-none rounded-br-none"
+            placeholder="Tìm kiếm"
+            options={OPTION_FILTER}
+            size="md"
+          />
+          <input
+            type="text"
+            placeholder="Tìm kiếm địa điểm khu vực"
+            className="flex-1 rounded-tr-md rounded-br-md border border-l-0 px-4 py-2.5 outline-none"
+          />
+        </div>
+        <div className="mx-auto grid max-w-[600px] grid-cols-3 gap-2 pt-4">
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Tỉnh/Thành"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Quận/Huyện"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Phường/Xã"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Đường/Phố"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Mức giá"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+          <SelectElement
+            inputClass="bg-transparent text-white"
+            placeholder="Hướng"
+            options={OPTION_FILTER}
+            colorIcon={Colors.white}
+          />
+        </div>
+      </div>
     </div>
   );
 };

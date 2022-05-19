@@ -34,14 +34,25 @@ export * from './Warning';
 export * from './Menu';
 export * from './Acreage';
 
-export const IconList = (
-  type: IconListProps,
-  size?: 'sm' | 'md',
-  variant?: 'outline' | 'primary' | 'default'
-) => {
+type IconListCmp = {
+  type: IconListProps;
+  size?: 'sm' | 'md';
+  variant?: 'outline' | 'primary' | 'default';
+  color?: Colors;
+};
+
+export const IconList: React.FC<IconListCmp> = ({
+  type,
+  size,
+  variant,
+  color,
+}) => {
   const sizeIcon = size === 'sm' ? 16 : 24;
-  const checkVariantColor =
-    variant === 'primary' ? Colors.white : Colors.primary;
+  const checkVariantColor = color
+    ? color
+    : variant === 'primary'
+    ? Colors.white
+    : Colors.primary;
   switch (type) {
     case 'location':
       return (
@@ -192,6 +203,8 @@ export const IconList = (
         />
       );
     default:
-      return;
+      return <></>;
   }
 };
+
+export default IconList;

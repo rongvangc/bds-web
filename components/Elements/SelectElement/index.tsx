@@ -10,18 +10,28 @@ import React, {
 } from 'react';
 import { isFunction, suppressEvent } from '../../../utils/common';
 import {
+  Colors,
   MouseOrTouchEvent,
   OptionData,
   SelectProps,
   SelectRef,
 } from '../../../utils/types';
+import { motion } from 'framer-motion';
 import { useDebounce, useMountEffect } from '../../Layouts/hooks';
 import useOptions from './hooks/useOptions';
+import { Input } from './Input';
+import { Menu } from './Menu';
 import Value from './Value';
+import { selectVariant } from '../../../utils/animation';
+import { CaretDropdown } from './CaretDropdown';
 
 const SelectElement = forwardRef<SelectRef, SelectProps>(
   (
     {
+      className = '',
+      inputClass = '',
+      colorIcon = Colors.primary,
+      size = 'sm',
       options,
       autoFocus,
       initialValue,
@@ -40,6 +50,9 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
   ) => {
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
+
+    const sizeStyle = size === 'sm' ? 'px-4 py-1.5' : 'px-4 py-2.5';
+    const fontStyle = size === 'sm' ? 'text-sm' : '';
 
     // DOM element refs
     const controlRef = useRef<HTMLDivElement>(null);
@@ -136,7 +149,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       (): string =>
         isFunction(valueFormat) && selectedOption
           ? valueFormat(selectedOption)
-          : selectedOption?.value!,
+          : selectedOption?.description!,
       [selectedOption, valueFormat]
     );
 
@@ -166,7 +179,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
 
     return (
       <div
-        className="select-wrapper"
+        className={`select-wrapper ${fontStyle} ${className}`}
         id="id"
         aria-controls="id"
         aria-expanded={false}
@@ -177,38 +190,52 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
           onMouseDown={handleOnControlMouseDown}
           ref={controlRef}
         >
-          <div className="value-wrapper relative">
-            <div className="single-value absolute">
+          <div className="value-wrapper relative z-0">
+            <div
+              className={`single-value absolute z-10 w-full overflow-hidden rounded-md ${inputClass}`}
+            >
               <Value
+                sizeStyle={sizeStyle}
+                selectedOption={selectedOption}
                 searchValue={inputValue}
                 placeholder={placeholder}
                 onFormatValue={onFormatValue}
               />
             </div>
 
-            <input
-              ref={inputRef}
+            <Input
+              sizeStyle={sizeStyle}
+              className={inputClass}
+              inputRef={inputRef}
               onBlur={handleOnInputBlur}
               onFocus={handleOnInputFocus}
               onChange={handleOnInputChange}
-              value={inputValue}
-              className=""
+              inputValue={inputValue}
             />
+            <div
+              className={`absolute ${
+                size === 'sm' ? 'right-2 top-2' : 'right-3 top-3'
+              }`}
+            >
+              <CaretDropdown show={menuOpen} color={colorIcon} />
+            </div>
           </div>
         </div>
         {menuOpen && (
-          <div className="menu" ref={menuRef}>
-            {menuOptions?.map((item) => (
-              <p
-                onMouseDown={handleOnMouseDownEvent}
-                onClick={() => selectOption(item)}
-                key={item?.id}
-                className="cursor-pointer"
-              >
-                {onFormatDescription(item)}
-              </p>
-            ))}
-          </div>
+          <motion.div
+            initial="closed"
+            animate={menuOpen ? 'open' : 'closed'}
+            variants={selectVariant}
+            className="relative z-10"
+          >
+            <Menu
+              menuRef={menuRef}
+              menuOptions={menuOptions}
+              onClick={selectOption}
+              onMouseDown={handleOnMouseDownEvent}
+              onFormatDescription={onFormatDescription}
+            />
+          </motion.div>
         )}
       </div>
     );
