@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { IconList } from '../../../icons';
 import { IconListProps } from '../../../utils/types';
 
@@ -7,7 +7,7 @@ type IconButtonProps = {
   icon?: IconListProps;
   size?: 'sm' | 'md';
   variant?: 'outline' | 'primary' | 'default';
-  className?: string;
+  className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
 };
 
 const ButtonElement: React.FC<IconButtonProps> = ({
