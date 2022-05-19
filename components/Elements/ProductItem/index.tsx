@@ -61,13 +61,13 @@ const ProductItem: React.FC<ProductItemType> = () => {
           <span className="ml-4	font-semibold">525</span>
           <HomeIcon width={14} height={14} />
         </p>
-        <p className="mb-1 flex items-center text-sm">
+        <p className="mb-1 flex items-center text-sm font-semibold">
           <LocationIcon width={14} height={14} />
           <span className="ml-1">
             Phường Bình Thuận, Quận Hải Châu, Đà Nẵng.
           </span>
         </p>
-        <p className="truncate-2-line mb-0 text-sm font-medium">
+        <p className="mb-0 text-sm font-medium line-clamp-3">
           Landmark Tower Đã Nẵng là dự án căn hộ cao cấp có vị trí đắc địa bên
           bờ sông Hàn, TP. Đà Nẵng. Dự án do Công ty CP Cosmo Housing làm chủ
           đầu tư, quy mô gồm 2 tòa tháp cao 31 và 39 tầng với hơn 400 căn hộ cao
