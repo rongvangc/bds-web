@@ -36,7 +36,7 @@ const ButtonElement: React.FC<IconButtonProps> = ({
       onClick={onClick}
     >
       <span className={size === 'sm' ? 'pr-1' : 'pr-2'}>
-        {IconList(icon, size, variant)}
+        <IconList type={icon} size={size} variant={variant} />
       </span>
       <p>{children}</p>
     </button>

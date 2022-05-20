@@ -44,7 +44,7 @@ type IconListCmp = {
 export const IconList: React.FC<IconListCmp> = ({
   type,
   size,
-  variant,
+  variant = 'default',
   color,
 }) => {
   const sizeIcon = size === 'sm' ? 16 : 24;
