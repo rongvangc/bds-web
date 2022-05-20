@@ -9,7 +9,7 @@ const FilterSection = () => {
   };
 
   return (
-    <div>
+    <div className="pt-10">
       <FilterRealEstate option={FILTER_OPTION} onChange={handleChangeTab} />
     </div>
   );
