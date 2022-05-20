@@ -1,8 +1,8 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 
 type BadgeProps = {
   text?: string;
-  className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
+  className?: string;
 };
 
 const Badge: React.FC<BadgeProps> = ({

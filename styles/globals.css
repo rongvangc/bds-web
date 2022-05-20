@@ -36,26 +36,3 @@ a {
   font-size: 14px;
   font-weight: 600;
 }
-
-
-/* width */
-.menu::-webkit-scrollbar {
-  width: 6px;
-}
-
-/* Track */
-.menu::-webkit-scrollbar-track {
-  background: #f1f1f1;  
-  border-radius: 10px;
-}
- 
-/* Handle */
-.menu::-webkit-scrollbar-thumb {
-  background: #cecece; 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-.menu::-webkit-scrollbar-thumb:hover {
-  background: grey; 
-}

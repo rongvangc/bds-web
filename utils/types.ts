@@ -3,7 +3,6 @@ import type {
   TouchEvent,
   EventHandler,
   FocusEventHandler,
-  HTMLAttributes,
 } from 'react';
 
 export type IconProps = {
@@ -83,16 +82,12 @@ export type SelectRef = Readonly<{
 export type SelectProps = Readonly<{
   options: OptionData[];
   autoFocus?: boolean;
-  colorIcon?: Colors;
   initialValue?: OptionData;
   placeholder?: string;
   filterIgnoreCase?: boolean;
   filterIgnoreAccents?: boolean;
   inputDelay?: number;
   acceptKey?: string[];
-  className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
-  inputClass?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
-  size?: 'sm' | 'md';
   valueFormat?: (data: OptionData) => string;
   descriptionFormat?: (data: OptionData) => string;
   onInputChange?: (value?: string) => any;
