@@ -1,12 +1,10 @@
 import type { NextPage } from 'next';
-import SwiperCore, { EffectCoverflow, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import ButtonElement from '../../components/Elements/ButtonElement';
+import Button from '../../components/Elements/Button';
 import Badge from '../../components/Elements/Badge';
-
-SwiperCore.use([EffectCoverflow, Pagination]);
 
 const slides = [
   'https://file4.batdongsan.com.vn/2022/05/17/20220517174329-daf0.jpg',
@@ -15,6 +13,10 @@ const slides = [
 ];
 
 const ProductSlider: NextPage = () => {
+  const swiper = useSwiper();
+
+  console.log('Pagination', Pagination);
+
   return (
     <div className="swiper-container relative">
       <Swiper
@@ -22,6 +24,7 @@ const ProductSlider: NextPage = () => {
         className="mySwiper"
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
       >
         {slides.map((imageUrl: string, index: number) => (
           <SwiperSlide key={index}>
@@ -57,20 +60,22 @@ const ProductSlider: NextPage = () => {
         ))}
       </Swiper>
 
-      <ButtonElement
+      <Button
         size="sm"
         variant="default"
         className="!absolute top-64 left-6 z-10 bg-white hover:bg-gray"
+        onClick={() => swiper?.slidePrev()}
       >
         &#171;
-      </ButtonElement>
-      <ButtonElement
+      </Button>
+      <Button
         size="sm"
         variant="default"
-        className=" !absolute top-64 right-6 z-10 bg-white hover:bg-gray "
+        className=" !absolute top-64 right-6 z-10 bg-white hover:bg-gray"
+        onClick={() => swiper?.slideNext()}
       >
         &#187;
-      </ButtonElement>
+      </Button>
     </div>
   );
 };
