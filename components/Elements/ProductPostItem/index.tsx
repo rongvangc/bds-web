@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { LocationIcon, HomeIcon } from '../../../icons';
 
 const imageUrl =
   'https://file4.batdongsan.com.vn/crop/118x84/2022/05/18/JGcIp0rf/20220518101955-f9cb.jpg';
@@ -23,7 +22,7 @@ const ProductPostItem: React.FC<ProductPostItemType> = () => {
         />
       </div>
       <div className="post-item-content relative ml-2 border-tertiary">
-        <p className="mb-2 text-sm font-semibold">
+        <p className="mb-2 text-sm font-semibold line-clamp-3">
           Ra mắt câu lạc bộ đầu tư bất động sản Alpha Land
         </p>
         <span className="left- absolute bottom-0 text-xs">Hôm nay</span>
