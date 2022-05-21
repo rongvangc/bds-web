@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { FILTER_OPTION } from '../../../utils/constants';
 import { FilterKey, OptionData } from '../../../utils/types';
 import FilterRealEstate from '../../Elements/FilterRealEstate';

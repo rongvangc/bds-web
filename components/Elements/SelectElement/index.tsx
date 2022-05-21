@@ -49,6 +49,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       filterIgnoreAccents = true,
       inputDelay = 300,
       acceptKey,
+      isClear = false,
       valueFormat,
       descriptionFormat,
       onInputBlur,
@@ -220,6 +221,13 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     useEffect(() => {
       menuOpenRef.current = menuOpen;
     }, [menuOpen]);
+
+    /**
+     * Set default value when has Clear
+     */
+    useEffect(() => {
+      isClear && setSelectedOption(initialValue);
+    }, [initialValue, isClear]);
 
     /**
      * useMountEffect:

@@ -45,6 +45,7 @@ export type IconListProps =
   | 'logout'
   | 'map-location'
   | 'row'
+  | 'refresh'
   | '';
 
 export enum Colors {
@@ -124,6 +125,7 @@ export type SelectProps = Readonly<{
   placeholder?: string;
   filterIgnoreCase?: boolean;
   filterIgnoreAccents?: boolean;
+  isClear?: boolean;
   inputDelay?: number;
   acceptKey?: string[];
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;

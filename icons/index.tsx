@@ -27,6 +27,7 @@ import { LoginIcon } from './Login';
 import { LogoutIcon } from './Logout';
 import { MapLocationIcon } from './MapLocation';
 import { RowIcon } from './Row';
+import { RefreshIcon } from './Refresh';
 
 export * from './User';
 export * from './UserPlus';
@@ -57,6 +58,7 @@ export * from './Login';
 export * from './Logout';
 export * from './MapLocation';
 export * from './Row';
+export * from './Refresh';
 
 type IconListCmp = {
   type: IconListProps;
@@ -67,7 +69,7 @@ type IconListCmp = {
 
 export const IconList: React.FC<IconListCmp> = ({
   type,
-  size,
+  size = 'sm',
   variant = 'default',
   color,
 }) => {
@@ -301,6 +303,14 @@ export const IconList: React.FC<IconListCmp> = ({
     case 'key':
       return (
         <KeyIcon width={sizeIcon} height={sizeIcon} color={checkVariantColor} />
+      );
+    case 'refresh':
+      return (
+        <RefreshIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
       );
     default:
       return <></>;

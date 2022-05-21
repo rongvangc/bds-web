@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
+import IconList from '../../../icons';
 import { isFunction } from '../../../utils/common';
 import { DEFAULT_FILTER, REAL_ESTATE_OPTION } from '../../../utils/constants';
 import {
@@ -13,11 +14,15 @@ const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
 > = ({ option, className, onChange, onFilter }) => {
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]);
+  const [hasFilter, setHasFilter] = useState<boolean>(false);
+  const [clear, setClear] = useState<boolean>(false);
   const [filterOption, setFilterOption] =
     useState<Record<FilterKey, OptionData | null>>(DEFAULT_FILTER);
 
   const handleFilterOption = useCallback(
     (key: FilterKey) => (data: OptionData) => {
+      setHasFilter(true);
+      setClear(false);
       setFilterOption({
         ...filterOption,
         [key]: data,
@@ -30,6 +35,12 @@ const FilterRealEstate: React.FC<
     },
     [filterOption, onFilter]
   );
+
+  const handleReset = useCallback(() => {
+    setFilterOption(DEFAULT_FILTER);
+    setHasFilter(false);
+    setClear(true);
+  }, []);
 
   const handleSwichTab = useCallback(
     (value: OptionData) => {
@@ -56,7 +67,7 @@ const FilterRealEstate: React.FC<
           </a>
         ))}
       </div>
-      <div className="rounded-lg bg-primary p-4 ">
+      <div className="relative rounded-lg bg-primary p-4">
         <div className="flex items-center align-middle">
           <SelectElement
             className="w-[250px]"
@@ -65,6 +76,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             size="md"
             onOptionChange={handleFilterOption('type')}
+            isClear={clear}
           />
           <input
             type="text"
@@ -79,6 +91,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
+            isClear={clear}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
@@ -86,6 +99,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
+            isClear={clear}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
@@ -93,6 +107,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
+            isClear={clear}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
@@ -100,6 +115,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}
+            isClear={clear}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
@@ -107,6 +123,7 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('price')}
+            isClear={clear}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
@@ -114,8 +131,17 @@ const FilterRealEstate: React.FC<
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('direction')}
+            isClear={clear}
           />
         </div>
+        {hasFilter && (
+          <a
+            className="absolute bottom-2 right-2 z-0 cursor-pointer rounded-md border border-white bg-white"
+            onClick={handleReset}
+          >
+            <IconList type="refresh" size="md" color={Colors.primary} />
+          </a>
+        )}
       </div>
     </div>
   );
