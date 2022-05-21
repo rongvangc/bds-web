@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { FILTER_OPTION } from '../../../utils/constants';
-import { OptionData } from '../../../utils/types';
+import { FilterKey, OptionData } from '../../../utils/types';
 import FilterRealEstate from '../../Elements/FilterRealEstate';
 
 const FilterSection = () => {
@@ -8,9 +8,20 @@ const FilterSection = () => {
     console.log(value);
   };
 
+  const handleFilterOption = useCallback(
+    (data: Record<FilterKey, OptionData | null>) => {
+      console.log(data);
+    },
+    []
+  );
+
   return (
     <div className="mx-auto w-[900px] pt-10">
-      <FilterRealEstate option={FILTER_OPTION} onChange={handleChangeTab} />
+      <FilterRealEstate
+        option={FILTER_OPTION}
+        onChange={handleChangeTab}
+        onFilter={handleFilterOption}
+      />
     </div>
   );
 };

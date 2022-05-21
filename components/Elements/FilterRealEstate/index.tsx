@@ -1,7 +1,9 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
-import { REAL_ESTATE_OPTION } from '../../../utils/constants';
+import { isFunction } from '../../../utils/common';
+import { DEFAULT_FILTER, REAL_ESTATE_OPTION } from '../../../utils/constants';
 import {
   Colors,
+  FilterKey,
   FilterRealEstateProps,
   OptionData,
 } from '../../../utils/types';
@@ -9,8 +11,25 @@ import SelectElement from '../SelectElement';
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
-> = ({ option, className, onChange }) => {
+> = ({ option, className, onChange, onFilter }) => {
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]);
+  const [filterOption, setFilterOption] =
+    useState<Record<FilterKey, OptionData | null>>(DEFAULT_FILTER);
+
+  const handleFilterOption = useCallback(
+    (key: FilterKey) => (data: OptionData) => {
+      setFilterOption({
+        ...filterOption,
+        [key]: data,
+      });
+      isFunction(onFilter) &&
+        onFilter({
+          ...filterOption,
+          [key]: data,
+        });
+    },
+    [filterOption, onFilter]
+  );
 
   const handleSwichTab = useCallback(
     (value: OptionData) => {
@@ -45,6 +64,7 @@ const FilterRealEstate: React.FC<
             placeholder="Tìm kiếm"
             options={REAL_ESTATE_OPTION}
             size="md"
+            onOptionChange={handleFilterOption('type')}
           />
           <input
             type="text"
@@ -58,36 +78,42 @@ const FilterRealEstate: React.FC<
             placeholder="Tỉnh/Thành"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('province')}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('district')}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('ward')}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('street')}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Mức giá"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('price')}
           />
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Hướng"
             options={REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
+            onOptionChange={handleFilterOption('direction')}
           />
         </div>
       </div>

@@ -32,17 +32,19 @@ const ButtonElement: React.FC<IconButtonProps> = ({
       : `${checkSize} text-primary border-transparent`;
 
   return (
-    <button
-      className={`${variantType} ${className} flex items-center ${
-        size === 'sm' ? 'rounded-md' : 'rounded-lg'
-      } border font-medium outline-none`}
-      onClick={onClick}
-    >
-      <span className={size === 'sm' ? 'pr-1 pt-0' : 'pr-1 pt-0.5'}>
-        <IconList type={icon} size={size} variant={variant} />
-      </span>
-      <p>{children}</p>
-    </button>
+    <LinkButton href={url}>
+      <button
+        className={`${variantType} ${className} flex items-center ${
+          size === 'sm' ? 'rounded-md' : 'rounded-lg'
+        } border font-medium outline-none`}
+        onClick={onClick}
+      >
+        <span className={size === 'sm' ? 'pr-1 pt-0' : 'pr-1 pt-0.5'}>
+          <IconList type={icon} size={size} variant={variant} />
+        </span>
+        <p>{children}</p>
+      </button>
+    </LinkButton>
   );
 };
 

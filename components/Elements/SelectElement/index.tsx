@@ -8,7 +8,11 @@ import React, {
   type FocusEvent,
   useEffect,
 } from 'react';
-import { isFunction, suppressEvent } from '../../../utils/common';
+import {
+  isArrayWithLength,
+  isFunction,
+  suppressEvent,
+} from '../../../utils/common';
 import {
   Colors,
   MouseOrTouchEvent,
@@ -17,7 +21,12 @@ import {
   SelectRef,
 } from '../../../utils/types';
 import { motion } from 'framer-motion';
-import { useDebounce, useMountEffect } from '../../hooks';
+import {
+  useCallbackRef,
+  useDebounce,
+  useMountEffect,
+  useUpdateEffect,
+} from '../../hooks';
 import useOptions from './hooks/useOptions';
 import { Input } from './Input';
 import { Menu } from './Menu';
@@ -45,11 +54,16 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       onInputBlur,
       onInputFocus,
       onInputChange,
+      onOptionChange,
+      onSearchChange,
     },
     ref: Ref<SelectRef>
   ) => {
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
+    const onChangeEventValue = useRef<boolean>(false);
+    const onSearchChangeIsFunc = useRef<boolean>(isFunction(onSearchChange));
+    const onOptionChangeIsFunc = useRef<boolean>(isFunction(onOptionChange));
 
     const sizeStyle = size === 'sm' ? 'pl-4 py-1.5 pr-8' : 'pl-4 py-2.5 pr-8';
     const fontStyle = size === 'sm' ? 'text-sm' : '';
@@ -79,6 +93,9 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       selectedOption,
       acceptKey
     );
+
+    const onSearchChangeRef = useCallbackRef(onSearchChange);
+    const onOptionChangeRef = useCallbackRef(onOptionChange);
 
     const blurInput = (): void => inputRef.current?.blur();
     const focusInput = (): void => inputRef.current?.focus();
@@ -137,6 +154,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
 
     const handleOnInputChange = useCallback(
       (e: FormEvent<HTMLInputElement>): void => {
+        onChangeEventValue.current = true;
         const value = e.currentTarget.value;
         onInputChange?.(value);
         setInputValue(value);
@@ -160,6 +178,40 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
           : option.description!,
       [descriptionFormat]
     );
+
+    /**
+     * Execute every render - these ref boolean flags are used to determine if functions
+     * ..are defined inside of a callback wrapper returned from 'useCallbackRef' custom hook
+     */
+    useEffect(() => {
+      onSearchChangeIsFunc.current = isFunction(onSearchChange);
+      onOptionChangeIsFunc.current = isFunction(onOptionChange);
+    });
+
+    /**
+     * If 'onSearchChange' function is defined, run as callback when the stateful debouncedInputValue
+     * updates check if onChangeEventValue ref is set true, which indicates the inputValue change was triggered by input change event
+     */
+    useEffect(() => {
+      const { current: isFunc } = onSearchChangeIsFunc;
+
+      if (isFunc && onChangeEventValue.current) {
+        onChangeEventValue.current = false;
+        onSearchChangeRef(debouncedInputValue);
+      }
+    }, [onSearchChangeRef, debouncedInputValue]);
+
+    /**
+     * useUpdateEffect:
+     * Handle passing 'selectedOption' value(s) to onOptionChange callback function prop (if defined)
+     */
+    useUpdateEffect(() => {
+      const { current: isFunc } = onOptionChangeIsFunc;
+
+      if (isFunc) {
+        selectedOption && onOptionChangeRef(selectedOption);
+      }
+    }, [onOptionChangeRef, selectedOption]);
 
     /**
      * Write value of 'menuOpen' to ref object.

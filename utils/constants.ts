@@ -1,5 +1,15 @@
 import { OptionData } from './types';
 
+export const DEFAULT_FILTER = {
+  type: null,
+  province: null,
+  district: null,
+  ward: null,
+  street: null,
+  price: null,
+  direction: null,
+};
+
 export const NAVIGATOR = [
   {
     name: 'Giới thiệu',

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import ProductCard from '../components/Elements/ProductCard';
 import Layout from '../components/Layouts';
 import Section from '../components/Layouts/Section';
 import FilterSection from '../components/Layouts/Section/FilterSection';

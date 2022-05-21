@@ -16,6 +16,17 @@ import { MenuIcon } from './Menu';
 import { AcreageIcon } from './Acreage';
 import { CaretDownIcon } from './CaretDown';
 import { CaretUpIcon } from './CaretUp';
+import { AppIcon } from './App';
+import { ChatIcon } from './Chat';
+import { ClockIcon } from './Clock';
+import { ColumnIcon } from './Column';
+import { ImageIcon } from './Image';
+import { KeyIcon } from './Key';
+import { LayoutIcon } from './Layout';
+import { LoginIcon } from './Login';
+import { LogoutIcon } from './Logout';
+import { MapLocationIcon } from './MapLocation';
+import { RowIcon } from './Row';
 
 export * from './User';
 export * from './UserPlus';
@@ -33,6 +44,19 @@ export * from './OtherHorizontal';
 export * from './Warning';
 export * from './Menu';
 export * from './Acreage';
+export * from './CaretDown';
+export * from './CaretUp';
+export * from './App';
+export * from './Chat';
+export * from './Clock';
+export * from './Column';
+export * from './Image';
+export * from './Key';
+export * from './Layout';
+export * from './Login';
+export * from './Logout';
+export * from './MapLocation';
+export * from './Row';
 
 type IconListCmp = {
   type: IconListProps;
@@ -201,6 +225,82 @@ export const IconList: React.FC<IconListCmp> = ({
           height={sizeIcon}
           color={checkVariantColor}
         />
+      );
+    case 'app':
+      return (
+        <AppIcon width={sizeIcon} height={sizeIcon} color={checkVariantColor} />
+      );
+    case 'clock':
+      return (
+        <ClockIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'column':
+      return (
+        <ColumnIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'chat':
+      return (
+        <ChatIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'image':
+      return (
+        <ImageIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'layout':
+      return (
+        <LayoutIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'login':
+      return (
+        <LoginIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'logout':
+      return (
+        <LogoutIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'row':
+      return (
+        <RowIcon width={sizeIcon} height={sizeIcon} color={checkVariantColor} />
+      );
+    case 'map-location':
+      return (
+        <MapLocationIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'key':
+      return (
+        <KeyIcon width={sizeIcon} height={sizeIcon} color={checkVariantColor} />
       );
     default:
       return <></>;

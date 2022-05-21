@@ -34,6 +34,17 @@ export type IconListProps =
   | 'acreage'
   | 'caret-down'
   | 'caret-up'
+  | 'app'
+  | 'chat'
+  | 'column'
+  | 'clock'
+  | 'key'
+  | 'image'
+  | 'login'
+  | 'layout'
+  | 'logout'
+  | 'map-location'
+  | 'row'
   | '';
 
 export enum Colors {
@@ -55,6 +66,7 @@ export enum Colors {
 export type FilterRealEstateProps = {
   option: OptionData[];
   onChange?: (value: OptionData) => void;
+  onFilter?: (data: Record<FilterKey, OptionData | null>) => void;
 };
 
 export type OptionData = {
@@ -131,3 +143,12 @@ export type MouseOrTouchEvent<T = Element> = MouseEvent<T> | TouchEvent<T>;
 export type MouseOrTouchEventHandler<T = Element> = EventHandler<
   MouseOrTouchEvent<T>
 >;
+
+export type FilterKey =
+  | 'type'
+  | 'province'
+  | 'district'
+  | 'ward'
+  | 'street'
+  | 'price'
+  | 'direction';
