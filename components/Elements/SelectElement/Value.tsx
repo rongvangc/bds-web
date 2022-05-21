@@ -17,12 +17,12 @@ const Value: React.FC<ValueProps> = ({
   onFormatValue,
 }) => {
   if (placeholder && !searchValue && !selectedOption)
-    return <div className={`border ${sizeStyle}`}>{placeholder}</div>;
+    return <div className={`truncate border ${sizeStyle}`}>{placeholder}</div>;
 
   if (searchValue) return <></>;
 
   return (
-    <div className={`single-value w-full border ${sizeStyle}`}>
+    <div className={`single-value w-full truncate border ${sizeStyle}`}>
       {onFormatValue()}
     </div>
   );

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { CallbackFunction } from '../../../utils/types';
+import { CallbackFunction } from '../../utils/types';
 
 /**
  * A custom hook that converts a callback to a ref to avoid triggering re-renders

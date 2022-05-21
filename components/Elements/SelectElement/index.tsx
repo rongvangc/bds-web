@@ -17,7 +17,7 @@ import {
   SelectRef,
 } from '../../../utils/types';
 import { motion } from 'framer-motion';
-import { useDebounce, useMountEffect } from '../../Layouts/hooks';
+import { useDebounce, useMountEffect } from '../../hooks';
 import useOptions from './hooks/useOptions';
 import { Input } from './Input';
 import { Menu } from './Menu';
@@ -51,7 +51,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
 
-    const sizeStyle = size === 'sm' ? 'px-4 py-1.5' : 'px-4 py-2.5';
+    const sizeStyle = size === 'sm' ? 'pl-4 py-1.5 pr-8' : 'pl-4 py-2.5 pr-8';
     const fontStyle = size === 'sm' ? 'text-sm' : '';
 
     // DOM element refs
@@ -214,7 +214,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
             />
             <div
               className={`absolute ${
-                size === 'sm' ? 'right-2 top-2' : 'right-3 top-3'
+                size === 'sm' ? 'right-2 top-1.5' : 'right-3 top-3'
               }`}
             >
               <CaretDropdown show={menuOpen} color={colorIcon} />

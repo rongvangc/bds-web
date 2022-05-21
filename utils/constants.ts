@@ -29,7 +29,7 @@ export const FILTER_OPTION: OptionData[] = [
   },
 ];
 
-export const OPTION_FILTER: OptionData[] = [
+export const REAL_ESTATE_OPTION: OptionData[] = [
   {
     id: '1',
     value: 'tat-ca',
@@ -64,5 +64,23 @@ export const OPTION_FILTER: OptionData[] = [
     id: '7',
     value: 'loai-khac',
     description: 'Bất động sản khác',
+  },
+];
+
+export const POST_OPTION_TAB: OptionData[] = [
+  {
+    id: '1',
+    value: 'noi-bat',
+    description: 'Tin tức nổi bật',
+  },
+  {
+    id: '2',
+    value: 'thi-truong',
+    description: 'Tin tức thị trường',
+  },
+  {
+    id: '3',
+    value: 'phong-thuy',
+    description: 'Phong thủy',
   },
 ];

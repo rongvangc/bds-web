@@ -9,7 +9,7 @@ const FilterSection = () => {
   };
 
   return (
-    <div className="pt-10">
+    <div className="mx-auto w-[900px] pt-10">
       <FilterRealEstate option={FILTER_OPTION} onChange={handleChangeTab} />
     </div>
   );

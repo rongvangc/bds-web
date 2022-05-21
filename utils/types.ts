@@ -5,6 +5,7 @@ import type {
   FocusEventHandler,
   HTMLAttributes,
 } from 'react';
+import { string } from 'yup';
 
 export type IconProps = {
   width?: number;
@@ -47,6 +48,8 @@ export enum Colors {
   lightGreen = '#a7d1bb',
   white = '#ffffff',
   black = '#484848',
+  gray = '#cecece',
+  lightGray = 'rgba(242,242,242,0.5)',
 }
 
 export type FilterRealEstateProps = {
@@ -69,6 +72,27 @@ export type MenuOption = Readonly<{
   isDisabled: boolean;
   isSelected: boolean;
 }>;
+
+export type PostType = {
+  id: string;
+  title: string;
+  description?: string;
+  thumbnail?: string;
+  url?: string;
+  date?: Date;
+};
+
+export type ProductType = {
+  id: string;
+  name: string;
+  price: string;
+  acreage: number;
+  address: string;
+  date?: Date;
+  url?: string;
+  status?: string;
+  isHot?: boolean;
+};
 
 export type SelectRef = Readonly<{
   empty: boolean;
