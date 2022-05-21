@@ -24,7 +24,7 @@ const useOptions = (
       filterIgnoreAccents
     );
 
-    const filterOptionByKey = options.filter((option) =>
+    const filterOptionByKey = options?.filter((option) =>
       Object.keys(option).some((key) =>
         acceptKey?.includes(key)
           ? option[key]?.includes(normalizedSearch)
@@ -32,7 +32,7 @@ const useOptions = (
       )
     );
 
-    const filterOption = options.filter((option) =>
+    const filterOption = options?.filter((option) =>
       option.value.includes(normalizedSearch)
     );
 
