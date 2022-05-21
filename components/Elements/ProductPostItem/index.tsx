@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { LocationIcon, HomeIcon } from '../../../icons';
 
 const imageUrl =
   'https://file4.batdongsan.com.vn/crop/118x84/2022/05/18/JGcIp0rf/20220518101955-f9cb.jpg';

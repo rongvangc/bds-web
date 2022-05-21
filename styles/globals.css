@@ -41,7 +41,6 @@ a {
   font-weight: 600;
 }
 
-
 /* width */
 .menu::-webkit-scrollbar {
   width: 4px;
@@ -49,17 +48,24 @@ a {
 
 /* Track */
 .menu::-webkit-scrollbar-track {
-  background: #f1f1f1;  
+  background: #f1f1f1;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 .menu::-webkit-scrollbar-thumb {
-  background: #cecece; 
+  background: #cecece;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 .menu::-webkit-scrollbar-thumb:hover {
-  background: grey; 
+  background: grey;
+}
+
+/* Slider */
+.swiper-container {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }

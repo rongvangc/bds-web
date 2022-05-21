@@ -1,7 +1,7 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 
 type BadgeProps = {
-  text?: string;
+  text?: string | ReactNode;
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
 };
 
