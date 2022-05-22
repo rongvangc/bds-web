@@ -6,6 +6,7 @@ import LinkButton from '../LinkButton';
 type IconButtonProps = {
   onClick?: () => void;
   icon?: IconListProps;
+  iconDirection?: 'left' | 'right';
   size?: 'sm' | 'md';
   variant?: 'outline' | 'primary' | 'default';
   url?: string;
@@ -18,11 +19,16 @@ const ButtonElement: React.FC<IconButtonProps> = ({
   variant = 'default',
   size = 'md',
   className,
-  url = '/',
+  url,
+  iconDirection = 'left',
   children,
 }) => {
-  const checkSize =
-    size === 'sm' ? 'h-[28px] text-sm pr-2 pl-2' : 'h-[40px] pr-6 pl-4';
+  const isRightDirection = iconDirection === 'right';
+  const isSmallSize = size === 'sm';
+
+  const checkSize = isSmallSize
+    ? `h-[28px] text-sm pr-2 pl-2`
+    : `h-[40px] ${isRightDirection ? 'pr-4 pl-6' : 'pr-6 pl-4'}`;
 
   const variantType =
     variant === 'primary'
@@ -31,21 +37,29 @@ const ButtonElement: React.FC<IconButtonProps> = ({
       ? `${checkSize} text-primary bg-white border`
       : `${checkSize} text-primary border-transparent`;
 
-  return (
-    <LinkButton href={url}>
-      <button
-        className={`${variantType} ${className} flex items-center ${
-          size === 'sm' ? 'rounded-md' : 'rounded-lg'
-        } border font-medium outline-none`}
-        onClick={onClick}
+  const button = () => (
+    <button
+      className={`${variantType} ${className} ${
+        isRightDirection ? 'flex-row-reverse' : ''
+      } flex items-center ${
+        isSmallSize ? 'rounded-md' : 'rounded-lg'
+      } border font-medium outline-none`}
+      onClick={onClick}
+    >
+      <span
+        className={`${isRightDirection ? 'pl-1' : 'pr-1'} ${
+          isSmallSize ? 'pt-0' : 'pt-0.5'
+        }`}
       >
-        <span className={size === 'sm' ? 'pr-1 pt-0' : 'pr-1 pt-0.5'}>
-          <IconList type={icon} size={size} variant={variant} />
-        </span>
-        <p>{children}</p>
-      </button>
-    </LinkButton>
+        <IconList type={icon} size={size} variant={variant} />
+      </span>
+      <p>{children}</p>
+    </button>
   );
+
+  if (!url) return button();
+
+  return <LinkButton href={url}>{button()}</LinkButton>;
 };
 
 export default ButtonElement;

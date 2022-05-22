@@ -46,6 +46,10 @@ export type IconListProps =
   | 'map-location'
   | 'row'
   | 'refresh'
+  | 'calendar'
+  | 'arrow-left'
+  | 'arrow-right'
+  | 'facebook'
   | '';
 
 export enum Colors {

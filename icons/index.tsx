@@ -28,6 +28,10 @@ import { LogoutIcon } from './Logout';
 import { MapLocationIcon } from './MapLocation';
 import { RowIcon } from './Row';
 import { RefreshIcon } from './Refresh';
+import { CalendarIcon } from './Calendar';
+import { ArrowLeftIcon } from './ArrowLeft';
+import { ArrowRightIcon } from './ArrowRight';
+import { FacebookIcon } from './Facebook';
 
 export * from './User';
 export * from './UserPlus';
@@ -59,6 +63,10 @@ export * from './Logout';
 export * from './MapLocation';
 export * from './Row';
 export * from './Refresh';
+export * from './Calendar';
+export * from './Facebook';
+export * from './ArrowLeft';
+export * from './ArrowRight';
 
 type IconListCmp = {
   type: IconListProps;
@@ -307,6 +315,38 @@ export const IconList: React.FC<IconListCmp> = ({
     case 'refresh':
       return (
         <RefreshIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'calendar':
+      return (
+        <CalendarIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'arrow-left':
+      return (
+        <ArrowLeftIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'arrow-right':
+      return (
+        <ArrowRightIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'facebook':
+      return (
+        <FacebookIcon
           width={sizeIcon}
           height={sizeIcon}
           color={checkVariantColor}
