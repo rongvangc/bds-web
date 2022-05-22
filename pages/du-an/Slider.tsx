@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, A11y } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import Button from '../../components/Elements/Button';
 import Badge from '../../components/Elements/Badge';
+import IconList from '../../icons';
+import { Colors } from '../../utils/types';
 
 const slides = [
   'https://file4.batdongsan.com.vn/2022/05/17/20220517174329-daf0.jpg',
@@ -15,25 +16,26 @@ const slides = [
 const ProductSlider: NextPage = () => {
   const swiper = useSwiper();
 
-  console.log('Pagination', Pagination);
-
   return (
     <div className="swiper-container relative">
       <Swiper
-        pagination={true}
-        className="mySwiper"
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        slidesPerView={1}
+        modules={[Navigation, A11y]}
+        navigation={{
+          prevEl: '.prvBtn',
+          nextEl: '.nextBtn',
+        }}
+        loop
+        className="mb-10 overflow-hidden rounded-md"
       >
         {slides.map((imageUrl: string, index: number) => (
           <SwiperSlide key={index}>
-            <div className="w-100 relative h-[420px]">
+            <div className="relative h-[420px] w-full overflow-hidden rounded-md">
               <span className="product-image-gradient border-bottom-left-radius-[4px] absolute left-0 bottom-0 z-[1] h-[260px] w-full" />
               <Image
                 src={imageUrl || '/default-product-image.png'}
                 layout="fill"
-                className=" object-cover"
+                objectFit="cover"
                 alt=""
               />
               <div className="absolute bottom-10 left-20 right-20 z-10">
@@ -60,22 +62,14 @@ const ProductSlider: NextPage = () => {
         ))}
       </Swiper>
 
-      <Button
-        size="sm"
-        variant="default"
-        className="!absolute top-64 left-6 z-10 bg-white hover:bg-gray"
-        onClick={() => swiper?.slidePrev()}
-      >
-        &#171;
-      </Button>
-      <Button
-        size="sm"
-        variant="default"
-        className=" !absolute top-64 right-6 z-10 bg-white hover:bg-gray"
-        onClick={() => swiper?.slideNext()}
-      >
-        &#187;
-      </Button>
+      <div className="bott absolute top-[190px] flex w-full justify-between">
+        <div className="prvBtn absolute -left-12 cursor-pointer rounded-md p-1 shadow-md hover:bg-gray">
+          <IconList type="arrow-left" size="md" color={Colors.black} />
+        </div>
+        <div className="nextBtn absolute -right-12 cursor-pointer rounded-md p-1 shadow-md hover:bg-gray">
+          <IconList type="arrow-right" size="md" color={Colors.black} />
+        </div>
+      </div>
     </div>
   );
 };

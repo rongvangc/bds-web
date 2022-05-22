@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Navigation, A11y } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import IconList from '../../../icons';
 import { Colors } from '../../../utils/types';
 import Heading from '../../Elements/Heading';
@@ -34,8 +34,6 @@ const PARTNER_IMAGE = [
 ];
 
 const PartnerSection: React.FC = () => {
-  const swiper = useSwiper();
-
   return (
     <>
       <div className="flex items-center">
