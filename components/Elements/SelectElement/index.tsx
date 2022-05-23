@@ -66,7 +66,12 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     const onSearchChangeIsFunc = useRef<boolean>(isFunction(onSearchChange));
     const onOptionChangeIsFunc = useRef<boolean>(isFunction(onOptionChange));
 
-    const sizeStyle = size === 'sm' ? 'pl-4 py-1.5 pr-8' : 'pl-4 py-2.5 pr-8';
+    const sizeStyle =
+      size === 'sm'
+        ? 'pl-4 py-1.5 pr-8'
+        : size === 'xs'
+        ? 'pl-2 py-1 pr-4'
+        : 'pl-4 py-2.5 pr-8';
     const fontStyle = size === 'sm' ? 'text-sm' : '';
 
     // DOM element refs
@@ -274,7 +279,11 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
             />
             <div
               className={`absolute ${
-                size === 'sm' ? 'right-2 top-1.5' : 'right-3 top-3'
+                size === 'sm'
+                  ? 'right-2 top-1.5'
+                  : size === 'xs'
+                  ? 'right-1 top-1'
+                  : 'right-3 top-3'
               }`}
             >
               <CaretDropdown show={menuOpen} color={colorIcon} />

@@ -21,7 +21,7 @@ export const NAVIGATOR = [
   },
 ];
 
-export const FILTER_OPTION: OptionData[] = [
+export const TYPE_TAB_OPTION: OptionData[] = [
   {
     id: '1',
     value: 'dat-ban',
@@ -36,6 +36,19 @@ export const FILTER_OPTION: OptionData[] = [
     id: '3',
     value: 'du-an',
     description: 'Dự án',
+  },
+];
+
+export const TYPE_TAB_BAR_OPTION: OptionData[] = [
+  {
+    id: '1',
+    value: 'dat-ban',
+    description: 'Bán',
+  },
+  {
+    id: '2',
+    value: 'cho-thue',
+    description: 'Cho thuê',
   },
 ];
 

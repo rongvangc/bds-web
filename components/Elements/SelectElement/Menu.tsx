@@ -25,7 +25,7 @@ export const Menu: React.FC<MenuProps> = ({
     );
 
   return (
-    <div className="absolute mt-2 mb-2 box-border w-full rounded-md bg-white p-2 shadow-md">
+    <div className="absolute mt-2 mb-2 box-border w-full min-w-max rounded-md bg-white p-2 shadow-md">
       <div className="menu max-h-60 overflow-y-auto" ref={menuRef}>
         {menuOptions?.map((item) => (
           <p

@@ -2,15 +2,19 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import IconList, { MenuIcon } from '../../../icons';
-import { NAVIGATOR } from '../../../utils/constants';
+import { NAVIGATOR, TYPE_TAB_BAR_OPTION } from '../../../utils/constants';
 import ButtonElement from '../../Elements/ButtonElement';
 import LinkButton from '../../Elements/LinkButton';
 import { Colors } from '../../../utils/types';
+import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
+import { useHeader } from '../../hooks/useHeader';
 
 const Header: React.FC = () => {
   const { route } = useRouter();
 
   const isHome = route === '/';
+
+  const { handleChangeTab, handleFilterOption } = useHeader();
 
   return (
     <>
@@ -112,6 +116,16 @@ const Header: React.FC = () => {
           </div>
         </div>
       </header>
+
+      {!isHome && (
+        <div className="sticky top-0 z-30 bg-white shadow">
+          <FilterRealEstateBar
+            option={TYPE_TAB_BAR_OPTION}
+            onChange={handleChangeTab}
+            onFilter={handleFilterOption}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FILTER_OPTION } from '../../../utils/constants';
+import { TYPE_TAB_OPTION } from '../../../utils/constants';
 import { FilterKey, OptionData } from '../../../utils/types';
 import FilterRealEstate from '../../Elements/FilterRealEstate';
 
@@ -18,7 +18,7 @@ const FilterSection = () => {
   return (
     <div className="mx-auto w-[900px] pt-10">
       <FilterRealEstate
-        option={FILTER_OPTION}
+        option={TYPE_TAB_OPTION}
         onChange={handleChangeTab}
         onFilter={handleFilterOption}
       />

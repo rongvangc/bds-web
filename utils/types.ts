@@ -134,7 +134,7 @@ export type SelectProps = Readonly<{
   acceptKey?: string[];
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
   inputClass?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'xs';
   valueFormat?: (data: OptionData) => string;
   descriptionFormat?: (data: OptionData) => string;
   onInputChange?: (value?: string) => any;
