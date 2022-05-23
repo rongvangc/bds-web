@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Layout from '../components/Layouts';
 import Section from '../components/Layouts/Section';
+import ContactMailSection from '../components/Layouts/Section/ContactMailSection';
 import FilterSection from '../components/Layouts/Section/FilterSection';
 import HeroSection from '../components/Layouts/Section/HeroSection';
 import HotProject from '../components/Layouts/Section/HotProject';
@@ -33,6 +34,9 @@ const Home: NextPage = () => {
       </Section>
       <Section>
         <WhySection />
+      </Section>
+      <Section image="/contact.jpg">
+        <ContactMailSection />
       </Section>
       <Section>
         <PartnerSection />

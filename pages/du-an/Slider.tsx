@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { Navigation, A11y } from 'swiper';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
 import Badge from '../../components/Elements/Badge';
@@ -14,8 +14,6 @@ const slides = [
 ];
 
 const ProductSlider: NextPage = () => {
-  const swiper = useSwiper();
-
   return (
     <div className="swiper-container relative">
       <Swiper

@@ -39,11 +39,11 @@ const ButtonElement: React.FC<IconButtonProps> = ({
 
   const button = () => (
     <button
-      className={`${variantType} ${className} ${
+      className={`${variantType} ${
         isRightDirection ? 'flex-row-reverse' : ''
       } flex items-center ${
         isSmallSize ? 'rounded-md' : 'rounded-lg'
-      } border font-medium outline-none`}
+      } border font-medium outline-none ${className}`}
       onClick={onClick}
     >
       <span

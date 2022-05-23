@@ -1,12 +1,16 @@
-import { useRouter } from 'next/router';
 import React from 'react';
-import { MenuIcon } from '../../../icons';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import IconList, { MenuIcon } from '../../../icons';
 import { NAVIGATOR } from '../../../utils/constants';
 import ButtonElement from '../../Elements/ButtonElement';
 import LinkButton from '../../Elements/LinkButton';
+import { Colors } from '../../../utils/types';
 
 const Header: React.FC = () => {
   const { route } = useRouter();
+
+  const isHome = route === '/';
 
   return (
     <>
@@ -33,6 +37,45 @@ const Header: React.FC = () => {
         </div>
       </header>
       <header className="hidden shadow-md md:block">
+        {isHome && (
+          <>
+            <div className="absolute w-full">
+              <div className="relative z-0 h-[144px]">
+                <Image
+                  src="/bg-head.jpg"
+                  height={100}
+                  layout="fill"
+                  objectFit="fill"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="container relative mx-auto flex h-36 flex-col justify-center text-center">
+              <Image
+                src="/logo.jpg"
+                width={300}
+                height={50}
+                objectFit="contain"
+                alt=""
+              />
+              <p className="mt-4 text-xl font-bold text-white">
+                Mang đến phồn vinh và cuộc sống thịnh vượng
+              </p>
+              <div className="flex justify-center">
+                <div className="flex items-center">
+                  <IconList type="facebook" color={Colors.white} />
+                  <span className="ml-2 text-base font-medium text-white">
+                    G47 Tôn Đức Thắng - P.Tân An - TP.BMT
+                  </span>
+                </div>
+                <div className="ml-16 flex items-center text-lg font-medium text-white">
+                  <IconList type="mobile" color={Colors.white} />
+                  <span className="ml-2 text-base">02626 27 8888</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
         <div className="container mx-auto flex justify-end bg-white py-1 md:shrink-0">
           <ButtonElement
             size="sm"
