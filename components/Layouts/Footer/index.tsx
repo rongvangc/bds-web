@@ -6,8 +6,11 @@ import LinkButton from '../../Elements/LinkButton';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white">
-      <div className="container mx-auto py-12">
+    <footer className="relative block bg-primary text-white">
+      <div className="z-0">
+        <Image src="/bg-footer.jpg" layout="fill" objectFit="fill" alt="" />
+      </div>
+      <div className="container relative mx-auto py-12">
         <div className="grid grid-cols-10 gap-12">
           <div className="col-span-2">
             <Image

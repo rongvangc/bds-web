@@ -47,7 +47,6 @@ const Header: React.FC = () => {
               <div className="relative z-0 h-[144px]">
                 <Image
                   src="/bg-head.jpg"
-                  height={100}
                   layout="fill"
                   objectFit="fill"
                   alt=""

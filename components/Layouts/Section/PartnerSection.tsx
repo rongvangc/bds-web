@@ -38,13 +38,15 @@ const PartnerSection: React.FC = () => {
     <>
       <div className="flex items-center">
         <Heading title="Đối tác của" />
-        <Image
-          src="/logo.jpg"
-          width={100}
-          height={20}
-          layout="responsive"
-          alt=""
-        />
+        <div className="mb-1 ml-3">
+          <Image
+            src="/logo-color.png"
+            width={140}
+            height={40}
+            objectFit="contain"
+            alt=""
+          />
+        </div>
       </div>
       <div className="swiper-container relative">
         <Swiper
