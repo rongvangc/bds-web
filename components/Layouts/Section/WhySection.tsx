@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import ButtonElement from '../../Elements/Button';
+import Button from '../../Elements/Button';
 import Heading from '../../Elements/Heading';
 
 const WhySection: React.FC = () => {
@@ -34,14 +34,14 @@ const WhySection: React.FC = () => {
           </div>
 
           <div>
-            <ButtonElement
+            <Button
               icon="arrow-right"
               iconDirection="right"
               variant="primary"
               size="sm"
             >
               Xem chi tiết
-            </ButtonElement>
+            </Button>
           </div>
         </div>
         <div className="flex flex-col justify-between rounded-3xl border border-primary p-8">
@@ -55,14 +55,14 @@ const WhySection: React.FC = () => {
           </div>
 
           <div>
-            <ButtonElement
+            <Button
               icon="arrow-right"
               iconDirection="right"
               variant="primary"
               size="sm"
             >
               Xem chi tiết
-            </ButtonElement>
+            </Button>
           </div>
         </div>
         <div className="flex flex-col justify-between rounded-3xl border border-primary p-8">
@@ -77,14 +77,14 @@ const WhySection: React.FC = () => {
           </div>
 
           <div>
-            <ButtonElement
+            <Button
               icon="arrow-right"
               iconDirection="right"
               variant="primary"
               size="sm"
             >
               Xem chi tiết
-            </ButtonElement>
+            </Button>
           </div>
         </div>
       </div>

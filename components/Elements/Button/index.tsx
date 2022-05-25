@@ -13,7 +13,7 @@ type IconButtonProps = {
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
 };
 
-const ButtonElement: React.FC<IconButtonProps> = ({
+const Button: React.FC<IconButtonProps> = ({
   onClick,
   icon = '',
   variant = 'default',
@@ -62,4 +62,4 @@ const ButtonElement: React.FC<IconButtonProps> = ({
   return <LinkButton href={url}>{button()}</LinkButton>;
 };
 
-export default ButtonElement;
+export default Button;

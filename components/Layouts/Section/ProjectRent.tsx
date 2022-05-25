@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProductType } from '../../../utils/types';
-import ButtonElement from '../../Elements/ButtonElement';
+import Button from '../../Elements/Button';
 import Heading from '../../Elements/Heading';
 import ProductCard from '../../Elements/ProductCard';
 
@@ -102,9 +102,9 @@ const ProjectRent: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-center pt-6">
-        <ButtonElement size="md" icon="caret-down" variant="outline">
+        <Button size="md" icon="caret-down" variant="outline">
           Xem thêm
-        </ButtonElement>
+        </Button>
       </div>
     </div>
   );

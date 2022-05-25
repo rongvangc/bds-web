@@ -8,7 +8,7 @@ import {
   FilterRealEstateProps,
   OptionData,
 } from '../../../utils/types';
-import ButtonElement from '../Button';
+import Button from '../Button';
 import SelectElement from '../SelectElement';
 
 const FilterRealEstateBar: React.FC<
@@ -136,14 +136,14 @@ const FilterRealEstateBar: React.FC<
         </a>
       )}
       <div className="mr-2 h-8 w-[1px] bg-gray" />
-      <ButtonElement
+      <Button
         icon="search"
         variant="primary"
         size="sm"
         className="rounded border-secondary bg-secondary"
       >
         Tìm kiếm
-      </ButtonElement>
+      </Button>
     </div>
   );
 };

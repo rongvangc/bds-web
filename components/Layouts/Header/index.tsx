@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import IconList, { MenuIcon } from '../../../icons';
 import { NAVIGATOR, TYPE_TAB_BAR_OPTION } from '../../../utils/constants';
-import ButtonElement from '../../Elements/ButtonElement';
+import Button from '../../Elements/Button';
 import LinkButton from '../../Elements/LinkButton';
 import { Colors } from '../../../utils/types';
 import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
@@ -26,17 +26,17 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <ButtonElement
+            <Button
               size="sm"
               icon="edit-alt"
               variant="primary"
               className="mr-1"
             >
               Đăng tin
-            </ButtonElement>
-            <ButtonElement size="sm" icon="user" variant="primary">
+            </Button>
+            <Button size="sm" icon="user" variant="primary">
               Đăng nhập
-            </ButtonElement>
+            </Button>
           </div>
         </div>
       </header>
@@ -80,20 +80,15 @@ const Header: React.FC = () => {
           </>
         )}
         <div className="container mx-auto flex justify-end bg-white py-1 md:shrink-0">
-          <ButtonElement
-            size="sm"
-            icon="edit-alt"
-            variant="primary"
-            className="mr-2"
-          >
+          <Button size="sm" icon="edit-alt" variant="primary" className="mr-2">
             Đăng tin
-          </ButtonElement>
-          <ButtonElement size="sm" icon="user" className="mr-2">
+          </Button>
+          <Button size="sm" icon="user" className="mr-2">
             Đăng nhập
-          </ButtonElement>
-          <ButtonElement size="sm" icon="user">
+          </Button>
+          <Button size="sm" icon="user">
             Đăng ký
-          </ButtonElement>
+          </Button>
         </div>
         <div className="bg-primary">
           <div className="container mx-auto">
