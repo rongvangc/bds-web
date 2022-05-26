@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import SliderFreemode from '../SliderFreemode';
 import ProductCard from '../ProductCard';
-import { ProductType } from '../../../utils/types';
+import { ProductType } from 'utils/types';
 
 const mockProduct: ProductType[] = [
   {
