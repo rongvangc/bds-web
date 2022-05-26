@@ -11,6 +11,7 @@ type IconButtonProps = {
   variant?: 'outline' | 'primary' | 'default';
   url?: string;
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
+  colorText?: string;
 };
 
 const Button: React.FC<IconButtonProps> = ({
@@ -22,6 +23,7 @@ const Button: React.FC<IconButtonProps> = ({
   url,
   iconDirection = 'left',
   children,
+  colorText,
 }) => {
   const isRightDirection = iconDirection === 'right';
   const isSmallSize = size === 'sm';
@@ -53,7 +55,7 @@ const Button: React.FC<IconButtonProps> = ({
       >
         <IconList type={icon} size={size} variant={variant} />
       </span>
-      <p>{children}</p>
+      <p className={colorText}>{children}</p>
     </button>
   );
 

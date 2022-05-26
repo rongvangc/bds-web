@@ -10,6 +10,7 @@ import RealEstateMap from '../components/Elements/RealEstateMap';
 import KeyWords from '../components/Elements/KeyWords';
 import ProductDeliveryInfo from '../components/Elements/ProductDeliveryInfo';
 import RealEstateRecommend from '../components/Elements/RealEstateRecommend';
+import BoxInforOwner from '../components/Elements/BoxInforOwner';
 
 const mockImages = [
   'https://swiperjs.com/demos/images/nature-1.jpg',
@@ -71,7 +72,13 @@ const Product: NextPage = () => {
 
             <RealEstateRecommend />
           </div>
-          <div className="...">06</div>
+          <div className="col-span-1">
+            <BoxInforOwner />
+
+            <div className="box bg-[#f2f2f2]"></div>
+            <div className="box bg-[#f2f2f2]"></div>
+            <div className="box bg-[#f2f2f2]"></div>
+          </div>
         </div>
       </Section>
     </Layout>
