@@ -9,7 +9,7 @@ import RealEstateFeatures from '../components/Elements/RealEstateFeatures';
 import RealEstateMap from '../components/Elements/RealEstateMap';
 import KeyWords from '../components/Elements/KeyWords';
 import ProductDeliveryInfo from '../components/Elements/ProductDeliveryInfo';
-import SliderFreemode from '../components/Elements/SliderFreemode';
+import RealEstateRecommend from '../components/Elements/RealEstateRecommend';
 
 const mockImages = [
   'https://swiperjs.com/demos/images/nature-1.jpg',
@@ -69,7 +69,7 @@ const Product: NextPage = () => {
 
             <ProductDeliveryInfo />
 
-            <SliderFreemode />
+            <RealEstateRecommend />
           </div>
           <div className="...">06</div>
         </div>
