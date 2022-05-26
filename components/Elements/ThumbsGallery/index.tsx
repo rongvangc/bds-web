@@ -28,7 +28,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
             thumbsSwiper && !thumbsSwiper?.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="h-2/5"
+        className="h-1/5"
       >
         {images.map((image) => (
           <SwiperSlide>

@@ -65,9 +65,23 @@ a {
 
 .left-bar::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 100%;
   width: 8px;
   background: #12004f;
   left: -36px;
+}
+
+/* TAG */
+
+.tag {
+  overflow: hidden;
+  display: block;
+  float: left;
+  padding: 6px 16px;
+  border-radius: 40px;
+  background: #f2f2f2;
+  margin-right: 8px;
+  color: #2c2c2c;
+  cursor: pointer;
 }

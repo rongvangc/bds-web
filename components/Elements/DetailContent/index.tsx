@@ -15,26 +15,25 @@ const DetailContent: React.FC<DetailContentProps> = ({}) => {
       <div className="border-slate-200 mt-4 border-y py-4">
         <div className="flex gap-4">
           <div>
-            <span className="sub-title">Mức giá</span>
-            <span className="sub-value">Thỏa thuận</span>
+            <span className="note">Mức giá</span>
+            <span className="sub-title-1">Thỏa thuận</span>
           </div>
           <div>
-            <span className="sub-title">Diện tích</span>
-            <span className="sub-value">4625 m²</span>
+            <span className="note">Diện tích</span>
+            <span className="sub-title-1">4625 m²</span>
           </div>
         </div>
       </div>
 
       <div className="mt-6">
-        <span className="sub-value">Thông in mô tả</span>
+        <span className="sub-title-1">Thông in mô tả</span>
         <div className="mt-4">
           - Lô đất có tổng DT 4625m2 có 400m2 đất ở, nằm giữa thủ phủ nghỉ
           <br />
           dưỡng của Lương Sơn, Hoà Bình. <br />
           - Trên đất có sẵn nhà sàn gỗ chắc chắn, có nhà xây nhỏ xinh.
-          <br />
-          - Khuôn viên được phủ xanh với nhiều loại cây xanh và cây ăn quả.{' '}
-          <br />
+          <br />- Khuôn viên được phủ xanh với nhiều loại cây xanh và cây ăn
+          quả. <br />
           - Có hòn non bộ và bể bơi, ranh giới pháp lý rõ ràng. <br />
           - Thế đất thoải nhẹ được chủ nhân bày trí thiết kế rất hài hoà mang
           lại không gian xanh và phong thuỷ vô cùng ấm cúng và bình an. <br />
