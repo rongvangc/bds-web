@@ -130,7 +130,7 @@ const FilterRealEstateBar: React.FC<
         isClear={clear}
         size="xs"
       />
-      {!hasFilter && (
+      {hasFilter && (
         <a className="mr-2 cursor-pointer rounded" onClick={handleReset}>
           <IconList type="refresh" size="md" color={Colors.primary} />
         </a>
