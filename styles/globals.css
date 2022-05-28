@@ -41,6 +41,32 @@ a {
   font-weight: 600;
 }
 
+
+.menu-header li:hover .child-menu {
+  z-index: 10;
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.5s;
+}
+
+.child-menu {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.child-menu ul {
+  overflow: hidden;
+}
+
+.child-menu li {
+  padding: 5px 10px;
+}
+
+.child-menu li:hover {
+  background: rgba(242,242,242,0.5);
+}
+
 /* width */
 .menu::-webkit-scrollbar {
   width: 4px;

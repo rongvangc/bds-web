@@ -74,6 +74,12 @@ export type FilterRealEstateProps = {
   onFilter?: (data: Record<FilterKey, OptionData | null>) => void;
 };
 
+export type NavigatorMenu = {
+  name: string;
+  path: string;
+  options?: OptionData[];
+};
+
 export type OptionData = {
   id: string;
   value: string;
