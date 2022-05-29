@@ -50,6 +50,10 @@ export type IconListProps =
   | 'arrow-left'
   | 'arrow-right'
   | 'facebook'
+  | 'expand'
+  | 'collapse'
+  | 'phone'
+  | 'document'
   | '';
 
 export enum Colors {
@@ -72,6 +76,12 @@ export type FilterRealEstateProps = {
   option: OptionData[];
   onChange?: (value: OptionData) => void;
   onFilter?: (data: Record<FilterKey, OptionData | null>) => void;
+};
+
+export type NavigatorMenu = {
+  name: string;
+  path: string;
+  options?: OptionData[];
 };
 
 export type OptionData = {

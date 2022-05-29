@@ -41,6 +41,32 @@ a {
   font-weight: 600;
 }
 
+
+.menu-header li:hover .child-menu {
+  z-index: 10;
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: 0.5s;
+}
+
+.child-menu {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.child-menu ul {
+  overflow: hidden;
+}
+
+.child-menu li {
+  padding: 5px 10px;
+}
+
+.child-menu li:hover {
+  background: rgba(242,242,242,0.5);
+}
+
 /* width */
 .menu::-webkit-scrollbar {
   width: 4px;
@@ -87,7 +113,6 @@ a {
 }
 
 /* BOX */
-
 .box {
   border: 1px solid #f2f2f2;
   border-radius: 8px;
@@ -96,7 +121,6 @@ a {
 }
 
 /* AVATAR */
-
 .avatar {
   font-size: 18px;
   line-height: 28px;
@@ -112,4 +136,16 @@ a {
   display: inline-block;
   margin-top: 8px;
   text-transform: uppercase;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

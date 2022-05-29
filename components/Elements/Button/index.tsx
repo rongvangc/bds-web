@@ -12,6 +12,7 @@ type IconButtonProps = {
   url?: string;
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
   colorText?: string;
+  disabled?: boolean;
 };
 
 const Button: React.FC<IconButtonProps> = ({
@@ -24,6 +25,7 @@ const Button: React.FC<IconButtonProps> = ({
   iconDirection = 'left',
   children,
   colorText,
+  disabled = false,
 }) => {
   const isRightDirection = iconDirection === 'right';
   const isSmallSize = size === 'sm';
@@ -45,8 +47,9 @@ const Button: React.FC<IconButtonProps> = ({
         isRightDirection ? 'flex-row-reverse' : ''
       } flex items-center ${
         isSmallSize ? 'rounded-md' : 'rounded-lg'
-      } border font-medium outline-none ${className}`}
+      } border font-medium outline-none disabled:bg-gray ${className}`}
       onClick={onClick}
+      disabled={disabled}
     >
       <span
         className={`${isRightDirection ? 'pl-1' : 'pr-1'} ${

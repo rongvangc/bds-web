@@ -32,6 +32,10 @@ import { CalendarIcon } from './Calendar';
 import { ArrowLeftIcon } from './ArrowLeft';
 import { ArrowRightIcon } from './ArrowRight';
 import { FacebookIcon } from './Facebook';
+import { PhoneIcon } from './Phone';
+import { CollapseIcon } from './Collapse';
+import { ExpandIcon } from './Expand';
+import { DocumentIcon } from './Document';
 
 export * from './User';
 export * from './UserPlus';
@@ -67,6 +71,10 @@ export * from './Calendar';
 export * from './Facebook';
 export * from './ArrowLeft';
 export * from './ArrowRight';
+export * from './Phone';
+export * from './Collapse';
+export * from './Expand';
+export * from './Document';
 
 type IconListCmp = {
   type: IconListProps;
@@ -347,6 +355,38 @@ export const IconList: React.FC<IconListCmp> = ({
     case 'facebook':
       return (
         <FacebookIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'phone':
+      return (
+        <PhoneIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'collapse':
+      return (
+        <CollapseIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'expand':
+      return (
+        <ExpandIcon
+          width={sizeIcon}
+          height={sizeIcon}
+          color={checkVariantColor}
+        />
+      );
+    case 'document':
+      return (
+        <DocumentIcon
           width={sizeIcon}
           height={sizeIcon}
           color={checkVariantColor}

@@ -5,14 +5,16 @@ import IconList, { MenuIcon } from '../../../icons';
 import { NAVIGATOR, TYPE_TAB_BAR_OPTION } from '../../../utils/constants';
 import Button from '../../Elements/Button';
 import LinkButton from '../../Elements/LinkButton';
-import { Colors } from '../../../utils/types';
+import { Colors, NavigatorMenu, OptionData } from '../../../utils/types';
 import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
 import { useHeader } from '../../hooks/useHeader';
 
 const Header: React.FC = () => {
   const { route } = useRouter();
+  const router = useRouter();
 
   const isHome = route === '/';
+  const isShowHeaderBar = route === '/nha-dat-ban' || route === '/nha-dat-thue';
 
   const { handleChangeTab, handleFilterOption } = useHeader();
 
@@ -80,14 +82,21 @@ const Header: React.FC = () => {
           </>
         )}
         <div className="container mx-auto flex justify-end bg-white py-1 md:shrink-0">
-          <Button size="sm" icon="edit-alt" variant="primary" className="mr-2">
+          <Button
+            size="sm"
+            icon="edit-alt"
+            variant="primary"
+            className="mr-2"
+            onClick={() => router.push('/dashboard')}
+          >
             Đăng tin
           </Button>
-          <Button size="sm" icon="user" className="mr-2">
+          <Button
+            size="sm"
+            icon="user"
+            onClick={() => router.push('/dang-nhap')}
+          >
             Đăng nhập
-          </Button>
-          <Button size="sm" icon="user">
-            Đăng ký
           </Button>
         </div>
         <div className="bg-primary">
@@ -96,14 +105,34 @@ const Header: React.FC = () => {
               <div className="text-white">
                 <LinkButton href="/">Logo</LinkButton>
               </div>
-              <ul className="menu-header flex text-white">
-                {NAVIGATOR.map((item: any) => (
-                  <li
-                    key={item.path}
-                    className={item.path === route ? 'active' : ''}
-                  >
-                    <LinkButton href={item.path}>{item.name}</LinkButton>
-                  </li>
+              <ul className="menu-header relative flex text-white">
+                {NAVIGATOR.map((item: NavigatorMenu) => (
+                  <>
+                    <li
+                      key={item.path}
+                      className={item.path === route ? 'active relative' : ''}
+                    >
+                      <LinkButton className="z-30" href={item.path}>
+                        {item.name}
+                      </LinkButton>
+
+                      {item.options && (
+                        <div className="child-menu absolute top-0">
+                          <ul className="z-20 mt-10 flex w-max flex-col rounded-md bg-white text-black shadow-md">
+                            {item?.options?.map(
+                              (item: OptionData, i: number) => (
+                                <li key={i}>
+                                  <LinkButton href={item.value}>
+                                    {item.description}
+                                  </LinkButton>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  </>
                 ))}
               </ul>
             </div>
@@ -111,8 +140,8 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {!isHome && (
-        <div className="sticky top-0 z-30 bg-white shadow">
+      {isShowHeaderBar && (
+        <div className="bg-white shadow">
           <FilterRealEstateBar
             option={TYPE_TAB_BAR_OPTION}
             onChange={handleChangeTab}
