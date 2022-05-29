@@ -11,6 +11,7 @@ import { useHeader } from '../../hooks/useHeader';
 
 const Header: React.FC = () => {
   const { route } = useRouter();
+  const router = useRouter()
 
   const isHome = route === '/';
   const isShowHeaderBar = route === '/nha-dat-ban' || route === '/nha-dat-thue';
@@ -84,10 +85,10 @@ const Header: React.FC = () => {
           <Button size="sm" icon="edit-alt" variant="primary" className="mr-2">
             Đăng tin
           </Button>
-          <Button size="sm" icon="user" className="mr-2">
+          <Button size="sm" icon="user" variant="primary" onClick={() => router.push('/dang-nhap')}>
             Đăng nhập
           </Button>
-          <Button size="sm" icon="user">
+          <Button size="sm" icon="user" onClick={() => router.push('/dang-ky')}>
             Đăng ký
           </Button>
         </div>
