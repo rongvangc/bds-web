@@ -4,6 +4,7 @@ import Image from 'next/image';
 import IconList from 'icons';
 import { Colors } from 'utils/types';
 import { Loading } from 'components/Elements/Loading';
+import { useRouter } from 'next/router';
 
 const EditComponent = lazy(
   () => import('../../components/Layouts/Section/EditProfileDashboard')
@@ -24,11 +25,10 @@ const HomeComponent = lazy(
 type SectionWorking = 'home' | 'edit' | 'user' | 'post' | 'project';
 
 const Dashboard: NextPage = () => {
+  const { push } = useRouter();
   const [session, setSession] = useState<SectionWorking>('home');
 
   const handleChangeSession = (key: SectionWorking) => () => setSession(key);
-
-  console.log(session);
 
   const sessionLayout = () => {
     return (
@@ -116,7 +116,10 @@ const Dashboard: NextPage = () => {
 
             <div className="mt-auto">
               <ul>
-                <li className="mb-2 flex cursor-pointer items-center rounded-md py-1 px-2">
+                <li
+                  className="mb-2 flex cursor-pointer items-center rounded-md py-1 px-2"
+                  onClick={() => push('/')}
+                >
                   <IconList type="home" />
                   <a className="ml-2 font-semibold">Trang chủ</a>
                 </li>
