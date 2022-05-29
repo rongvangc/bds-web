@@ -5,7 +5,6 @@ import type {
   FocusEventHandler,
   HTMLAttributes,
 } from 'react';
-import { string } from 'yup';
 
 export type IconProps = {
   width?: number;

@@ -1,14 +1,62 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { lazy, ReactElement, Suspense, useState } from 'react';
 import Image from 'next/image';
 import IconList from 'icons';
 import { Colors } from 'utils/types';
+import { Loading } from 'components/Elements/Loading';
+
+const EditComponent = lazy(
+  () => import('../../components/Layouts/Section/EditProfileDashboard')
+);
+const UserComponent = lazy(
+  () => import('../../components/Layouts/Section/UserDashboard')
+);
+const PostComponent = lazy(
+  () => import('../../components/Layouts/Section/PostDashboard')
+);
+const ProjectComponent = lazy(
+  () => import('../../components/Layouts/Section/ProjectDashboard')
+);
+const HomeComponent = lazy(
+  () => import('../../components/Layouts/Section/HomeDashboard')
+);
+
+type SectionWorking = 'home' | 'edit' | 'user' | 'post' | 'project';
 
 const Dashboard: NextPage = () => {
+  const [session, setSession] = useState<SectionWorking>('home');
+
+  const handleChangeSession = (key: SectionWorking) => () => setSession(key);
+
+  console.log(session);
+
+  const sessionLayout = () => {
+    return (
+      <div className="my-4 w-full rounded-md shadow-md">
+        <Suspense fallback={<Loading />}>
+          {(() => {
+            switch (session) {
+              case 'edit':
+                return <EditComponent />;
+              case 'user':
+                return <UserComponent />;
+              case 'post':
+                return <PostComponent />;
+              case 'project':
+                return <ProjectComponent />;
+              default:
+                return <HomeComponent />;
+            }
+          })()}
+        </Suspense>
+      </div>
+    );
+  };
+
   return (
     <div className="container">
-      <div className="grid grid-cols-4 gap-12">
-        <div className="col-span-1 h-screen shadow-md">
+      <div className="grid grid-cols-4 gap-8">
+        <div className="sticky top-0 col-span-1 h-screen shadow-md">
           <div className="flex h-full flex-col justify-between p-4">
             <div className="h-full">
               <div className="flex justify-center">
@@ -30,7 +78,7 @@ const Dashboard: NextPage = () => {
                 />
                 <div
                   className="absolute bottom-0 right-6 cursor-pointer rounded-full bg-primary p-1"
-                  onClick={() => {}}
+                  onClick={handleChangeSession('edit')}
                 >
                   <IconList type="edit-alt" size="sm" color={Colors.white} />
                 </div>
@@ -41,15 +89,24 @@ const Dashboard: NextPage = () => {
                   Admin Role
                 </h3>
                 <ul>
-                  <li className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2">
+                  <li
+                    className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2"
+                    onClick={handleChangeSession('post')}
+                  >
                     <IconList type="edit" />
                     <a className="ml-2 font-medium">Tin tức</a>
                   </li>
-                  <li className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2">
+                  <li
+                    className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2"
+                    onClick={handleChangeSession('project')}
+                  >
                     <IconList type="document" />
                     <a className="ml-2 font-medium">Dự án</a>
                   </li>
-                  <li className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2">
+                  <li
+                    className="mb-1 flex cursor-pointer items-center rounded-md py-1 px-2"
+                    onClick={handleChangeSession('user')}
+                  >
                     <IconList type="user-plus" />
                     <a className="ml-2 font-medium">Quản lý người dùng</a>
                   </li>
@@ -59,15 +116,19 @@ const Dashboard: NextPage = () => {
 
             <div className="mt-auto">
               <ul>
+                <li className="mb-2 flex cursor-pointer items-center rounded-md py-1 px-2">
+                  <IconList type="home" />
+                  <a className="ml-2 font-semibold">Trang chủ</a>
+                </li>
                 <li className="flex cursor-pointer items-center rounded-md bg-lightGray py-1 px-2">
-                  <IconList type="logout" size="md" />
-                  <a className="ml-2 text-lg font-semibold">Đăng xuất</a>
+                  <IconList type="logout" />
+                  <a className="ml-2 font-semibold">Đăng xuất</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="col-span-3">123</div>
+        <div className="col-span-3">{sessionLayout()}</div>
       </div>
     </div>
   );
