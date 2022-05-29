@@ -30,5 +30,9 @@ module.exports = {
       lightGray: 'rgba(242,242,242,0.5)',
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('tailwindcss'),
+    require('autoprefixer'),
+  ],
 };
