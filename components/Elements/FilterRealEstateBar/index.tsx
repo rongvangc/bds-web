@@ -1,7 +1,10 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
 import IconList from '../../../icons';
 import { isFunction } from '../../../utils/common';
-import { DEFAULT_FILTER, REAL_ESTATE_OPTION } from '../../../utils/constants';
+import {
+  DEFAULT_FILTER,
+  RENT_REAL_ESTATE_OPTION,
+} from '../../../utils/constants';
 import {
   Colors,
   FilterKey,
@@ -80,7 +83,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-44"
         placeholder="Tỉnh/Thành"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('province')}
         isClear={clear}
         size="xs"
@@ -89,7 +92,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Quận/Huyện"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('district')}
         isClear={clear}
         size="xs"
@@ -98,7 +101,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Phường/Xã"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('ward')}
         isClear={clear}
         size="xs"
@@ -107,7 +110,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Đường/Phố"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('street')}
         isClear={clear}
         size="xs"
@@ -116,7 +119,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Mức giá"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('price')}
         isClear={clear}
         size="xs"
@@ -125,7 +128,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Hướng"
-        options={REAL_ESTATE_OPTION}
+        options={RENT_REAL_ESTATE_OPTION}
         onOptionChange={handleFilterOption('direction')}
         isClear={clear}
         size="xs"

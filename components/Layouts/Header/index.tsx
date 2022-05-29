@@ -11,7 +11,7 @@ import { useHeader } from '../../hooks/useHeader';
 
 const Header: React.FC = () => {
   const { route } = useRouter();
-  const router = useRouter()
+  const router = useRouter();
 
   const isHome = route === '/';
   const isShowHeaderBar = route === '/nha-dat-ban' || route === '/nha-dat-thue';
@@ -82,14 +82,21 @@ const Header: React.FC = () => {
           </>
         )}
         <div className="container mx-auto flex justify-end bg-white py-1 md:shrink-0">
-          <Button size="sm" icon="edit-alt" variant="primary" className="mr-2">
+          <Button
+            size="sm"
+            icon="edit-alt"
+            variant="primary"
+            className="mr-2"
+            onClick={() => router.push('/dashboard')}
+          >
             Đăng tin
           </Button>
-          <Button size="sm" icon="user" variant="primary" onClick={() => router.push('/dang-nhap')}>
+          <Button
+            size="sm"
+            icon="user"
+            onClick={() => router.push('/dang-nhap')}
+          >
             Đăng nhập
-          </Button>
-          <Button size="sm" icon="user" onClick={() => router.push('/dang-ky')}>
-            Đăng ký
           </Button>
         </div>
         <div className="bg-primary">
@@ -112,13 +119,15 @@ const Header: React.FC = () => {
                       {item.options && (
                         <div className="child-menu absolute top-0">
                           <ul className="z-20 mt-10 flex w-max flex-col rounded-md bg-white text-black shadow-md">
-                            {item?.options?.map((item: OptionData) => (
-                              <li key={item.value}>
-                                <LinkButton href={item.value}>
-                                  {item.description}
-                                </LinkButton>
-                              </li>
-                            ))}
+                            {item?.options?.map(
+                              (item: OptionData, i: number) => (
+                                <li key={i}>
+                                  <LinkButton href={item.value}>
+                                    {item.description}
+                                  </LinkButton>
+                                </li>
+                              )
+                            )}
                           </ul>
                         </div>
                       )}

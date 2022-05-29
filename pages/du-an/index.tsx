@@ -1,15 +1,17 @@
+import SliderProject from 'components/Layouts/Section/SlideProject';
 import type { NextPage } from 'next';
 import ProductItem from '../../components/Elements/ProductItem';
 import ProductPostItem from '../../components/Elements/ProductPostItem';
 import Layout from '../../components/Layouts';
 import Section from '../../components/Layouts/Section';
-import ProductSlider from './Slider';
 
 const Product: NextPage = () => {
   return (
     <Layout>
       <Section>
-        <ProductSlider />
+        <SliderProject />
+      </Section>
+      <Section>
         <div className="grid grid-cols-3 gap-8">
           <div className="col-span-2">
             <ProductItem />

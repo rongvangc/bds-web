@@ -50,6 +50,10 @@ export type IconListProps =
   | 'arrow-left'
   | 'arrow-right'
   | 'facebook'
+  | 'expand'
+  | 'collapse'
+  | 'phone'
+  | 'document'
   | '';
 
 export enum Colors {

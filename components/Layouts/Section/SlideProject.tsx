@@ -1,11 +1,10 @@
-import type { NextPage } from 'next';
 import { Navigation, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import Badge from '../../components/Elements/Badge';
-import IconList from '../../icons';
-import { Colors } from '../../utils/types';
+import Badge from 'components/Elements/Badge';
+import IconList from 'icons';
+import { Colors } from 'utils/types';
 
 const slides = [
   'https://file4.batdongsan.com.vn/2022/05/17/20220517174329-daf0.jpg',
@@ -13,7 +12,7 @@ const slides = [
   'https://file4.batdongsan.com.vn/2022/05/16/20220516104954-8f4f.jpg',
 ];
 
-const ProductSlider: NextPage = () => {
+const SliderProject: React.FC = () => {
   return (
     <div className="swiper-container relative">
       <Swiper
@@ -72,4 +71,4 @@ const ProductSlider: NextPage = () => {
   );
 };
 
-export default ProductSlider;
+export default SliderProject;

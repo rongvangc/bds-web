@@ -1,5 +1,9 @@
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 export const loginSchema = Yup.object().shape({
-  email: Yup.string().email().required('Trường thông tin bắt buộc'),
-  password: Yup.string().required('Trường thông tin bắt buộc').min(8, 'Mật khẩu cần trên 8 ký tự'),
-})
+  email: Yup.string()
+    .required('Trường thông tin bắt buộc')
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Vui lòng nhập email có thật'),
+  password: Yup.string()
+    .required('Trường thông tin bắt buộc')
+    .min(8, 'Mật khẩu cần trên 8 ký tự'),
+});
