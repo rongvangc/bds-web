@@ -50,57 +50,57 @@ export const TYPE_TAB_BAR_OPTION: OptionData[] = [
 export const SALE_REAL_ESTATE_OPTION: OptionData[] = [
   {
     id: '1',
-    value: 'tat-ca',
+    value: 'ban-tat-ca',
     description: 'Tất cả nhà đất',
   },
   {
     id: '2',
-    value: 'can-ho-chung-cu',
+    value: 'ban-can-ho-chung-cu',
     description: 'Căn hộ chung cư',
   },
   {
     id: '3',
-    value: 'nha-rieng',
+    value: 'ban-nha-rieng',
     description: 'Nhà riêng',
   },
   {
     id: '4',
-    value: 'nha-biet-thu-lien-ke',
+    value: 'ban-nha-biet-thu-lien-ke',
     description: 'Nhà biệt thự, liền kề',
   },
   {
     id: '5',
-    value: 'nha-mat-pho',
+    value: 'ban-nha-mat-pho',
     description: 'Nhà mặt phố',
   },
   {
     id: '6',
-    value: 'shophouse-nha-pho-thuong-mai',
+    value: 'ban-shophouse-nha-pho-thuong-mai',
     description: 'Shophouse, nhà phố thương mại',
   },
   {
     id: '7',
-    value: 'dat-nen-du-an',
+    value: 'ban-dat-nen-du-an',
     description: 'Đất nền dự án',
   },
   {
     id: '8',
-    value: 'dat',
+    value: 'ban-dat',
     description: 'Đất',
   },
   {
     id: '9',
-    value: 'trang-trai-khu-nghi-duong',
+    value: 'ban-trang-trai-khu-nghi-duong',
     description: 'Trang trại khu nghỉ dưỡng',
   },
   {
     id: '10',
-    value: 'condotel',
+    value: 'ban-condotel',
     description: 'Condotel',
   },
   {
     id: '11',
-    value: 'nha-kho-xuong',
+    value: 'ban-nha-kho-xuong',
     description: 'Nhà kho, nhà xưởng',
   },
 ];
@@ -108,47 +108,47 @@ export const SALE_REAL_ESTATE_OPTION: OptionData[] = [
 export const RENT_REAL_ESTATE_OPTION: OptionData[] = [
   {
     id: '1',
-    value: 'tat-ca',
+    value: 'thue-tat-ca',
     description: 'Tất cả nhà đất',
   },
   {
     id: '2',
-    value: 'can-ho-chung-cu',
+    value: 'thue-can-ho-chung-cu',
     description: 'Căn hộ chung cư',
   },
   {
     id: '3',
-    value: 'nha-rieng',
+    value: 'thue-nha-rieng',
     description: 'Nhà riêng',
   },
   {
     id: '4',
-    value: 'nha-mat-pho',
+    value: 'thue-nha-mat-pho',
     description: 'Nhà mặt phố',
   },
   {
     id: '5',
-    value: 'shophouse-nha-pho-thuong-mai',
+    value: 'thue-shophouse-nha-pho-thuong-mai',
     description: 'Shophouse, nhà phố thương mại',
   },
   {
     id: '6',
-    value: 'nha-tro-phong-tro',
+    value: 'thue-nha-tro-phong-tro',
     description: 'Nhà trọ, phòng trọ',
   },
   {
     id: '7',
-    value: 'van-phong',
+    value: 'thue-van-phong',
     description: 'Văn phòng',
   },
   {
     id: '8',
-    value: 'kho-xuong-nha-dat',
+    value: 'thue-kho-xuong-nha-dat',
     description: 'Kho, xưởng, nhà đất',
   },
   {
     id: '9',
-    value: 'nha-kho-xuong',
+    value: 'thue-nha-kho-xuong',
     description: 'Nhà kho, nhà xưởng',
   },
 ];

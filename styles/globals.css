@@ -50,20 +50,24 @@ a {
   transition: 0.5s;
 }
 
-.child-menu {
+.menu-header .child-menu {
   opacity: 0;
   visibility: hidden;
 }
 
-.child-menu ul {
+.menu-header .child-menu ul {
   overflow: hidden;
 }
 
-.child-menu li {
+.menu-header .child-menu li {
   padding: 5px 10px;
 }
 
-.child-menu li:hover {
+.menu-header .child-menu li.active a {
+  color: #c2525c;
+}
+
+.menu-header .child-menu li:hover {
   background: rgba(242,242,242,0.5);
 }
 
@@ -183,4 +187,10 @@ input[type=number] {
     0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
     50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
     75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+}
+
+/* Editor */
+
+#editorjs .codex-editor:first-child {
+  display: none;
 }

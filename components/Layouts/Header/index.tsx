@@ -10,11 +10,11 @@ import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
 import { useHeader } from '../../hooks/useHeader';
 
 const Header: React.FC = () => {
-  const { route } = useRouter();
-  const router = useRouter();
+  const { route, asPath, push } = useRouter();
 
   const isHome = route === '/';
-  const isShowHeaderBar = route === '/nha-dat-ban' || route === '/nha-dat-thue';
+  const isShowHeaderBar =
+    asPath === '/nha-dat-ban' || asPath === '/nha-dat-thue';
 
   const { handleChangeTab, handleFilterOption } = useHeader();
 
@@ -87,15 +87,11 @@ const Header: React.FC = () => {
             icon="edit-alt"
             variant="primary"
             className="mr-2"
-            onClick={() => router.push('/dashboard')}
+            onClick={() => push('/dashboard')}
           >
             Đăng tin
           </Button>
-          <Button
-            size="sm"
-            icon="user"
-            onClick={() => router.push('/dang-nhap')}
-          >
+          <Button size="sm" icon="user" onClick={() => push('/dang-nhap')}>
             Đăng nhập
           </Button>
         </div>
@@ -105,34 +101,35 @@ const Header: React.FC = () => {
               <div className="text-white">
                 <LinkButton href="/">Logo</LinkButton>
               </div>
-              <ul className="menu-header relative flex text-white">
+              <ul className="menu-header relative z-30 flex text-white">
                 {NAVIGATOR.map((item: NavigatorMenu) => (
-                  <>
-                    <li
-                      key={item.path}
-                      className={item.path === route ? 'active relative' : ''}
-                    >
-                      <LinkButton className="z-30" href={item.path}>
-                        {item.name}
-                      </LinkButton>
+                  <li
+                    key={item.path}
+                    className={item.path === asPath ? 'active relative' : ''}
+                  >
+                    <LinkButton className="z-30" href={item.path}>
+                      {item.name}
+                    </LinkButton>
 
-                      {item.options && (
-                        <div className="child-menu absolute top-0">
-                          <ul className="z-20 mt-10 flex w-max flex-col rounded-md bg-white text-black shadow-md">
-                            {item?.options?.map(
-                              (item: OptionData, i: number) => (
-                                <li key={i}>
-                                  <LinkButton href={item.value}>
-                                    {item.description}
-                                  </LinkButton>
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
-                      )}
-                    </li>
-                  </>
+                    {item.options && (
+                      <div className="child-menu absolute top-0">
+                        <ul className="z-20 mt-10 flex w-max flex-col rounded-md bg-white text-black shadow-md">
+                          {item?.options?.map((item: OptionData, i: number) => (
+                            <li
+                              key={i}
+                              className={
+                                `/${item.value}` === asPath ? 'active' : ''
+                              }
+                            >
+                              <LinkButton href={`/${item.value}`}>
+                                {item.description}
+                              </LinkButton>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
