@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     domains: ['file4.batdongsan.com.vn', 'swiperjs.com'],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;
