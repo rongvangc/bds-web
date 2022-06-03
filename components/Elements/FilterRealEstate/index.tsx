@@ -1,7 +1,10 @@
 import React, { HTMLAttributes, useCallback, useState } from 'react';
 import IconList from '../../../icons';
 import { isFunction } from '../../../utils/common';
-import { DEFAULT_FILTER, REAL_ESTATE_OPTION } from '../../../utils/constants';
+import {
+  DEFAULT_FILTER,
+  SALE_REAL_ESTATE_OPTION,
+} from '../../../utils/constants';
 import {
   Colors,
   FilterKey,
@@ -73,7 +76,7 @@ const FilterRealEstate: React.FC<
             className="w-[250px]"
             inputClass="rounded-tr-none rounded-br-none"
             placeholder="Tìm kiếm"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             size="md"
             onOptionChange={handleFilterOption('type')}
             isClear={clear}
@@ -88,7 +91,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
             isClear={clear}
@@ -96,7 +99,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
             isClear={clear}
@@ -104,7 +107,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
             isClear={clear}
@@ -112,7 +115,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}
             isClear={clear}
@@ -120,7 +123,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Mức giá"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('price')}
             isClear={clear}
@@ -128,7 +131,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Hướng"
-            options={REAL_ESTATE_OPTION}
+            options={SALE_REAL_ESTATE_OPTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('direction')}
             isClear={clear}
