@@ -1,141 +1,99 @@
-import Table from 'components/Elements/Table';
+import React, { useMemo, useState, useReducer } from 'react';
 import {
-  filterGreaterThan,
-  makeData,
-  roundedMedian,
-} from 'components/Elements/Table/helper';
-import { NumberRangeColumnFilter } from 'components/Elements/Table/NumberRangeColumnFilter';
-import { SelectColumnFilter } from 'components/Elements/Table/SelectColumnFilter';
-import { SliderColumnFilter } from 'components/Elements/Table/SliderColumnFilter';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+  createTable,
+  PaginationState,
+  RowSelectionState,
+  SortingState,
+} from '@tanstack/react-table';
+import { makeData, Person } from 'components/Elements/Table/makeData';
+import Table from 'components/Elements/Table';
+
+let table = createTable().setRowType<Person>();
 
 const PostDashboard: React.FC = () => {
+  const rerender = useReducer(() => ({}), {})[1];
+
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
   const columns = useMemo(
     () => [
-      {
-        Header: 'Name',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName',
-            // Use a two-stage aggregator here to first
-            // count the total rows being aggregated,
-            // then sum any of those counts if they are
-            // aggregated further
-            aggregate: 'count',
-            Aggregated: ({ value }: { value: string }) => `${value} Names`,
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName',
-            // Use our custom `fuzzyText` filter on this column
-            filter: 'fuzzyText',
-            // Use another two-stage aggregator here to
-            // first count the UNIQUE values from the rows
-            // being aggregated, then sum those counts if
-            // they are aggregated further
-            aggregate: 'uniqueCount',
-            Aggregated: ({ value }: { value: string }) =>
-              `${value} Unique Names`,
-          },
-        ],
-      },
-      {
-        Header: 'Info',
-        columns: [
-          {
-            Header: 'Age',
-            accessor: 'age',
-            Filter: SliderColumnFilter,
-            filter: 'equals',
-            // Aggregate the average age of visitors
-            aggregate: 'average',
-            Aggregated: ({ value }: { value: string }) => `${value} (avg)`,
-          },
-          {
-            Header: 'Visits',
-            accessor: 'visits',
-            Filter: NumberRangeColumnFilter,
-            filter: 'between',
-            // Aggregate the sum of all visits
-            aggregate: 'sum',
-            Aggregated: ({ value }: { value: string }) => `${value} (total)`,
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-            Filter: SelectColumnFilter,
-            filter: 'includes',
-          },
-          {
-            Header: 'Profile Progress',
-            accessor: 'progress',
-            Filter: SliderColumnFilter,
-            filter: filterGreaterThan,
-            // Use our custom roundedMedian aggregator
-            aggregate: roundedMedian,
-            Aggregated: ({ value }: { value: string }) => `${value} (med)`,
-          },
-        ],
-      },
+      table.createDataColumn('firstName', {
+        id: 'firstName',
+        cell: (info) => info.getValue(),
+        header: () => <span>Last Name</span>,
+        enableColumnFilter: false,
+      }),
+      table.createDataColumn('lastName', {
+        cell: (info) => info.getValue(),
+        header: () => <span>Last Name</span>,
+        enableColumnFilter: false,
+      }),
+      table.createDataColumn('age', {
+        cell: (info) => info.getValue(),
+        header: () => <span>Age</span>,
+      }),
+      table.createDataColumn('visits', {
+        cell: (info) => info.getValue(),
+        header: () => <span>Visits</span>,
+        enableColumnFilter: false,
+      }),
+      table.createDataColumn('status', {
+        cell: (info) => info.getValue(),
+        header: 'Status',
+        enableColumnFilter: false,
+      }),
+      table.createDataColumn('progress', {
+        cell: (info) => info.getValue(),
+        header: 'Profile Progress',
+        enableColumnFilter: false,
+      }),
     ],
     []
   );
 
-  const [data, setData] = useState(() => makeData(10000));
-  const [originalData] = useState(data);
+  const [data, setData] = useState(() => makeData(100000));
+  const refreshData = () => setData(() => makeData(100000));
 
-  // We need to keep the table from resetting the pageIndex when we
-  // Update data. So we can keep track of that flag with a ref.
-  const skipResetRef = useRef(false);
-
-  // When our cell renderer calls updateMyData, we'll use
-  // the rowIndex, columnId and new value to update the
-  // original data
-  const updateMyData = (
-    rowIndex: number,
-    columnId: string,
-    value: string | number
-  ) => {
-    // We also turn on the flag to not reset the page
-    skipResetRef.current = true;
-    setData((old: any) =>
-      old.map((row: any, index: any) => {
-        if (index === rowIndex) {
-          return {
-            ...row,
-            [columnId]: value,
-          };
-        }
-        return row;
-      })
-    );
-  };
-
-  // After data changes, we turn the flag back off
-  // so that if data actually changes when we're not
-  // editing it, the page is reset
-  useEffect(() => {
-    skipResetRef.current = false;
-  }, [data]);
-
-  // Let's add a data resetter/randomizer to help
-  // illustrate that flow...
-  const resetData = () => {
-    // Don't reset the page when we do this
-    skipResetRef.current = true;
-    setData(originalData);
-  };
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+    pageCount: undefined, // allows the table to calculate the page count for us via instance.getPageCount()
+    // If we wanted to control the pageCount, we could provide it here (eg. if we were doing server-side pagination)
+  });
 
   return (
     <>
-      <button onClick={resetData}>Reset Data</button>
       <Table
-        columns={columns}
-        data={data}
-        updateMyData={updateMyData}
-        skipReset={skipResetRef.current}
+        {...{
+          data,
+          sorting,
+          rowSelection,
+          columns,
+          pagination,
+          setPagination,
+          setSorting,
+          setRowSelection,
+        }}
       />
+      <hr />
+      <div>
+        <button onClick={() => rerender()}>Force Rerender</button>
+      </div>
+      <div>
+        <button onClick={() => refreshData()}>Refresh Data</button>
+      </div>
+      <pre>
+        {JSON.stringify(
+          {
+            rowSelection,
+            sorting,
+            pagination,
+          },
+          null,
+          2
+        )}
+      </pre>
     </>
   );
 };
