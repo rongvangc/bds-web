@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig = {
-  images: {
-    domains: ['file4.batdongsan.com.vn', 'swiperjs.com'],
-  },
+  withBundleAnalyzer,
+  images: {},
   reactStrictMode: false,
   async rewrites() {
     const SALE_REAL_ESTATE_OPTION = [
@@ -135,4 +138,5 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
+
