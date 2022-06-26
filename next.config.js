@@ -124,14 +124,14 @@ const nextConfig = {
         description: 'Trung tâm phương mại',
       },
     ];
-    const mergeCaterogy = [
+    const mergeCategory = [
       ...RENT_REAL_ESTATE_OPTION,
       ...SALE_REAL_ESTATE_OPTION,
       ...PJ_REAL_ESTATE_OPTION,
     ];
-    const customDestination = mergeCaterogy.map((option) => ({
+    const customDestination = mergeCategory.map((option) => ({
       source: `/${option.value}`,
-      destination: '/danh-muc',
+      destination: '/du-an',
     }));
 
     return customDestination;

@@ -19,12 +19,15 @@ const IndeterminateCheckbox: React.FC<IndeterminateCheckboxProps> = ({
   }, [ref, indeterminate]);
 
   return (
-    <input
-      type="checkbox"
-      ref={ref}
-      className={className + ' cursor-pointer'}
-      {...rest}
-    />
+    <>
+      <input
+        type="checkbox"
+        ref={ref}
+        className={className + ' cursor-pointer'}
+        {...rest}
+      />
+      <label htmlFor={rest?.id} />
+    </>
   );
 };
 

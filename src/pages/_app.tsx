@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import '../styles/product.css';
 import '../styles/post.css';
 import '../styles/detail.css';
+import '../styles/table.css';
 
 // Import Swiper styles
 import 'swiper/css';

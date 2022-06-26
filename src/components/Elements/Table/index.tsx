@@ -1,91 +1,20 @@
-import {
-  ColumnDef,
-  ColumnSort,
-  createTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  OnChangeFn,
-  PaginationState,
-  RowSelectionState,
-  SortingState,
-  useTableInstance,
-} from '@tanstack/react-table';
+import IconList from '@/icons';
+import { TableInstance } from '@tanstack/react-table';
 import React from 'react';
-import IndeterminateCheckbox from './Checkbox';
 import Filter from './Filter';
-import { Person } from './makeData';
-import MinMax from './MinMax';
 
-let table = createTable().setRowType<Person>();
-
-const Table = ({
-  data,
-  sorting,
-  columns,
-  rowSelection,
-  pagination,
-  setPagination,
-  setSorting,
-  setRowSelection,
-}: {
-  data: Person[];
-  sorting: ColumnSort[];
-  columns: ColumnDef<typeof table.generics>[];
-  rowSelection: RowSelectionState;
-  pagination: PaginationState;
-  setPagination: OnChangeFn<PaginationState>;
-  setSorting: OnChangeFn<SortingState>;
-  setRowSelection: OnChangeFn<RowSelectionState>;
-}) => {
-  const instance = useTableInstance(table, {
-    data,
-    columns: [
-      {
-        id: 'select',
-        header: ({ instance }) => (
-          <IndeterminateCheckbox
-            {...{
-              checked: instance.getIsAllRowsSelected(),
-              indeterminate: instance.getIsSomeRowsSelected(),
-              onChange: instance.getToggleAllRowsSelectedHandler(),
-            }}
-          />
-        ),
-        cell: ({ row }) => (
-          <div className="px-1">
-            <IndeterminateCheckbox
-              {...{
-                checked: row.getIsSelected(),
-                indeterminate: row.getIsSomeSelected(),
-                onChange: row.getToggleSelectedHandler(),
-              }}
-            />
-          </div>
-        ),
-      },
-      ...columns,
-    ],
-    state: {
-      pagination,
-      sorting,
-      rowSelection,
-    },
-    onPaginationChange: setPagination,
-    onSortingChange: setSorting,
-    onRowSelectionChange: setRowSelection,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    enableRowSelection: true,
-    debugTable: true,
-  });
-
+const Table = ({ instance }: { instance: TableInstance<any> }) => {
   return (
     <div className="p-2">
       <div className="h-2" />
+      {/* {instance.getFlatHeaders().map(
+        (header) =>
+          header.id === 'firstName' && (
+            <div>
+              <Filter column={header.column} />
+            </div>
+          )
+      )} */}
       <table>
         <thead>
           {instance.getHeaderGroups().map((headerGroup) => (
@@ -103,19 +32,16 @@ const Table = ({
                             onClick: header.column.getToggleSortingHandler(),
                           }}
                         >
+                          {{
+                            asc: '🔼 ',
+                            desc: '🔽 ',
+                          }[header.column.getIsSorted() as string] ?? null}
                           {header.renderHeader()}
                         </div>
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
-                        }[header.column.getIsSorted() as string] ?? null}
+
                         {header.column.getCanFilter() ? (
                           <div>
                             <Filter column={header.column} />
-                            <MinMax
-                              column={header.column}
-                              instance={instance}
-                            />
                           </div>
                         ) : null}
                       </div>
@@ -145,38 +71,38 @@ const Table = ({
           onClick={() => instance.setPageIndex(0)}
           disabled={!instance.getCanPreviousPage()}
         >
-          {'<<'}
+          {'🔚'}
         </button>
         <button
           className="rounded border p-1"
           onClick={() => instance.previousPage()}
           disabled={!instance.getCanPreviousPage()}
         >
-          {'<'}
+          <IconList type="arrow-left" size="md" />
         </button>
         <button
           className="rounded border p-1"
           onClick={() => instance.nextPage()}
           disabled={!instance.getCanNextPage()}
         >
-          {'>'}
+          <IconList type="arrow-right" size="md" />
         </button>
         <button
           className="rounded border p-1"
           onClick={() => instance.setPageIndex(instance.getPageCount() - 1)}
           disabled={!instance.getCanNextPage()}
         >
-          {'>>'}
+          {'🔜'}
         </button>
         <span className="flex items-center gap-1">
-          <div>Page</div>
+          <div>Trang</div>
           <strong>
-            {instance.getState().pagination.pageIndex + 1} of{' '}
+            {instance.getState().pagination.pageIndex + 1} của{' '}
             {instance.getPageCount()}
           </strong>
         </span>
         <span className="flex items-center gap-1">
-          | Go to page:
+          | Đi đến trang:
           <input
             type="number"
             defaultValue={instance.getState().pagination.pageIndex + 1}
@@ -188,6 +114,7 @@ const Table = ({
           />
         </span>
         <select
+          className="formSelect"
           value={instance.getState().pagination.pageSize}
           onChange={(e) => {
             instance.setPageSize(Number(e.target.value));
@@ -195,12 +122,12 @@ const Table = ({
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
-              Show {pageSize}
+              Hiển thị {pageSize}
             </option>
           ))}
         </select>
+        <div className="ml-auto">{instance.getRowModel().rows.length} Hàng</div>
       </div>
-      <div>{instance.getRowModel().rows.length} Rows</div>
     </div>
   );
 };

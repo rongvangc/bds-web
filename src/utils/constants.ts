@@ -10,6 +10,8 @@ export const DEFAULT_FILTER = {
   direction: null,
 };
 
+export const PAGE_SIZE = [10, 20, 30, 40, 50];
+
 /**
  * @Format
  * * Doing url with same format below
@@ -187,12 +189,12 @@ export const POST_OPTION_TAB: OptionData[] = [
 export const NAVIGATOR: NavigatorMenu[] = [
   {
     name: 'Nhà đất bán',
-    path: '/nha-dat-ban',
+    path: `/${SALE_REAL_ESTATE_OPTION[0]?.value}`,
     options: SALE_REAL_ESTATE_OPTION,
   },
   {
     name: 'Nhà đất cho thuê',
-    path: '/nha-dat-thue',
+    path: `/${RENT_REAL_ESTATE_OPTION[0]?.value}`,
     options: RENT_REAL_ESTATE_OPTION,
   },
   {
