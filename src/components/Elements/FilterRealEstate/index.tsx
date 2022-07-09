@@ -1,5 +1,10 @@
 import IconList from '@/icons';
-import { DEFAULT_FILTER, SALE_REAL_ESTATE_OPTION } from '@/utils/constants';
+import {
+  DEFAULT_FILTER,
+  SALE_REAL_ESTATE_OPTION,
+  PRICE_RANGE,
+  DIRECTION,
+} from '@/utils/constants';
 import {
   FilterRealEstateProps,
   OptionData,
@@ -51,8 +56,8 @@ const FilterRealEstate: React.FC<
   );
 
   return (
-    <div className={`${className}`}>
-      <div className="text-center">
+    <div className={`${className || ''}`}>
+      <div className="-mb-[1px] text-center">
         {option?.map((tab) => (
           <a
             onClick={() => handleSwitchTab(tab)}
@@ -120,7 +125,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Mức giá"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={PRICE_RANGE}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('price')}
             isClear={clear}
@@ -128,7 +133,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Hướng"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={DIRECTION}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('direction')}
             isClear={clear}

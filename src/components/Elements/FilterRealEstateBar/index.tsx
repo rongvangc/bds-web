@@ -1,5 +1,10 @@
 import IconList from '@/icons';
-import { DEFAULT_FILTER, RENT_REAL_ESTATE_OPTION } from '@/utils/constants';
+import {
+  DEFAULT_FILTER,
+  RENT_REAL_ESTATE_OPTION,
+  PRICE_RANGE,
+  DIRECTION,
+} from '@/utils/constants';
 import {
   FilterRealEstateProps,
   OptionData,
@@ -116,7 +121,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Mức giá"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={PRICE_RANGE}
         onOptionChange={handleFilterOption('price')}
         isClear={clear}
         size="xs"
@@ -125,7 +130,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Hướng"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={DIRECTION}
         onOptionChange={handleFilterOption('direction')}
         isClear={clear}
         size="xs"

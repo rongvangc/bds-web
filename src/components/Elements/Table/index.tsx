@@ -6,7 +6,6 @@ import Filter from './Filter';
 const Table = ({ instance }: { instance: TableInstance<any> }) => {
   return (
     <div className="p-2">
-      <div className="h-2" />
       {/* {instance.getFlatHeaders().map(
         (header) =>
           header.id === 'firstName' && (

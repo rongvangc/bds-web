@@ -76,7 +76,7 @@ const Dashboard: NextPage = () => {
                 alt=""
               />
               <div
-                className="absolute bottom-0 right-6 cursor-pointer rounded-full bg-primary p-1"
+                className="absolute bottom-4 right-6 cursor-pointer rounded-full bg-primary p-1"
                 onClick={handleChangeSession('edit')}
               >
                 <IconList type="edit-alt" size="sm" color={Colors.white} />

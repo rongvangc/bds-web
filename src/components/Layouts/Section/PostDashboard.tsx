@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useReducer } from 'react';
+import React, { useMemo, useState, useReducer, useCallback } from 'react';
 import {
   ColumnSizingState,
   createTable,
@@ -14,6 +14,7 @@ import {
 import { makeData, Person } from 'src/components/Elements/Table/makeData';
 import Table from 'src/components/Elements/Table';
 import IndeterminateCheckbox from '@/components/Elements/Table/Checkbox';
+import Button from '@/components/Elements/Button';
 
 let table = createTable().setRowType<Person>();
 
@@ -21,6 +22,11 @@ const PostDashboard: React.FC = () => {
   const rerender = useReducer(() => ({}), {})[1];
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleToggleButton = useCallback(() => {
+    setOpen(!open);
+  }, []);
 
   const columns = useMemo(
     () => [
@@ -128,10 +134,16 @@ const PostDashboard: React.FC = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  return (
+  return open ? (
+    <div>123</div>
+  ) : (
     <>
+      <div className="px-2">
+        <Button variant="primary" onClick={handleToggleButton}>
+          Tạo bài viết
+        </Button>
+      </div>
       <Table instance={instance} />
-      <hr />
       <div>
         <button onClick={() => rerender()}>Force Rerender</button>
       </div>
