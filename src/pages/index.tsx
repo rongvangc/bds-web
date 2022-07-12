@@ -1,5 +1,5 @@
 import todoApi from '../client/todoApiExample';
-import type { NextPage } from 'next';
+import type { InferGetServerSidePropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import Layout from '../components/Layouts';
@@ -14,11 +14,22 @@ import ProjectForYou from '../components/Layouts/Section/ProjectForYou';
 import ProjectRent from '../components/Layouts/Section/ProjectRent';
 import WhySection from '../components/Layouts/Section/WhySection';
 
+import { GetServerSideProps } from 'next';
+
+import { provinceService } from '@services/index';
+import { Province } from '@/types/index';
+
+type HomeProps = {
+  provinceList: Province[];
+};
+
 const Editor = dynamic(() => import('../components/Elements/Editor'), {
   ssr: false,
 });
 
-const Home: NextPage = () => {
+const Home = ({
+  provinceList,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   useEffect(() => {
     const fetchTodo = async () => {
       try {
@@ -41,7 +52,7 @@ const Home: NextPage = () => {
         <HeroSection />
       </Section>
       <Section>
-        <FilterSection />
+        <FilterSection provinceList={provinceList} />
       </Section>
       <Section>
         <PostSection />
@@ -69,3 +80,20 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  try {
+    const provinceList = await provinceService.getProvinceList();
+    return {
+      props: {
+        provinceList,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        provinceList: [],
+      },
+    };
+  }
+};

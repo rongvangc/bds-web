@@ -3,7 +3,13 @@ import { TYPE_TAB_OPTION } from '../../../utils/constants';
 import { FilterKey, OptionData } from '../../../utils/types';
 import FilterRealEstate from '../../Elements/FilterRealEstate';
 
-const FilterSection = () => {
+import { Province } from '@/types';
+
+type FilterSectionProps = {
+  provinceList: Province[];
+};
+
+const FilterSection = (props: FilterSectionProps) => {
   const handleChangeTab = (value: OptionData) => {
     console.log(value);
   };
@@ -18,6 +24,7 @@ const FilterSection = () => {
   return (
     <div className="mx-auto w-[900px] pt-10">
       <FilterRealEstate
+        {...props}
         option={TYPE_TAB_OPTION}
         onChange={handleChangeTab}
         onFilter={handleFilterOption}

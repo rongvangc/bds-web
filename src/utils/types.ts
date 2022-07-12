@@ -6,6 +6,8 @@ import type {
   HTMLAttributes,
 } from 'react';
 
+import { Province } from '@/types/index';
+
 export type IconProps = {
   width?: number;
   height?: number;
@@ -72,6 +74,7 @@ export enum Colors {
 }
 
 export type FilterRealEstateProps = {
+  provinceList: Province[];
   option: OptionData[];
   onChange?: (value: OptionData) => void;
   onFilter?: (data: Record<FilterKey, OptionData | null>) => void;

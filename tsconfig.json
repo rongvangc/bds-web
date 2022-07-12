@@ -33,20 +33,15 @@
     "downlevelIteration": true,
     "paths": {
       "@/*": ["./src/*"],
+      "@services/*": ["./src/services/*"],
       "@/client/*": ["./src/client/*"],
       "@/components/*": ["./src/components/*"],
       "@/icons/*": ["./src/icons/*"],
       "@/pages/*": ["./src/pages/*"],
       "@/stores/*": ["./src/stores/*"],
-      "@/utils/*": ["./src/utils/*"],
+      "@/utils/*": ["./src/utils/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

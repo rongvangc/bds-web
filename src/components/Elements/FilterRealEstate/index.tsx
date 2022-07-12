@@ -1,3 +1,5 @@
+//#region import
+import React, { HTMLAttributes, useCallback, useEffect, useState } from 'react';
 import IconList from '@/icons';
 import {
   DEFAULT_FILTER,
@@ -12,17 +14,128 @@ import {
   Colors,
 } from '@/utils/types';
 import { isFunction } from 'formik';
-import React, { HTMLAttributes, useCallback, useState } from 'react';
 import SelectElement from '../SelectElement';
+
+import useSWR from 'swr';
+
+import { districtService, wardService } from '@services/index';
+
+//#endregion
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
-> = ({ option, className, onChange, onFilter }) => {
+> = ({ provinceList, option, className, onChange, onFilter }) => {
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]!);
   const [hasFilter, setHasFilter] = useState<boolean>(false);
   const [clear, setClear] = useState<boolean>(false);
   const [filterOption, setFilterOption] =
     useState<Record<FilterKey, OptionData | null>>(DEFAULT_FILTER);
+
+  const [normalizedistrictList, setNormalizeDistrictList] =
+    useState<OptionData[]>();
+
+  const [normalizeWardList, setNormalizeWardList] = useState<OptionData[]>();
+
+  const { data: districtList } = useSWR(
+    filterOption.province ? `list/${filterOption.province.id}` : null,
+    (url) => districtService.getDistrictList(url)
+  );
+
+  const { data: wardList } = useSWR(
+    filterOption.district ? `list/${filterOption.district.id}` : null,
+    (url) => wardService.getWardList(url)
+  );
+
+  useEffect(() => {
+    if (!districtList) return;
+
+    const nDistrictList = districtList.reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      let description;
+
+      switch (rest.type) {
+        case 'huyen':
+          description = `Huyện`;
+          break;
+        case 'thi-xa':
+          description = `Thị xã`;
+          break;
+        case 'thanh-pho':
+          description = `Thành phố`;
+          break;
+        case 'quan':
+          description = `Quận`;
+          break;
+      }
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: `${description} ${name}`,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+
+    setNormalizeDistrictList(nDistrictList);
+  }, [districtList]);
+
+  useEffect(() => {
+    if (!wardList) return;
+
+    const nWardList = wardList.reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      let description = '';
+
+      switch (rest.type) {
+        case 'phuong':
+          description = 'Phường';
+          break;
+        case 'xa':
+          description = 'Xã';
+          break;
+        case 'thi-tran':
+          description = 'Thị trấn';
+          break;
+      }
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: `${description} ${name}`,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+
+    setNormalizeWardList(nWardList);
+  }, [wardList]);
+
+  const nProvinceList = provinceList.reduce((arr, curr) => {
+    const { _id, name, ...rest } = curr;
+
+    let description = '';
+
+    switch (rest.type) {
+      case 'tinh':
+        description = 'Tỉnh';
+        break;
+      case 'thanh-pho':
+        description = 'Thành phố';
+        break;
+    }
+
+    arr.push({
+      id: _id,
+      value: _id,
+      description: `${description} ${name}`,
+      ...rest,
+    });
+
+    return arr;
+  }, [] as OptionData[]);
 
   const handleFilterOption = useCallback(
     (key: FilterKey) => (data: OptionData) => {
@@ -93,7 +206,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={nProvinceList}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
             isClear={clear}
@@ -101,7 +214,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={normalizedistrictList!}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
             isClear={clear}
@@ -109,7 +222,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={normalizeWardList!}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
             isClear={clear}
