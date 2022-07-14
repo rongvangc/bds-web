@@ -18,7 +18,7 @@ import SelectElement from '../SelectElement';
 
 import useSWR from 'swr';
 
-import { districtService, wardService } from '@services/index';
+import { districtService, wardService, streetService } from '@services/index';
 
 //#endregion
 
@@ -36,14 +36,22 @@ const FilterRealEstate: React.FC<
 
   const [normalizeWardList, setNormalizeWardList] = useState<OptionData[]>();
 
+  const [normalizeStreetList, setNormalizeStreetList] =
+    useState<OptionData[]>();
+
   const { data: districtList } = useSWR(
-    filterOption.province ? `list/${filterOption.province.id}` : null,
+    filterOption.province ? [`${filterOption.province.id}`] : null,
     (url) => districtService.getDistrictList(url)
   );
 
   const { data: wardList } = useSWR(
-    filterOption.district ? `list/${filterOption.district.id}` : null,
+    filterOption.district ? [`${filterOption.district.id}`] : null,
     (url) => wardService.getWardList(url)
+  );
+
+  const { data: streetList } = useSWR(
+    filterOption.district ? [`/${filterOption.district.id}`] : null,
+    (url) => streetService.getStreetList(url)
   );
 
   useEffect(() => {
@@ -52,27 +60,10 @@ const FilterRealEstate: React.FC<
     const nDistrictList = districtList.reduce((arr, curr) => {
       const { _id, name, ...rest } = curr;
 
-      let description;
-
-      switch (rest.type) {
-        case 'huyen':
-          description = `Huyện`;
-          break;
-        case 'thi-xa':
-          description = `Thị xã`;
-          break;
-        case 'thanh-pho':
-          description = `Thành phố`;
-          break;
-        case 'quan':
-          description = `Quận`;
-          break;
-      }
-
       arr.push({
         id: _id,
         value: _id,
-        description: `${description} ${name}`,
+        description: name,
         ...rest,
       });
       return arr;
@@ -87,24 +78,10 @@ const FilterRealEstate: React.FC<
     const nWardList = wardList.reduce((arr, curr) => {
       const { _id, name, ...rest } = curr;
 
-      let description = '';
-
-      switch (rest.type) {
-        case 'phuong':
-          description = 'Phường';
-          break;
-        case 'xa':
-          description = 'Xã';
-          break;
-        case 'thi-tran':
-          description = 'Thị trấn';
-          break;
-      }
-
       arr.push({
         id: _id,
         value: _id,
-        description: `${description} ${name}`,
+        description: name,
         ...rest,
       });
       return arr;
@@ -113,24 +90,31 @@ const FilterRealEstate: React.FC<
     setNormalizeWardList(nWardList);
   }, [wardList]);
 
+  useEffect(() => {
+    if (!streetList) return;
+
+    const nStreetList = streetList.reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: name,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+
+    setNormalizeStreetList(nStreetList);
+  }, [streetList]);
+
   const nProvinceList = provinceList.reduce((arr, curr) => {
     const { _id, name, ...rest } = curr;
-
-    let description = '';
-
-    switch (rest.type) {
-      case 'tinh':
-        description = 'Tỉnh';
-        break;
-      case 'thanh-pho':
-        description = 'Thành phố';
-        break;
-    }
 
     arr.push({
       id: _id,
       value: _id,
-      description: `${description} ${name}`,
+      description: name,
       ...rest,
     });
 
@@ -230,7 +214,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
-            options={SALE_REAL_ESTATE_OPTION}
+            options={normalizeStreetList!}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}
             isClear={clear}

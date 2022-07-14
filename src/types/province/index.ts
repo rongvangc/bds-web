@@ -1,7 +1,6 @@
 export type Province = {
+  _id: string;
   code: string;
-  type: string;
   name: string;
   parentID: string;
-  _id: string;
 };

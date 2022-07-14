@@ -6,10 +6,10 @@ type JSONResponse<T> = {
   errors?: Array<{ message: string }>;
 };
 
-const URL = `${process.env.SERVER_PROD}/api/v1/province`;
+const URL = `${process.env.SERVER_URL}/province/`;
 
 async function getProvinceList(): Promise<Province[]> {
-  const response = await fetch(`${URL}/list`);
+  const response = await fetch(`${URL}`);
 
   const { data, errors }: JSONResponse<Province[]> = await response.json();
 

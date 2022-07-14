@@ -1,5 +1,5 @@
 import todoApi from '../client/todoApiExample';
-import type { InferGetServerSidePropsType, NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import Layout from '../components/Layouts';

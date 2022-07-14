@@ -1,6 +1,6 @@
-export type District = {
+export type Street = {
   _id: string;
   name: string;
   parentID: string;
-  districtID: number;
+  streetID: number;
 };
