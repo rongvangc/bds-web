@@ -6,6 +6,7 @@ interface ValueProps {
   selectedOption?: OptionData;
   searchValue?: string;
   placeholder?: string;
+  disabled?: boolean;
   onFormatValue: () => string;
 }
 
@@ -14,6 +15,7 @@ const Value: React.FC<ValueProps> = ({
   selectedOption,
   searchValue,
   placeholder,
+  disabled,
   onFormatValue,
 }) => {
   if (placeholder && !searchValue && !selectedOption)
@@ -23,7 +25,7 @@ const Value: React.FC<ValueProps> = ({
 
   return (
     <div className={`single-value w-full truncate border ${sizeStyle}`}>
-      {onFormatValue()}
+      {!disabled && onFormatValue()}
     </div>
   );
 };

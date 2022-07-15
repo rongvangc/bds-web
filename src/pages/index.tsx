@@ -1,7 +1,4 @@
-import todoApi from '../client/todoApiExample';
 import type { InferGetServerSidePropsType } from 'next';
-import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
 import Layout from '../components/Layouts';
 import Section from '../components/Layouts/Section';
 import ContactMailSection from '../components/Layouts/Section/ContactMailSection';
@@ -15,39 +12,27 @@ import ProjectRent from '../components/Layouts/Section/ProjectRent';
 import WhySection from '../components/Layouts/Section/WhySection';
 
 import { GetServerSideProps } from 'next';
-
 import { provinceService } from '@services/index';
-import { Province } from '@/types/index';
+import { ConvertAddressType } from '@/utils/types';
+
+// import dynamic from 'next/dynamic';
 
 type HomeProps = {
-  provinceList: Province[];
+  provinceList: ConvertAddressType[];
 };
 
-const Editor = dynamic(() => import('../components/Elements/Editor'), {
-  ssr: false,
-});
+// const Editor = dynamic(() => import('../components/Elements/Editor'), {
+//   ssr: false,
+// });
 
 const Home = ({
   provinceList,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  useEffect(() => {
-    const fetchTodo = async () => {
-      try {
-        const response = await todoApi.getAllTodo();
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTodo();
-  }, []);
-
   return (
     <Layout>
-      <Section>
+      {/* <Section>
         <Editor id="test" />
-      </Section>
+      </Section> */}
       <Section image="/hero.jpg">
         <HeroSection />
       </Section>
@@ -84,6 +69,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   try {
     const provinceList = await provinceService.getProvinceList();
+    console.log(provinceList);
     return {
       props: {
         provinceList,

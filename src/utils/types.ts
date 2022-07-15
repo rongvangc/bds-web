@@ -6,8 +6,6 @@ import type {
   HTMLAttributes,
 } from 'react';
 
-import { Province } from '@/types/index';
-
 export type IconProps = {
   width?: number;
   height?: number;
@@ -74,8 +72,9 @@ export enum Colors {
 }
 
 export type FilterRealEstateProps = {
-  provinceList: Province[];
+  provinceList: ConvertAddressType[];
   option: OptionData[];
+  onSearch: (value: string) => void;
   onChange?: (value: OptionData) => void;
   onFilter?: (data: Record<FilterKey, OptionData | null>) => void;
 };
@@ -142,6 +141,7 @@ export type SelectProps = Readonly<{
   filterIgnoreCase?: boolean;
   filterIgnoreAccents?: boolean;
   isClear?: boolean;
+  disabled?: boolean;
   inputDelay?: number;
   acceptKey?: string[];
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
@@ -170,3 +170,9 @@ export type FilterKey =
   | 'street'
   | 'price'
   | 'direction';
+
+export type ConvertAddressType = {
+  _id: string;
+  name: string;
+  parentID: string;
+} & Record<string, any>;

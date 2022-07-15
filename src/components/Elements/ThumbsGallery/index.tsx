@@ -56,7 +56,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
           </div>
         </div>
       </div>
-      <div className="swiper-container relative">
+      <div className="">
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={10}

@@ -139,8 +139,8 @@ const nextConfig = {
   env: {
     SERVER_URL:
       process.env.NODE_ENV === 'production'
-        ? process.env.SERVER_PROD
-        : process.env.SERVER_DEV,
+        ? process.env.SERVER_DEV
+        : process.env.SERVER_PROD,
   },
 };
 

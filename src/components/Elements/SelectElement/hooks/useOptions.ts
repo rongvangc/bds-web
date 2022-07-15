@@ -24,10 +24,13 @@ const useOptions = (
       filterIgnoreAccents
     );
 
+    const normalizeOption = (option?: string) =>
+      filterIgnoreCase ? option?.toLowerCase() : option;
+
     const filterOptionByKey = options?.filter((option) =>
       Object.keys(option).some((key) =>
         acceptKey?.includes(key)
-          ? option[key]?.includes(normalizedSearch)
+          ? normalizeOption(option[key])?.includes(normalizedSearch)
           : false
       )
     );

@@ -142,7 +142,7 @@ export const PRICE_RANGE: OptionData[] = [
   {
     id: '16',
     value: 'deal',
-    description: 'Thoả thuận',
+    description: 'Thỏa thuận',
   },
 ];
 

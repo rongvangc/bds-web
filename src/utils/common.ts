@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import { ConvertAddressType, OptionData } from './types';
 
 const DIACRITICS_REG_EXP = /[\u0300-\u036f]/g;
 
@@ -39,9 +40,26 @@ export const trimAndFormatFilterStr = (
   filterIgnoreAccents: boolean
 ): string => {
   let trimVal = value.trim();
+
   if (filterIgnoreCase) {
     trimVal = trimVal.toLowerCase();
   }
 
   return !filterIgnoreAccents ? trimVal : stripDiacritics(trimVal);
 };
+
+export const convertDataAddress = (
+  dataConvert: ConvertAddressType[]
+): OptionData[] =>
+  dataConvert.reduce((arr, curr) => {
+    const { _id, name, ...rest } = curr;
+
+    arr.push({
+      id: _id,
+      value: _id,
+      description: name,
+      ...rest,
+    });
+
+    return arr;
+  }, [] as OptionData[]);

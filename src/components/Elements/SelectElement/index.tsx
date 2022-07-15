@@ -26,8 +26,8 @@ import useOptions from './hooks/useOptions';
 import { Input } from './Input';
 import { Menu } from './Menu';
 import Value from './Value';
-import { selectVariant } from '../../../utils/animation';
 import { CaretDropdown } from './CaretDropdown';
+import { selectVariant } from '@/utils/animation';
 
 const SelectElement = forwardRef<SelectRef, SelectProps>(
   ({
@@ -40,10 +40,11 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     initialValue,
     placeholder = 'Select option...',
     filterIgnoreCase = true,
-    filterIgnoreAccents = true,
+    filterIgnoreAccents = false,
     inputDelay = 300,
     acceptKey,
     isClear = false,
+    disabled = false,
     valueFormat,
     descriptionFormat,
     onInputBlur,
@@ -118,6 +119,8 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     const handleOnControlMouseDown = (
       e: MouseOrTouchEvent<HTMLElement>
     ): void => {
+      if (disabled) return;
+
       if (!isFocused) focusInput();
 
       const isNotInput = (e.target as HTMLElement).nodeName !== 'INPUT';
@@ -249,7 +252,11 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
         >
           <div className="value-wrapper relative z-0">
             <div
-              className={`single-value absolute z-10 w-full overflow-hidden rounded-md ${inputClass}`}
+              className={`single-value pointer-events-auto absolute z-10 w-full overflow-hidden rounded-md ${inputClass} ${
+                disabled
+                  ? 'pointer-events-none cursor-not-allowed bg-gray/50'
+                  : ''
+              }`}
             >
               <Value
                 sizeStyle={sizeStyle}
@@ -257,6 +264,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
                 searchValue={inputValue}
                 placeholder={placeholder}
                 onFormatValue={onFormatValue}
+                disabled={disabled}
               />
             </div>
 
@@ -268,6 +276,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
               onFocus={handleOnInputFocus}
               onChange={handleOnInputChange}
               inputValue={inputValue}
+              disabled={disabled}
             />
             <div
               className={`absolute ${
@@ -282,7 +291,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
             </div>
           </div>
         </div>
-        {menuOpen && (
+        {menuOpen && !disabled && (
           <motion.div
             initial="closed"
             animate={menuOpen ? 'open' : 'closed'}
