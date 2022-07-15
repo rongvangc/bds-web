@@ -46,3 +46,80 @@ const Editor: React.FC<EditorProps> = ({
 };
 
 export default Editor;
+
+/**
+ const { data: districtList } = useSWR(
+    filterOption.province ? 'getDistrictList' : null,
+    () => districtService.getDistrictList(filterOption?.province?.id!)
+  );
+
+  const { data: wardStreetList } = useSWR(
+    filterOption.district ? 'getWardsAndStreetsByDistrictID' : null,
+    () =>
+      districtService.getWardsAndStreetsByDistrictID(
+        filterOption?.district?.id!
+      )
+  );
+
+  useEffect(() => {
+    if (!districtList) return;
+
+    const nDistrictList = districtList.reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: name,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+
+    setNormalizeDistrictList(nDistrictList);
+  }, [districtList]);
+
+  useEffect(() => {
+    if (!wardStreetList) return;
+
+    const nWardList = wardStreetList[0].reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: name,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+
+    setNormalizeWardList(nWardList);
+
+    const nStreetList = wardStreetList[1].reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
+
+      arr.push({
+        id: _id,
+        value: _id,
+        description: name,
+        ...rest,
+      });
+      return arr;
+    }, [] as OptionData[]);
+    setNormalizeStreetList(nStreetList);
+  }, [wardStreetList]);
+
+  const normalizeProvinceList = provinceList.reduce((arr, curr) => {
+    const { _id, name, ...rest } = curr;
+    arr.push({
+      id: _id,
+      value: _id,
+      description: name,
+      ...rest,
+    });
+    return arr;
+  }, [] as OptionData[]); 
+
+
+ */

@@ -28,30 +28,36 @@ const FilterRealEstate: React.FC<
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]!);
   const [hasFilter, setHasFilter] = useState<boolean>(false);
   const [clear, setClear] = useState<boolean>(false);
+
   const [filterOption, setFilterOption] =
     useState<Record<FilterKey, OptionData | null>>(DEFAULT_FILTER);
-
   const [normalizedistrictList, setNormalizeDistrictList] =
     useState<OptionData[]>();
-
   const [normalizeWardList, setNormalizeWardList] = useState<OptionData[]>();
-
   const [normalizeStreetList, setNormalizeStreetList] =
     useState<OptionData[]>();
 
   const { data: districtList } = useSWR(
-    filterOption.province ? [`${filterOption.province.id}`] : null,
-    (url) => districtService.getDistrictList(url)
+    filterOption.province
+      ? ['getDistrictByProvinceID', `${filterOption.province.id}`]
+      : null,
+    (...url) => districtService.getDistrictList(url[1])
   );
 
   const { data: wardList } = useSWR(
-    filterOption.district ? [`${filterOption.district.id}`] : null,
-    (url) => wardService.getWardList(url)
+    filterOption.district && [
+      'getWardListByDistrictID',
+      `${filterOption.district.id}`,
+    ],
+    (...url) => wardService.getWardList(url[1])
   );
 
   const { data: streetList } = useSWR(
-    filterOption.district ? [`/${filterOption.district.id}`] : null,
-    (url) => streetService.getStreetList(url)
+    filterOption.district && [
+      'getStreetListByDistrictID',
+      `/${filterOption.district.id}`,
+    ],
+    (...url) => streetService.getStreetList(url[1])
   );
 
   useEffect(() => {
@@ -62,7 +68,7 @@ const FilterRealEstate: React.FC<
 
       arr.push({
         id: _id,
-        value: _id,
+        value: name,
         description: name,
         ...rest,
       });
@@ -80,7 +86,7 @@ const FilterRealEstate: React.FC<
 
       arr.push({
         id: _id,
-        value: _id,
+        value: name,
         description: name,
         ...rest,
       });
@@ -98,7 +104,7 @@ const FilterRealEstate: React.FC<
 
       arr.push({
         id: _id,
-        value: _id,
+        value: name,
         description: name,
         ...rest,
       });
@@ -108,12 +114,12 @@ const FilterRealEstate: React.FC<
     setNormalizeStreetList(nStreetList);
   }, [streetList]);
 
-  const nProvinceList = provinceList.reduce((arr, curr) => {
+  const normalizeProvinceList = provinceList.reduce((arr, curr) => {
     const { _id, name, ...rest } = curr;
 
     arr.push({
       id: _id,
-      value: _id,
+      value: name,
       description: name,
       ...rest,
     });
@@ -190,7 +196,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
-            options={nProvinceList}
+            options={normalizeProvinceList}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
             isClear={clear}

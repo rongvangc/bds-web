@@ -1,4 +1,6 @@
 import { District } from '@/types/index';
+import { streetService } from '../street';
+import { wardService } from '../ward';
 
 type JSONResponse<T> = {
   data?: T;
@@ -29,8 +31,16 @@ async function getDistrictList(url: string): Promise<District[]> {
   }
 }
 
+const getWardsAndStreetsByDistrictID = async (districtID: string) => {
+  return await Promise.all([
+    wardService.getWardList(districtID),
+    streetService.getStreetList(districtID),
+  ]);
+};
+
 const districtService = {
   getDistrictList,
+  getWardsAndStreetsByDistrictID,
 };
 
 export { districtService };
