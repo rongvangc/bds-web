@@ -1,0 +1,32 @@
+.note {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: normal;
+  color: #999;
+  display: block;
+}
+
+.sub-title-1 {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: bold;
+  color: #2c2c2c;
+  margin-top: 4px;
+  display: block;
+}
+
+.sub-title-2 {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: bold;
+  color: #2c2c2c;
+  display: block;
+}
+
+.content-item-title {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: normal;
+  font-family: 'Roboto Medium';
+  color: #2c2c2c;
+}
