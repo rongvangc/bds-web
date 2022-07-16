@@ -1,9 +1,6 @@
+import { isArrayWithLength, trimAndFormatFilterStr } from '@/utils/common';
+import { OptionData } from '@/utils/types';
 import { useEffect, useState } from 'react';
-import {
-  isArrayWithLength,
-  trimAndFormatFilterStr,
-} from '../../../../utils/common';
-import { OptionData } from '../../../../utils/types';
 
 const useOptions = (
   options: OptionData[],
@@ -24,8 +21,8 @@ const useOptions = (
       filterIgnoreAccents
     );
 
-    const normalizeOption = (option?: string) =>
-      filterIgnoreCase ? option?.toLowerCase() : option;
+    const normalizeOption = (option: string) =>
+      trimAndFormatFilterStr(option, filterIgnoreCase, filterIgnoreAccents);
 
     const filterOptionByKey = options?.filter((option) =>
       Object.keys(option).some((key) =>

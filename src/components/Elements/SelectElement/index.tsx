@@ -42,7 +42,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       initialValue,
       placeholder = 'Select option...',
       filterIgnoreCase = true,
-      filterIgnoreAccents = false,
+      filterIgnoreAccents = true,
       inputDelay = 300,
       acceptKey,
       isClear = false,

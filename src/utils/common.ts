@@ -1,8 +1,6 @@
 import { FormEvent } from 'react';
 import { ConvertAddressType, OptionData } from './types';
 
-const DIACRITICS_REG_EXP = /[\u0300-\u036f]/g;
-
 /**
  * @private
  *
@@ -10,7 +8,7 @@ const DIACRITICS_REG_EXP = /[\u0300-\u036f]/g;
  * May not be supported by all legacy browsers (IE11 >=).
  */
 const stripDiacritics = (val: string): string => {
-  return val.normalize('NFD').replace(DIACRITICS_REG_EXP, '');
+  return val.normalize('NFD').replace(/\p{Diacritic}/gu, '');
 };
 
 export const isBoolean = (val: unknown): val is Boolean =>
