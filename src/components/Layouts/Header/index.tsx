@@ -7,16 +7,18 @@ import Button from '../../Elements/Button';
 import LinkButton from '../../Elements/LinkButton';
 import { Colors, NavigatorMenu, OptionData } from '../../../utils/types';
 import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
-import { useHeader } from '../../hooks/useHeader';
+import { useCommonStore } from '@/stores';
+import { useFilterHome } from '../hooks/useFilterHome';
 
 const Header: React.FC = () => {
   const { route, asPath, push } = useRouter();
+  const { onChangeSearchValue, onChangeFilterOption, onChangeTabValue } =
+    useCommonStore();
+  const { provinces, districts, streets, wards } = useFilterHome();
 
   const isHome = route === '/';
   const isShowHeaderBar =
     asPath === '/nha-dat-ban' || asPath === '/nha-dat-thue';
-
-  const { handleChangeTab, handleFilterOption } = useHeader();
 
   return (
     <>
@@ -140,9 +142,14 @@ const Header: React.FC = () => {
       {isShowHeaderBar && (
         <div className="bg-white shadow">
           <FilterRealEstateBar
+            districts={districts}
+            streets={streets}
+            wards={wards}
+            provinces={provinces}
             option={TYPE_TAB_BAR_OPTION}
-            onChange={handleChangeTab}
-            onFilter={handleFilterOption}
+            onSearch={onChangeSearchValue}
+            onChange={onChangeTabValue}
+            onFilter={onChangeFilterOption}
           />
         </div>
       )}

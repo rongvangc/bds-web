@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useReducer, useCallback } from 'react';
 import {
-  ColumnSizingState,
   createTable,
   getCoreRowModel,
   getFilteredRowModel,
@@ -26,7 +25,7 @@ const PostDashboard: React.FC = () => {
 
   const handleToggleButton = useCallback(() => {
     setOpen(!open);
-  }, []);
+  }, [open]);
 
   const columns = useMemo(
     () => [
@@ -78,7 +77,7 @@ const PostDashboard: React.FC = () => {
     columns: [
       {
         id: 'select',
-        header: ({ instance }) => (
+        header: () => (
           <></>
           // <IndeterminateCheckbox
           //   {...{
