@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Git Clone') { 
       steps {
-        git branch: 'Sprint02', credentialsId: 'github-private-macos~-key', url: 'git@github.com:rongvangc/bds-web.git'
+        git branch: 'Sprint02', credentialsId: 'github-private-key', url: 'git@github.com:rongvangc/bds-web.git'
       }
     }
     stage('Go to main folder') { 
