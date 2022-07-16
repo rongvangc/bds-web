@@ -55,7 +55,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       onOptionChange,
       onSearchChange,
     },
-    ref: Ref<SelectRef>
+    _ref: Ref<SelectRef>
   ) => {
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
