@@ -1,17 +1,18 @@
-import { Province } from '@/types/index';
+import { ConvertAddressType } from '@/utils/types';
 
 type JSONResponse<T> = {
   data?: T;
-  susccess: boolean;
+  success: boolean;
   errors?: Array<{ message: string }>;
 };
 
 const URL = `${process.env.SERVER_URL}/province/`;
 
-async function getProvinceList(): Promise<Province[]> {
+async function getProvinceList(): Promise<ConvertAddressType[]> {
   const response = await fetch(`${URL}`);
 
-  const { data, errors }: JSONResponse<Province[]> = await response.json();
+  const { data, errors }: JSONResponse<ConvertAddressType[]> =
+    await response.json();
 
   if (response.ok) {
     const provinceList = data;

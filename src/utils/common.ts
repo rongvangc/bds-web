@@ -49,17 +49,24 @@ export const trimAndFormatFilterStr = (
 };
 
 export const convertDataAddress = (
-  dataConvert: ConvertAddressType[]
-): OptionData[] =>
-  dataConvert.reduce((arr, curr) => {
-    const { _id, name, ...rest } = curr;
+  dataConvert?: ConvertAddressType[]
+): OptionData[] => {
+  if (!dataConvert) {
+    return [];
+  } else {
+    const data = dataConvert.reduce((arr, curr) => {
+      const { _id, name, ...rest } = curr;
 
-    arr.push({
-      id: _id,
-      value: _id,
-      description: name,
-      ...rest,
-    });
+      arr.push({
+        id: _id,
+        value: _id,
+        description: name,
+        ...rest,
+      });
 
-    return arr;
-  }, [] as OptionData[]);
+      return arr;
+    }, [] as OptionData[]);
+
+    return data;
+  }
+};

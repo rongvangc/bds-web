@@ -1,19 +1,20 @@
-import { District } from '@/types/index';
+import { ConvertAddressType } from './../../utils/types';
 import { streetService } from '../street';
 import { wardService } from '../ward';
 
 type JSONResponse<T> = {
   data?: T;
-  susccess: boolean;
+  success: boolean;
   errors?: Array<{ message: string }>;
 };
 
 const URL = `${process.env.SERVER_URL}/district/`;
 
-async function getDistrictList(url: string): Promise<District[]> {
+async function getDistrictList(url: string): Promise<ConvertAddressType[]> {
   const response = await fetch(`${URL}${url}`);
 
-  const { data, errors }: JSONResponse<District[]> = await response.json();
+  const { data, errors }: JSONResponse<ConvertAddressType[]> =
+    await response.json();
 
   if (response.ok) {
     const districtList = data;

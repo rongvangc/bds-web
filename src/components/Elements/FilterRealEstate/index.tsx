@@ -19,7 +19,17 @@ import { convertDataAddress } from '@/utils/common';
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
-> = ({ provinceList, option, className, onChange, onFilter, onSearch }) => {
+> = ({
+  provinces,
+  districts,
+  streets,
+  wards,
+  option,
+  className,
+  onChange,
+  onFilter,
+  onSearch,
+}) => {
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]!);
   const [hasFilter, setHasFilter] = useState<boolean>(false);
   const [clear, setClear] = useState<boolean>(false);
@@ -108,7 +118,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
-            options={convertDataAddress(provinceList)}
+            options={convertDataAddress(provinces)}
             acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
@@ -117,7 +127,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
-            options={[]}
+            options={convertDataAddress(districts)}
             acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
@@ -126,7 +136,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
-            options={[]}
+            options={convertDataAddress(wards)}
             acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
@@ -135,7 +145,7 @@ const FilterRealEstate: React.FC<
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
-            options={[]}
+            options={convertDataAddress(streets)}
             acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}

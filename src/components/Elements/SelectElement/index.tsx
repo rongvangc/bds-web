@@ -6,6 +6,7 @@ import React, {
   type FormEvent,
   type FocusEvent,
   useEffect,
+  Ref,
 } from 'react';
 import { isFunction, suppressEvent } from '../../../utils/common';
 import {
@@ -30,29 +31,32 @@ import { CaretDropdown } from './CaretDropdown';
 import { selectVariant } from '@/utils/animation';
 
 const SelectElement = forwardRef<SelectRef, SelectProps>(
-  ({
-    className = '',
-    inputClass = '',
-    colorIcon = Colors.primary,
-    size = 'sm',
-    options,
-    autoFocus,
-    initialValue,
-    placeholder = 'Select option...',
-    filterIgnoreCase = true,
-    filterIgnoreAccents = false,
-    inputDelay = 300,
-    acceptKey,
-    isClear = false,
-    disabled = false,
-    valueFormat,
-    descriptionFormat,
-    onInputBlur,
-    onInputFocus,
-    onInputChange,
-    onOptionChange,
-    onSearchChange,
-  }) => {
+  (
+    {
+      className = '',
+      inputClass = '',
+      colorIcon = Colors.primary,
+      size = 'sm',
+      options,
+      autoFocus,
+      initialValue,
+      placeholder = 'Select option...',
+      filterIgnoreCase = true,
+      filterIgnoreAccents = false,
+      inputDelay = 300,
+      acceptKey,
+      isClear = false,
+      disabled = false,
+      valueFormat,
+      descriptionFormat,
+      onInputBlur,
+      onInputFocus,
+      onInputChange,
+      onOptionChange,
+      onSearchChange,
+    },
+    ref: Ref<SelectRef>
+  ) => {
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
     const onChangeEventValue = useRef<boolean>(false);

@@ -2,6 +2,7 @@ import React from 'react';
 import { ConvertAddressType } from '@/utils/types';
 import FilterRealEstate from '@/components/Elements/FilterRealEstate';
 import { TYPE_TAB_OPTION } from '@/utils/constants';
+import { useCommonStore } from '@/stores';
 import { useFilterHome } from '../hooks/useFilterHome';
 
 type FilterSectionProps = {
@@ -9,19 +10,22 @@ type FilterSectionProps = {
 };
 
 const FilterSection: React.FC<FilterSectionProps> = ({ provinceList }) => {
-  const { handleChangeTab, handleFilterOption, handleSearchValue } =
-    useFilterHome();
+  const { onChangeSearchValue, onChangeFilterOption, onChangeTabValue } =
+    useCommonStore();
 
-  console.log(provinceList);
+  const { districts, streets, wards } = useFilterHome();
 
   return (
     <div className="mx-auto w-[900px] pt-10">
       <FilterRealEstate
-        provinceList={provinceList}
+        provinces={provinceList}
+        districts={districts}
+        wards={wards}
+        streets={streets}
         option={TYPE_TAB_OPTION}
-        onChange={handleChangeTab}
-        onSearch={handleSearchValue}
-        onFilter={handleFilterOption}
+        onChange={onChangeTabValue}
+        onSearch={onChangeSearchValue}
+        onFilter={onChangeFilterOption}
       />
     </div>
   );

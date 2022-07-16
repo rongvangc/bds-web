@@ -1,17 +1,18 @@
-import { Street } from '@/types/index';
+import { ConvertAddressType } from '@/utils/types';
 
 type JSONResponse<T> = {
   data?: T;
-  susccess: boolean;
+  success: boolean;
   errors?: Array<{ message: string }>;
 };
 
 const URL = `${process.env.SERVER_URL}/street/`;
 
-async function getStreetList(url: string): Promise<Street[]> {
+async function getStreetList(url: string): Promise<ConvertAddressType[]> {
   const response = await fetch(`${URL}${url}`);
 
-  const { data, errors }: JSONResponse<Street[]> = await response.json();
+  const { data, errors }: JSONResponse<ConvertAddressType[]> =
+    await response.json();
 
   if (response.ok) {
     const streetList = data;

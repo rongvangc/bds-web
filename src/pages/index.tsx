@@ -69,7 +69,6 @@ export default Home;
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   try {
     const provinceList = await provinceService.getProvinceList();
-    console.log(provinceList);
     return {
       props: {
         provinceList,

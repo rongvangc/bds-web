@@ -72,7 +72,10 @@ export enum Colors {
 }
 
 export type FilterRealEstateProps = {
-  provinceList: ConvertAddressType[];
+  provinces?: ConvertAddressType[];
+  districts?: ConvertAddressType[];
+  streets?: ConvertAddressType[];
+  wards?: ConvertAddressType[];
   option: OptionData[];
   onSearch: (value: string) => void;
   onChange?: (value: OptionData) => void;
