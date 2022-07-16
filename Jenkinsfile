@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+    nodejs '18.4.0'
+  }
   environment {
     BUILD_ID = 'dontKillMe /var/lib/jenkins/workspace/bds-web-pineline'
   }
