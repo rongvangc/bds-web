@@ -27,6 +27,11 @@ pipeline {
         sh 'yarn build'
       }
     }
+    stage('Delete current app') { 
+      steps {
+        sh 'pm2 delete bds-web-pineline'
+      }
+    }
     stage('Start web') { 
       steps {
         sh 'pm2 start --interpreter bash yarn --name bds-web-pineline -- start --log --watch'

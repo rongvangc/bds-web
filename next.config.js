@@ -5,7 +5,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const nextConfig = {
   withBundleAnalyzer,
-  images: {},
+  images: {
+    // domains: ['server.veradogroup.com'],
+    // deviceSizes: [375, 640, 750, 1080, 1200],
+    // formats: ['image/webp'],
+    // minimumCacheTTL: 30
+  },
   reactStrictMode: false,
   async rewrites() {
     const SALE_REAL_ESTATE_OPTION = [
