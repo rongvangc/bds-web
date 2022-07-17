@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Start web') { 
       steps {
-        sh 'pm2 start --interpreter bash yarn --name bds-web-pineline -- start --log'
+        sh 'pm2 start --interpreter bash yarn --name bds-web-pineline -- start'
       }
     }
     stage('Save') { 
