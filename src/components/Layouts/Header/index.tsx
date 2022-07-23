@@ -101,7 +101,14 @@ const Header: React.FC = () => {
           <div className="container mx-auto">
             <div className="flex items-center justify-between">
               <div className="text-white">
-                <LinkButton href="/">Logo</LinkButton>
+                <LinkButton href="/" className="flex items-center">
+                  <Image
+                    src="/logo-icon.png"
+                    width={30}
+                    height={30}
+                    alt="Logo"
+                  />
+                </LinkButton>
               </div>
               <ul className="menu-header relative z-30 flex text-white">
                 {NAVIGATOR.map((item: NavigatorMenu) => (

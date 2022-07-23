@@ -16,6 +16,7 @@ import {
 import { isFunction } from 'formik';
 import SelectElement from '../SelectElement';
 import { convertDataAddress } from '@/utils/common';
+import Button from '../Button';
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
@@ -113,6 +114,15 @@ const FilterRealEstate: React.FC<
             className="flex-1 rounded-tr-md rounded-br-md border border-l-0 px-4 py-2.5 outline-none"
             onChange={handleSearchValue}
           />
+          <div className="absolute right-8">
+            <Button
+              variant="primary"
+              size="sm"
+              className="border-secondary bg-secondary shadow-md"
+            >
+              Tìm kiếm
+            </Button>
+          </div>
         </div>
         <div className="mx-auto grid max-w-[600px] grid-cols-3 gap-2 pt-4">
           <SelectElement

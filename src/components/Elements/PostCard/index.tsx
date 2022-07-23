@@ -38,7 +38,7 @@ const PostCard: React.FC<PostCardType> = ({
               width={400}
               height={250}
               layout="responsive"
-              objectFit="fill"
+              objectFit="cover"
               alt=""
             />
           </div>
