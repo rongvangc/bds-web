@@ -28,6 +28,24 @@ export const suppressEvent = (e: FormEvent) => {
   e.stopPropagation();
 };
 
+export const stringVietnameseToSlug = (str: string) => {
+  var from =
+      'àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ',
+    to =
+      'aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy';
+  for (var i = 0, l = from.length; i < l; i++) {
+    str = str.replace(RegExp(from[i]!, 'gi'), to[i]!);
+  }
+
+  str = str
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\-]/g, '-')
+    .replace(/-+/g, '-');
+
+  return str;
+};
+
 /**
  * Apply regex to string, and if the value is NOT case sensitive,
  * call .toLowerCase() and return result.
@@ -37,13 +55,13 @@ export const trimAndFormatFilterStr = (
   filterIgnoreCase: boolean,
   filterIgnoreAccents: boolean
 ): string => {
-  let trimVal = value.trim();
+  let trimVal = stringVietnameseToSlug(value.trim());
 
   if (filterIgnoreCase) {
     trimVal = trimVal.toLowerCase();
   }
 
-  return !filterIgnoreAccents ? trimVal : stripDiacritics(trimVal);
+  return filterIgnoreAccents ? stripDiacritics(trimVal) : trimVal;
 };
 
 export const convertDataAddress = (

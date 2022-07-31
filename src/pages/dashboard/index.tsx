@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import React, { lazy, Suspense, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Loading } from '@/components/Elements/Loading';
 import IconList from '@/icons';
 import { Colors } from '@/utils/types';
+import Loading from '@/components/Elements/Loading';
 
 const EditComponent = lazy(
   () => import('../../components/Layouts/Section/EditProfileDashboard')

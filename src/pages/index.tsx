@@ -1,4 +1,4 @@
-import type { InferGetServerSidePropsType } from 'next';
+import type { NextPage } from 'next';
 import Layout from '../components/Layouts';
 import Section from '../components/Layouts/Section';
 import ContactMailSection from '../components/Layouts/Section/ContactMailSection';
@@ -11,23 +11,13 @@ import ProjectForYou from '../components/Layouts/Section/ProjectForYou';
 import ProjectRent from '../components/Layouts/Section/ProjectRent';
 import WhySection from '../components/Layouts/Section/WhySection';
 
-import { GetServerSideProps } from 'next';
-import { provinceService } from '@services/index';
-import { ConvertAddressType } from '@/utils/types';
-
 // import dynamic from 'next/dynamic';
-
-type HomeProps = {
-  provinceList: ConvertAddressType[];
-};
 
 // const Editor = dynamic(() => import('../components/Elements/Editor'), {
 //   ssr: false,
 // });
 
-const Home = ({
-  provinceList,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage = () => {
   return (
     <Layout>
       {/* <Section>
@@ -37,7 +27,7 @@ const Home = ({
         <HeroSection />
       </Section>
       <Section>
-        <FilterSection provinceList={provinceList} />
+        <FilterSection />
       </Section>
       <Section>
         <PostSection />
@@ -65,20 +55,3 @@ const Home = ({
 };
 
 export default Home;
-
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  try {
-    const provinceList = await provinceService.getProvinceList();
-    return {
-      props: {
-        provinceList,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        provinceList: [],
-      },
-    };
-  }
-};

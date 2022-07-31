@@ -129,7 +129,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
             options={convertDataAddress(provinces)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
             isClear={clear}
@@ -138,7 +137,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
             options={convertDataAddress(districts)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
             isClear={clear}
@@ -147,7 +145,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
             options={convertDataAddress(wards)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
             isClear={clear}
@@ -156,7 +153,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
             options={convertDataAddress(streets)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}
             isClear={clear}
@@ -165,7 +161,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Mức giá"
             options={PRICE_RANGE}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('price')}
             isClear={clear}
@@ -174,7 +169,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Hướng"
             options={DIRECTION}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('direction')}
             isClear={clear}

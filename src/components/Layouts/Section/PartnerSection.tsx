@@ -74,7 +74,7 @@ const PartnerSection: React.FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="absolute top-11 flex w-full justify-between">
+        <div className="absolute top-1/2 -mt-4 flex w-full justify-between">
           <div className="prvBtn absolute -left-12 cursor-pointer rounded-md p-1 shadow-md hover:bg-gray">
             <IconList type="arrow-left" size="md" color={Colors.black} />
           </div>

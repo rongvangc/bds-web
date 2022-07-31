@@ -73,7 +73,7 @@ const FilterRealEstateBar: React.FC<
           <a
             onClick={() => handleSwitchTab(tab)}
             key={tab.value}
-            className={`inline-block w-20 py-1 text-sm ${
+            className={`inline-block w-20 cursor-pointer py-1 text-sm ${
               tab.value === currentTab?.value
                 ? ' border-primary bg-primary text-white'
                 : 'border-primary bg-white text-primary'

@@ -217,13 +217,13 @@ input[type=number] {
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #cecece;
+  border: 5px solid #37a5e5;
   animation: prixClipFix 2s linear infinite both ;
 }
 .loader::after{
   inset: 8px;
   transform: rotate3d(90, 90, 0, 180deg );
-  border-color: #FF3D00;
+  border-color: #12004f;
 }
 
 @keyframes rotate {
@@ -245,4 +245,9 @@ input[type=number] {
 
 .project-swiper .swiper-wrapper {
   padding-bottom: 2px;
+}
+
+.carousel-swiper .swiper-slide-thumb-active {
+  border: 2px solid #12004f;
+  border-radius: 8px;
 }

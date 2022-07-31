@@ -44,7 +44,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       filterIgnoreCase = true,
       filterIgnoreAccents = true,
       inputDelay = 300,
-      acceptKey,
+      acceptKey = ['description'],
       isClear = false,
       disabled = false,
       valueFormat,
