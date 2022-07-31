@@ -18,6 +18,7 @@
     "@editorjs/simple-image": "^1.4.1",
     "@faker-js/faker": "^7.1.0",
     "@tailwindcss/line-clamp": "^0.4.0",
+    "@tanstack/match-sorter-utils": "^8.1.1",
     "@tanstack/react-table": "^8.0.0-beta.4",
     "@types/editorjs__header": "^2.6.0",
     "autoprefixer": "^10.4.7",
