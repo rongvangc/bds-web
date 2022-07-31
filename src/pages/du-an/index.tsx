@@ -8,7 +8,7 @@ import Section from '../../components/Layouts/Section';
 const Product: NextPage = () => {
   return (
     <Layout>
-      <Section>
+      <Section className="!pb-4">
         <SliderProject />
       </Section>
       <Section>
