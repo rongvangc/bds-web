@@ -7,7 +7,7 @@ const nextConfig = {
     // formats: ['image/webp'],
     // minimumCacheTTL: 30
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   async rewrites() {
     const SALE_REAL_ESTATE_OPTION = [
       {

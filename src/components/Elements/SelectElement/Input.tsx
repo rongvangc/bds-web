@@ -8,10 +8,12 @@ interface InputProps {
   inputValue: string;
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
   sizeStyle?: string;
+  id?: string;
   disabled?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
+  id,
   inputRef,
   sizeStyle,
   inputValue,
@@ -23,6 +25,8 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <input
+      id={id}
+      name={id}
       ref={inputRef}
       onBlur={onBlur}
       onFocus={onFocus}

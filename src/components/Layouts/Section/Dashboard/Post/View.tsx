@@ -1,10 +1,11 @@
-import React, { useMemo, useState, useReducer, useCallback } from 'react';
+import React, { useMemo, useReducer, useState } from 'react';
 import {
   createTable,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  OnChangeFn,
   PaginationState,
   RowSelectionState,
   SortingState,
@@ -13,19 +14,23 @@ import {
 import { makeData, Person } from 'src/components/Elements/Table/makeData';
 import Table from 'src/components/Elements/Table';
 import IndeterminateCheckbox from '@/components/Elements/Table/Checkbox';
-import Button from '@/components/Elements/Button';
+
+interface ViewProps {
+  sorting: SortingState;
+  rowSelection: RowSelectionState;
+  setSorting: OnChangeFn<SortingState>;
+  setRowSelection: OnChangeFn<RowSelectionState>;
+}
 
 let table = createTable().setRowType<Person>();
 
-const PostDashboard: React.FC = () => {
+const View: React.FC<ViewProps> = ({
+  sorting,
+  rowSelection,
+  setSorting,
+  setRowSelection,
+}) => {
   const rerender = useReducer(() => ({}), {})[1];
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleToggleButton = useCallback(() => {
-    setOpen(!open);
-  }, [open]);
 
   const columns = useMemo(
     () => [
@@ -132,16 +137,8 @@ const PostDashboard: React.FC = () => {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
-
-  return open ? (
-    <div>123</div>
-  ) : (
-    <>
-      <div className="px-2">
-        <Button variant="primary" onClick={handleToggleButton}>
-          Tạo bài viết
-        </Button>
-      </div>
+  return (
+    <div>
       <Table instance={instance} />
       <div>
         <button onClick={() => rerender()}>Force Rerender</button>
@@ -160,8 +157,8 @@ const PostDashboard: React.FC = () => {
           2
         )}
       </pre>
-    </>
+    </div>
   );
 };
 
-export default PostDashboard;
+export default View;

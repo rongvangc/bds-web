@@ -33,6 +33,7 @@ import { selectVariant } from '@/utils/animation';
 const SelectElement = forwardRef<SelectRef, SelectProps>(
   (
     {
+      id,
       className = '',
       inputClass = '',
       colorIcon = Colors.primary,
@@ -244,7 +245,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     return (
       <div
         className={`select-wrapper ${fontStyle} ${className}`}
-        id="id"
+        id={id}
         aria-controls="id"
         aria-expanded={false}
       >
@@ -273,6 +274,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
             </div>
 
             <Input
+              id={id}
               sizeStyle={sizeStyle}
               className={inputClass}
               inputRef={inputRef}

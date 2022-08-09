@@ -31,7 +31,7 @@ export const Menu: React.FC<MenuProps> = ({
           <p
             onMouseDown={onMouseDown}
             onClick={() => onClick(item)}
-            key={item?.id}
+            key={item?.value}
             className="border-1 my-1 cursor-pointer border-b border-gray/50 py-1 px-4 last:border-0 hover:bg-gray/50"
           >
             {onFormatDescription(item)}
