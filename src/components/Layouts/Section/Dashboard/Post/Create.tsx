@@ -9,7 +9,7 @@ const Create: React.FC = () => {
     initialValues: {
       title: '',
       content: '',
-      postType: 1,
+      postType: POST_TYPE[0]!,
       previewImage: '/default-product-image.png',
     },
     onSubmit: (values) => {
@@ -17,8 +17,6 @@ const Create: React.FC = () => {
     },
   });
   const { values, handleChange, handleSubmit } = formik;
-
-  console.log(values);
 
   return (
     <FormikProvider value={formik}>
@@ -58,7 +56,7 @@ const Create: React.FC = () => {
               <InputForm
                 id="previewImage"
                 label="ẢNH"
-                value={values?.postType}
+                value={values?.previewImage}
                 onChange={handleChange}
                 type="upload"
               />

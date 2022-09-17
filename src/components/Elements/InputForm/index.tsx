@@ -8,7 +8,7 @@ import Upload from '../Upload';
 type InputFormType = {
   id: string;
   label: string;
-  value: string | number;
+  value: string | number | OptionData | File;
   placeholder?: string;
   type?: 'text' | 'textarea' | 'select' | 'upload';
   error?: string;
@@ -52,7 +52,7 @@ export const InputForm: React.FC<InputFormType> = ({
       component = (
         <SelectElement
           id={id}
-          initialValue={options?.[0]}
+          initialValue={value as OptionData}
           placeholder={placeholder}
           options={options}
           className="w-fit"
@@ -66,10 +66,10 @@ export const InputForm: React.FC<InputFormType> = ({
       );
       break;
     case 'upload':
-      component = <Upload />;
+      component = <Upload currentImage={value as string} onChange={onChange} />;
       break;
     case 'textarea':
-      component = <Editor id="post" />;
+      component = <Editor onDataSave={onChange} id="post" />;
       break;
   }
 

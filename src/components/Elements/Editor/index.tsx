@@ -28,20 +28,20 @@ const Editor: React.FC<EditorProps> = ({
     [id, placeHolder]
   );
 
-  // const onSave = useCallback(async () => {
-  //   try {
-  //     const data = await editor.save();
-  //     isFunction(onDataSave) && onDataSave(data);
-  //   } catch (error) {
-  //     console.log('Saving failed: ', error);
-  //   }
-  // }, [editor, onDataSave]);
+  const onSave = useCallback(async () => {
+    try {
+      const data = await editor.save();
+      isFunction(onDataSave) && onDataSave(data);
+    } catch (error) {
+      console.log('Saving failed: ', error);
+    }
+  }, [editor, onDataSave]);
 
   return (
     <div className={className}>
-      {/* <Button variant="primary" onClick={onSave}>
+      <Button variant="primary" onClick={onSave}>
         Save
-      </Button> */}
+      </Button>
       {editor && <div id={id} />}
     </div>
   );

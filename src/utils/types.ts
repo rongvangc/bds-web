@@ -106,7 +106,7 @@ export type MenuOption = Readonly<{
 export type PostType = {
   title: string;
   description?: string;
-  postType: number;
+  postType: OptionData;
   content: string;
   previewImage: string;
   url?: string;

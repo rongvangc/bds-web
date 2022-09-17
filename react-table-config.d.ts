@@ -48,6 +48,14 @@ import {
   UseSortByState,
 } from 'react-table';
 
+declare global {
+  interface FileList {
+    forEach(callback: (f: File) => void): void;
+    map(callback: (f: File) => void): void;
+    reduce(callback: (acc: any, f: File) => void): any;
+  }
+}
+
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 

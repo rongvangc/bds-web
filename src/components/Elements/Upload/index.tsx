@@ -1,54 +1,69 @@
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from 'react';
 import { imageMimeType } from '@/utils/constants';
-import React, { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import Image from 'next/image';
+import { forEach, reduce } from 'lodash';
 
-interface UploadProps {}
+interface UploadProps {
+  currentImage?: string;
+  onChange: (e: React.ChangeEvent<any>) => void;
+}
 
-const Upload: React.FC<UploadProps> = () => {
-  const [file, setFile] = useState<File>();
-  const [fileDataURL, setFileDataURL] = useState(null);
-
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file: any) => {
-      const reader = new FileReader();
-
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => console.log('file reading has failed');
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        const binaryStr = reader.result;
-        console.log(binaryStr);
-      };
-      reader.readAsArrayBuffer(file);
-    });
-  }, []);
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: {
-      'image/jpeg': ['.jpg', '.jpeg'],
-      'image/png': ['.png'],
-    },
-  });
+const Upload: React.FC<UploadProps> = ({ currentImage }) => {
+  const [files, setFiles] = useState<FileList>();
+  const [fileDataURL, setFileDataURL] = useState<string | ArrayBuffer>();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileReader = new FileReader();
-    const file = e?.currentTarget?.files?.[0];
-    if (!file?.type?.match(imageMimeType)) {
-      alert('Image mime type is not valid');
-      return;
-    } else if (file) {
-      if (file) {
-        fileReader.onload = (e: any) => {
-          const { result } = e.currentTarget;
+    const files = e?.currentTarget?.files;
+
+    if (files) {
+      // const data = Array.from(files).reduce((acc: any, file: File) => {
+      //   const fileReader = new FileReader();
+      //   if (!file?.type?.match(imageMimeType)) {
+      //     alert('Image mime type is not valid');
+      //     return acc;
+      //   }
+
+      //   fileReader.onload = () => {
+      //     const { result } = fileReader;
+
+      //     if (result) {
+      //       acc = [...acc, result];
+      //     }
+      //   };
+
+      //   fileReader.readAsDataURL(file);
+      //   return acc;
+      // }, []);
+
+      console.log(Array.from(files));
+
+      const data = Array.from(files);
+      const data2 = data.map((file: File) => {
+        const fileReader = new FileReader();
+        if (!file?.type?.match(imageMimeType)) {
+          alert('Image mime type is not valid');
+          return;
+        }
+
+        let data;
+
+        fileReader.onload = () => {
+          const { result } = fileReader;
+
           if (result) {
-            setFileDataURL(result);
+            data = result;
           }
         };
+
         fileReader.readAsDataURL(file);
-      }
-      setFile(file);
+
+        return data;
+      });
+
+      console.log(data2);
     } else {
+      const fileReader = new FileReader();
       if (fileReader && fileReader.readyState === 1) {
         fileReader.abort();
       }
@@ -59,26 +74,37 @@ const Upload: React.FC<UploadProps> = () => {
     <>
       <form>
         <p>
-          <label htmlFor="image"> Browse images </label>
+          <label htmlFor="image">Browse images</label>
           <input
             type="file"
             id="image"
+            multiple
             accept=".png, .jpg, .jpeg"
             onChange={changeHandler}
           />
         </p>
       </form>
       {fileDataURL ? (
-        <p className="img-preview-wrapper">
-          {<img src={fileDataURL} alt="preview" />}
+        <p className="img-preview-wrapper relative h-60">
+          <Image
+            src={fileDataURL}
+            layout="fill"
+            objectFit="cover"
+            alt="preview"
+          />
         </p>
       ) : null}
-      <div {...getRootProps({ className: 'dropzone' })}>
-        <input {...getInputProps()} />
-        <p className="border-2 border-dashed border-primary p-4">
-          Drag & drop some files here, or click to select files
-        </p>
-      </div>
+
+      {!fileDataURL && currentImage && (
+        <div className="relative h-60">
+          <Image
+            src={currentImage}
+            layout="fill"
+            objectFit="cover"
+            alt="preview"
+          />
+        </div>
+      )}
     </>
   );
 };
