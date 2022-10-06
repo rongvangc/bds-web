@@ -2,21 +2,33 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import IconList, { MenuIcon } from '../../../icons';
-import { NAVIGATOR, TYPE_TAB_BAR_OPTION } from '../../../utils/constants';
+
 import Button from '../../Elements/Button';
 import LinkButton from '../../Elements/LinkButton';
-import { Colors, NavigatorMenu, OptionData } from '../../../utils/types';
 import FilterRealEstateBar from '../../Elements/FilterRealEstateBar';
-import { useHeader } from '../../hooks/useHeader';
+import { useCommonStore } from '@/stores';
+import { useFilterHome } from '../hooks/useFilterHome';
+import {
+  NAVIGATOR,
+  SALE_REAL_ESTATE_OPTION,
+  PJ_REAL_ESTATE_OPTION,
+  TYPE_TAB_BAR_OPTION,
+  RENT_REAL_ESTATE_OPTION,
+} from '@/utils/constants';
+import { Colors, NavigatorMenu, OptionData } from '@/utils/types';
 
 const Header: React.FC = () => {
   const { route, asPath, push } = useRouter();
+  const { onChangeSearchValue, onChangeFilterOption, onChangeTabValue } =
+    useCommonStore();
+  const { provinces, districts, streets, wards } = useFilterHome();
 
   const isHome = route === '/';
-  const isShowHeaderBar =
-    asPath === '/nha-dat-ban' || asPath === '/nha-dat-thue';
-
-  const { handleChangeTab, handleFilterOption } = useHeader();
+  const isShowHeaderBar = [
+    ...SALE_REAL_ESTATE_OPTION,
+    ...RENT_REAL_ESTATE_OPTION,
+    ...PJ_REAL_ESTATE_OPTION,
+  ].some((item) => `/${item.value}` === asPath);
 
   return (
     <>
@@ -99,7 +111,14 @@ const Header: React.FC = () => {
           <div className="container mx-auto">
             <div className="flex items-center justify-between">
               <div className="text-white">
-                <LinkButton href="/">Logo</LinkButton>
+                <LinkButton href="/" className="flex items-center">
+                  <Image
+                    src="/logo-icon.png"
+                    width={30}
+                    height={30}
+                    alt="Logo"
+                  />
+                </LinkButton>
               </div>
               <ul className="menu-header relative z-30 flex text-white">
                 {NAVIGATOR.map((item: NavigatorMenu) => (
@@ -140,9 +159,14 @@ const Header: React.FC = () => {
       {isShowHeaderBar && (
         <div className="bg-white shadow">
           <FilterRealEstateBar
+            districts={districts}
+            streets={streets}
+            wards={wards}
+            provinces={provinces}
             option={TYPE_TAB_BAR_OPTION}
-            onChange={handleChangeTab}
-            onFilter={handleFilterOption}
+            onSearch={onChangeSearchValue}
+            onChange={onChangeTabValue}
+            onFilter={onChangeFilterOption}
           />
         </div>
       )}

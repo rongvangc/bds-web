@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
 
 const nextConfig = {
-  withBundleAnalyzer,
-  images: {},
+  images: {
+    // domains: ['server.veradogroup.com'],
+    // deviceSizes: [375, 640, 750, 1080, 1200],
+    // formats: ['image/webp'],
+    // minimumCacheTTL: 30
+  },
   reactStrictMode: false,
   async rewrites() {
     const SALE_REAL_ESTATE_OPTION = [
@@ -137,11 +138,8 @@ const nextConfig = {
     return customDestination;
   },
   env: {
-    SERVER_URL:
-      process.env.NODE_ENV === 'production'
-        ? process.env.SERVER_DEV
-        : process.env.SERVER_PROD,
+    SERVER_URL: process.env.SERVER_PROD
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = nextConfig;

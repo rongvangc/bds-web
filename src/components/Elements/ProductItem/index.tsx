@@ -1,7 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { LocationIcon, HomeIcon, MenuIcon } from '../../../icons';
 import Badge from '../../../components/Elements/Badge';
+import IconList from '@/icons';
+import { Colors } from '@/utils/types';
+import LinkButton from '../LinkButton';
 
 const imageUrl = '/demo/project.jpg';
 const image1 = '/demo/project-2.jpg';
@@ -11,14 +13,14 @@ type ProductItemType = {};
 
 const ProductItem: React.FC<ProductItemType> = () => {
   return (
-    <a
+    <LinkButton
       className="mb-4 flex cursor-pointer overflow-hidden rounded-md shadow"
-      href="./du-an"
+      href="/123"
     >
       <div className="relative !flex h-[248px] w-[240px] flex-col">
         <span className="product-image-gradient border-bottom-left-radius-[4px] absolute left-0 bottom-0 z-[1] h-[40px] w-full" />
         <span className="absolute bottom-4 right-6 z-10 flex font-semibold text-white">
-          <MenuIcon color="white" />6
+          <IconList type="image" size="md" color={Colors.white} />6
         </span>
         <Image
           src={imageUrl || '/default-product-image.png'}
@@ -27,7 +29,7 @@ const ProductItem: React.FC<ProductItemType> = () => {
           className="object-cover"
           alt=""
         />
-        <div className="mt-0.5 flex justify-between	">
+        <div className="mt-0.5 flex justify-between	gap-[2px]">
           <Image
             src={image1 || '/default-product-image.png'}
             width={119}
@@ -55,11 +57,10 @@ const ProductItem: React.FC<ProductItemType> = () => {
         <p className="mb-1 flex items-center text-sm">
           <span className="font-semibold">10 triệu/m²</span>
           <span className="ml-4	font-semibold">6.64 ha</span>
-          <span className="ml-4	font-semibold">525</span>
-          <HomeIcon width={14} height={14} />
+          <span className="ml-4	font-semibold">525 m²</span>
         </p>
         <p className="mb-1 flex items-center text-sm font-semibold">
-          <LocationIcon width={14} height={14} />
+          <IconList type="location" />
           <span className="ml-1">
             Phường Bình Thuận, Quận Hải Châu, Đà Nẵng.
           </span>
@@ -72,7 +73,7 @@ const ProductItem: React.FC<ProductItemType> = () => {
           tượng của Đà Nẵng.
         </p>
       </div>
-    </a>
+    </LinkButton>
   );
 };
 

@@ -1,9 +1,16 @@
 import { useCommonStore } from '@/stores';
-import { districtService, streetService, wardService } from '@/services';
+import {
+  districtService,
+  provinceService,
+  streetService,
+  wardService,
+} from '@/services';
 import useSWR from 'swr';
 
 export const useFilterHome = () => {
   const { filterOption } = useCommonStore();
+
+  const { data: provinces } = useSWR(() => provinceService.getProvinceList());
 
   const { data: districts } = useSWR(
     filterOption.province && [
@@ -33,5 +40,6 @@ export const useFilterHome = () => {
     districts,
     wards,
     streets,
+    provinces,
   };
 };

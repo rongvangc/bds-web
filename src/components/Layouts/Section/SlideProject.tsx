@@ -23,7 +23,7 @@ const SliderProject: React.FC = () => {
           nextEl: '.nextBtn',
         }}
         loop
-        className="mb-10 overflow-hidden rounded-md"
+        className="mb-0 overflow-hidden rounded-md"
       >
         {slides.map((imageUrl: string, index: number) => (
           <SwiperSlide key={index}>

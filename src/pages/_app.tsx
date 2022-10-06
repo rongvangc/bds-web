@@ -14,9 +14,35 @@ import 'swiper/css/free-mode';
 import 'swiper/css/thumbs';
 
 import type { AppProps } from 'next/app';
+import { Fragment, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useCommonStore } from '@/stores';
+import dynamic from 'next/dynamic';
+
+const Loading = dynamic(() => import('@/components/Elements/Loading'), {
+  ssr: false,
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const router = useRouter();
+  const { loading, onLoading } = useCommonStore();
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => onLoading(true));
+    router.events.on('routeChangeComplete', () => onLoading(false));
+
+    return () => {
+      router.events.off('routeChangeStart', () => onLoading(true));
+      router.events.off('routeChangeComplete', () => onLoading(false));
+    };
+  }, [onLoading, router.events]);
+
+  return (
+    <Fragment>
+      <Loading loading={loading} isFull showLogo />
+      <Component {...pageProps} />
+    </Fragment>
+  );
 }
 
 export default MyApp;

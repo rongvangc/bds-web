@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardType> = ({
 }) => {
   return (
     <LinkButton href={url}>
-      <div className="rounded-lg shadow">
+      <div className="rounded-lg pb-1 shadow">
         <div className="relative rounded-tr-lg rounded-tl-lg">
           {isHot && <div className="ribbon">Giá tốt</div>}
           <div className="relative overflow-hidden rounded-tr-lg rounded-tl-lg">

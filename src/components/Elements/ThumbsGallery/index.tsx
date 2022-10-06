@@ -47,7 +47,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="absolute top-44 flex w-full justify-between">
+        <div className="absolute top-1/2 -mt-4 flex w-full justify-between">
           <div className="prvBtn absolute left-4 z-10 cursor-pointer rounded-md bg-white p-1 shadow-md hover:bg-gray">
             <IconList type="arrow-left" size="md" color={Colors.black} />
           </div>
@@ -64,7 +64,7 @@ const ThumbsGallery: React.FC<ThumbsGalleryProps> = ({ images }) => {
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode]}
-          className="mt-2 h-32"
+          className="carousel-swiper mt-2 h-32"
         >
           {images.map((image, i) => (
             <SwiperSlide key={i}>

@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Light.ttf');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+  
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Medium.ttf');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.ttf');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal
+}
+  
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Black.ttf');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html,
 body {
   padding: 0;
@@ -169,13 +217,13 @@ input[type=number] {
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #cecece;
+  border: 5px solid #37a5e5;
   animation: prixClipFix 2s linear infinite both ;
 }
 .loader::after{
   inset: 8px;
   transform: rotate3d(90, 90, 0, 180deg );
-  border-color: #FF3D00;
+  border-color: #12004f;
 }
 
 @keyframes rotate {
@@ -184,13 +232,22 @@ input[type=number] {
 }
 
 @keyframes prixClipFix {
-    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-    75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+  75%, 100%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
 }
 
 /* Editor */
 
 #editorjs .codex-editor:first-child {
   display: none;
+}
+
+.project-swiper .swiper-wrapper {
+  padding-bottom: 2px;
+}
+
+.carousel-swiper .swiper-slide-thumb-active {
+  border: 2px solid #12004f;
+  border-radius: 8px;
 }

@@ -33,6 +33,7 @@ import { selectVariant } from '@/utils/animation';
 const SelectElement = forwardRef<SelectRef, SelectProps>(
   (
     {
+      id,
       className = '',
       inputClass = '',
       colorIcon = Colors.primary,
@@ -44,7 +45,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       filterIgnoreCase = true,
       filterIgnoreAccents = true,
       inputDelay = 300,
-      acceptKey,
+      acceptKey = ['description'],
       isClear = false,
       disabled = false,
       valueFormat,
@@ -55,7 +56,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
       onOptionChange,
       onSearchChange,
     },
-    ref: Ref<SelectRef>
+    _ref: Ref<SelectRef>
   ) => {
     // Instance prop refs (primitive/function type)
     const menuOpenRef = useRef<boolean>(false);
@@ -244,7 +245,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
     return (
       <div
         className={`select-wrapper ${fontStyle} ${className}`}
-        id="id"
+        id={id}
         aria-controls="id"
         aria-expanded={false}
       >
@@ -273,6 +274,7 @@ const SelectElement = forwardRef<SelectRef, SelectProps>(
             </div>
 
             <Input
+              id={id}
               sizeStyle={sizeStyle}
               className={inputClass}
               inputRef={inputRef}

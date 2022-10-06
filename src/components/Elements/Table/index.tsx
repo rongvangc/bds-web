@@ -1,11 +1,16 @@
+import React, { HTMLAttributes } from 'react';
 import IconList from '@/icons';
 import { TableInstance } from '@tanstack/react-table';
-import React from 'react';
 import Filter from './Filter';
 
-const Table = ({ instance }: { instance: TableInstance<any> }) => {
+interface TableProps {
+  instance: TableInstance<any>;
+  className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
+}
+
+const Table = ({ instance, className = 'py-2' }: TableProps) => {
   return (
-    <div className="p-2">
+    <div className={className}>
       {/* {instance.getFlatHeaders().map(
         (header) =>
           header.id === 'firstName' && (

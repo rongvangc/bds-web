@@ -16,6 +16,7 @@ import {
 import { isFunction } from 'formik';
 import SelectElement from '../SelectElement';
 import { convertDataAddress } from '@/utils/common';
+import Button from '../Button';
 
 const FilterRealEstate: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
@@ -113,13 +114,21 @@ const FilterRealEstate: React.FC<
             className="flex-1 rounded-tr-md rounded-br-md border border-l-0 px-4 py-2.5 outline-none"
             onChange={handleSearchValue}
           />
+          <div className="absolute right-8">
+            <Button
+              variant="primary"
+              size="sm"
+              className="border-secondary bg-secondary shadow-md"
+            >
+              Tìm kiếm
+            </Button>
+          </div>
         </div>
         <div className="mx-auto grid max-w-[600px] grid-cols-3 gap-2 pt-4">
           <SelectElement
             inputClass="bg-transparent text-white"
             placeholder="Tỉnh/Thành"
             options={convertDataAddress(provinces)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('province')}
             isClear={clear}
@@ -128,7 +137,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Quận/Huyện"
             options={convertDataAddress(districts)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('district')}
             isClear={clear}
@@ -137,7 +145,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Phường/Xã"
             options={convertDataAddress(wards)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('ward')}
             isClear={clear}
@@ -146,7 +153,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Đường/Phố"
             options={convertDataAddress(streets)}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('street')}
             isClear={clear}
@@ -155,7 +161,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Mức giá"
             options={PRICE_RANGE}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('price')}
             isClear={clear}
@@ -164,7 +169,6 @@ const FilterRealEstate: React.FC<
             inputClass="bg-transparent text-white"
             placeholder="Hướng"
             options={DIRECTION}
-            acceptKey={['description', 'value']}
             colorIcon={Colors.white}
             onOptionChange={handleFilterOption('direction')}
             isClear={clear}

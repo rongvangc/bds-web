@@ -29,7 +29,7 @@ const PostGrid: React.FC<PostGridType> = ({ postData }) => {
         <div className="col-span-2">
           {postData?.map((item) => (
             <PostCard
-              key={item.id}
+              key={item.title}
               title={item.title}
               date={item.date}
               isTextOnly

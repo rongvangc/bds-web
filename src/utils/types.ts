@@ -89,7 +89,6 @@ export type NavigatorMenu = {
 };
 
 export type OptionData = {
-  id: string;
   value: string;
   description?: string;
   icon?: IconListProps;
@@ -105,10 +104,11 @@ export type MenuOption = Readonly<{
 }>;
 
 export type PostType = {
-  id: string;
   title: string;
   description?: string;
-  thumbnail?: string;
+  postType: OptionData;
+  content: string;
+  previewImage: string;
   url?: string;
   date?: Date;
 };
@@ -149,6 +149,7 @@ export type SelectProps = Readonly<{
   acceptKey?: string[];
   className?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
   inputClass?: string & Pick<HTMLAttributes<HTMLElement>, 'className'>;
+  id?: string;
   size?: 'sm' | 'md' | 'xs';
   valueFormat?: (data: OptionData) => string;
   descriptionFormat?: (data: OptionData) => string;

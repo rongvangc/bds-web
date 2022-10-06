@@ -1,4 +1,5 @@
 import IconList from '@/icons';
+import { convertDataAddress } from '@/utils/common';
 import {
   DEFAULT_FILTER,
   RENT_REAL_ESTATE_OPTION,
@@ -18,7 +19,16 @@ import SelectElement from '../SelectElement';
 
 const FilterRealEstateBar: React.FC<
   FilterRealEstateProps & Pick<HTMLAttributes<HTMLDivElement>, 'className'>
-> = ({ option, className, onChange, onFilter }) => {
+> = ({
+  districts,
+  streets,
+  wards,
+  provinces,
+  option,
+  className,
+  onChange,
+  onFilter,
+}) => {
   const [currentTab, setCurrentTab] = useState<OptionData>(option[0]!);
   const [hasFilter, setHasFilter] = useState<boolean>(false);
   const [clear, setClear] = useState<boolean>(false);
@@ -48,7 +58,7 @@ const FilterRealEstateBar: React.FC<
     setClear(true);
   }, []);
 
-  const handleSwichTab = useCallback(
+  const handleSwitchTab = useCallback(
     (value: OptionData) => {
       setCurrentTab(value);
       onChange && onChange(value);
@@ -61,9 +71,9 @@ const FilterRealEstateBar: React.FC<
       <div className="mx-2 flex overflow-hidden rounded border border-primary text-center">
         {option?.map((tab) => (
           <a
-            onClick={() => handleSwichTab(tab)}
+            onClick={() => handleSwitchTab(tab)}
             key={tab.value}
-            className={`inline-block w-20 py-1 text-sm ${
+            className={`inline-block w-20 cursor-pointer py-1 text-sm ${
               tab.value === currentTab?.value
                 ? ' border-primary bg-primary text-white'
                 : 'border-primary bg-white text-primary'
@@ -85,7 +95,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-44"
         placeholder="Tỉnh/Thành"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={convertDataAddress(provinces)}
         onOptionChange={handleFilterOption('province')}
         isClear={clear}
         size="xs"
@@ -94,7 +104,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Quận/Huyện"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={convertDataAddress(districts)}
         onOptionChange={handleFilterOption('district')}
         isClear={clear}
         size="xs"
@@ -103,7 +113,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Phường/Xã"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={convertDataAddress(wards)}
         onOptionChange={handleFilterOption('ward')}
         isClear={clear}
         size="xs"
@@ -112,7 +122,7 @@ const FilterRealEstateBar: React.FC<
         inputClass="rounded"
         className="mr-2 w-32"
         placeholder="Đường/Phố"
-        options={RENT_REAL_ESTATE_OPTION}
+        options={convertDataAddress(streets)}
         onOptionChange={handleFilterOption('street')}
         isClear={clear}
         size="xs"

@@ -2,24 +2,25 @@ import type { NextPage } from 'next';
 import React, { lazy, Suspense, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Loading } from '@/components/Elements/Loading';
 import IconList from '@/icons';
 import { Colors } from '@/utils/types';
+import Loading from '@/components/Elements/Loading';
 
 const EditComponent = lazy(
-  () => import('../../components/Layouts/Section/EditProfileDashboard')
+  () =>
+    import('../../components/Layouts/Section/Dashboard/EditProfileDashboard')
 );
 const UserComponent = lazy(
-  () => import('../../components/Layouts/Section/UserDashboard')
+  () => import('../../components/Layouts/Section/Dashboard/UserDashboard')
 );
 const PostComponent = lazy(
-  () => import('../../components/Layouts/Section/PostDashboard')
+  () => import('../../components/Layouts/Section/Dashboard/Post')
 );
 const ProjectComponent = lazy(
-  () => import('../../components/Layouts/Section/ProjectDashboard')
+  () => import('../../components/Layouts/Section/Dashboard/ProjectDashboard')
 );
 const HomeComponent = lazy(
-  () => import('../../components/Layouts/Section/HomeDashboard')
+  () => import('../../components/Layouts/Section/Dashboard/HomeDashboard')
 );
 
 type SectionWorking = 'home' | 'edit' | 'user' | 'post' | 'project';
@@ -32,7 +33,7 @@ const Dashboard: NextPage = () => {
 
   const sessionLayout = () => {
     return (
-      <div className="w-full rounded-md shadow-md">
+      <div className="w-full rounded-md p-2 shadow-md">
         <Suspense fallback={<Loading />}>
           {(() => {
             switch (session) {
