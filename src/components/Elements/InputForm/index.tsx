@@ -19,6 +19,7 @@ type InputFormType = {
 
 const Editor = dynamic(() => import('../Editor'), {
   ssr: false,
+  suspense: true,
 });
 
 export const InputForm: React.FC<InputFormType> = ({
